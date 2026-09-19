@@ -656,7 +656,18 @@ modal.style.display = "none";
 
 });
 
+
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const SUPABASE_URL = "https://meernnpwtcgqjppyccqk.supabase.co/rest/v1/";
+  const SUPABASE_KEY = "sb_publishable_RQUvUH0EYETyddgkKFgbAQ_ZKQubV-Z";
+
+  const supabase = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+</script>
 </body>
 </html>

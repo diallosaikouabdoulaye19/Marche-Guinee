@@ -236,6 +236,8 @@ nav .active {
   width: 100%;
   padding: 22px;
   border-radius: 25px 25px 0 0;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .close {
@@ -304,14 +306,13 @@ id="searchInput"
 placeholder="Rechercher un produit..."
 oninput="searchProducts()">
 
-<button>
+<button type="button">
 🔎
 </button>
 
 </div>
 
 </header>
-
 
 <main>
 
@@ -351,7 +352,6 @@ oninput="searchProducts()">
 
 </div>
 
-
 <div class="banner">
 
 <h3>Vendez facilement 🇬🇳</h3>
@@ -360,15 +360,13 @@ oninput="searchProducts()">
 Publiez vos produits gratuitement et échangez avec les clients.
 </p>
 
-<button onclick="openModal('sell')">
+<button type="button" onclick="openModal('sell')">
 ＋ Publier une annonce
 </button>
 
 </div>
 
-
 <h2>Annonces récentes</h2>
-
 
 <div class="products" id="products">
 
@@ -396,7 +394,6 @@ data-category="Téléphones">
 
 </div>
 
-
 <div class="card"
 data-name="Canapé moderne"
 data-category="Maison">
@@ -421,7 +418,6 @@ data-category="Maison">
 
 </div>
 
-
 <div class="card"
 data-name="Boubou homme"
 data-category="Mode">
@@ -445,7 +441,6 @@ data-category="Mode">
 </div>
 
 </div>
-
 
 <div class="card"
 data-name="Toyota Corolla"
@@ -475,52 +470,51 @@ data-category="Véhicules">
 
 </main>
 
-
-<button class="sell" onclick="openModal('sell')">
+<button type="button" class="sell" onclick="openModal('sell')">
 ＋ Vendre
 </button>
 
-
 <nav>
 
-<button class="active">
+<button type="button" class="active">
 <span>🏠</span>
 Accueil
 </button>
 
-<button onclick="document.getElementById('searchInput').focus()">
+<button type="button" onclick="document.getElementById('searchInput').focus()">
 <span>🔎</span>
 Recherche
 </button>
 
-<button onclick="openModal('sell')">
+<button type="button" onclick="openModal('sell')">
 <span>➕</span>
 Vendre
 </button>
 
-<button onclick="openModal('account')">
+<button type="button" onclick="openModal('account')">
 <span>👤</span>
 Compte
 </button>
 
 </nav>
 
-
 <div class="modal" id="sell">
 
 <div class="modal-box">
 
-<button class="close" onclick="closeModal('sell')">
+<button type="button" class="close" onclick="closeModal('sell')">
 ✕
 </button>
 
 <h2>Publier une annonce</h2>
 
-<input placeholder="Nom du produit">
+<input
+id="productName"
+placeholder="Nom du produit">
 
-<select>
+<select id="productCategory">
 
-<option>Choisir une catégorie</option>
+<option value="">Choisir une catégorie</option>
 <option>Téléphones</option>
 <option>Mode</option>
 <option>Maison</option>
@@ -530,150 +524,208 @@ Compte
 </select>
 
 <input
+id="productPrice"
 placeholder="Prix en GNF"
 type="number">
 
 <input
+id="productLocation"
 placeholder="Ville / quartier">
 
 <textarea
+id="productDescription"
 rows="4"
-placeholder="Description du produit">
-</textarea>
+placeholder="Description du produit"></textarea>
 
-<button class="primary"
+<button
+type="button"
+class="primary"
 onclick="enregistrerAnnonce()">
 Publier l'annonce
-
 </button>
 
 </div>
 
 </div>
 
-
 <div class="modal" id="account">
 
 <div class="modal-box">
 
-<button class="close" onclick="closeModal('account')">
+<button type="button" class="close" onclick="closeModal('account')">
 ✕
 </button>
 
 <h2>Créer mon compte</h2>
 
 <input
+id="fullName"
 placeholder="Nom complet">
 
 <input
+id="phone"
 placeholder="Numéro de téléphone">
 
 <input
+id="password"
 placeholder="Mot de passe"
 type="password">
 
-<button class="primary"
-onclick="alert('Compte créé pour la démonstration.')">
-
+<button
+type="button"
+class="primary"
+onclick="creerCompte()">
 Créer mon compte gratuitement
-
 </button>
 
 </div>
 
 </div>
 
+<!-- Supabase -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
+const SUPABASE_URL =
+"https://meernnpwtcgqjppyccqk.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_RQUvUH0EYETyddgkKFgbAQ_ZKQubV-Z";
+
+const supabaseClient =
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
 function openModal(id) {
-document.getElementById(id).style.display = "flex";
+  const modal = document.getElementById(id);
+
+  if (modal) {
+    modal.style.display = "flex";
+  }
 }
 
 function closeModal(id) {
-document.getElementById(id).style.display = "none";
+  const modal = document.getElementById(id);
+
+  if (modal) {
+    modal.style.display = "none";
+  }
 }
 
 function searchProducts() {
 
-let search =
-document.getElementById("searchInput")
-.value
-.toLowerCase();
+  const search =
+  document.getElementById("searchInput")
+  .value
+  .toLowerCase()
+  .trim();
 
-let cards =
-document.querySelectorAll(".card");
+  const cards =
+  document.querySelectorAll(".card");
 
-cards.forEach(function(card) {
+  cards.forEach(function(card) {
 
-let name =
-card.dataset.name.toLowerCase();
+    const name =
+    (card.dataset.name || "").toLowerCase();
 
-card.style.display =
-name.includes(search)
-? "block"
-: "none";
+    card.style.display =
+    name.includes(search)
+    ? "block"
+    : "none";
 
-});
+  });
 
 }
 
 function filterCategory(category) {
 
-let cards =
-document.querySelectorAll(".card");
+  const cards =
+  document.querySelectorAll(".card");
 
-cards.forEach(function(card) {
+  cards.forEach(function(card) {
 
-if (
-category === "Tous" ||
-card.dataset.category === category
-) {
+    if (
+      category === "Tous" ||
+      card.dataset.category === category
+    ) {
 
-card.style.display = "block";
+      card.style.display = "block";
 
-} else {
+    } else {
 
-card.style.display = "none";
+      card.style.display = "none";
+
+    }
+
+  });
 
 }
 
-});
+function enregistrerAnnonce() {
+
+  const nom =
+  document.getElementById("productName").value.trim();
+
+  const categorie =
+  document.getElementById("productCategory").value;
+
+  const prix =
+  document.getElementById("productPrice").value.trim();
+
+  const localisation =
+  document.getElementById("productLocation").value.trim();
+
+  if (!nom || !categorie || !prix || !localisation) {
+
+    alert("Veuillez remplir les informations principales de l'annonce.");
+
+    return;
+  }
+
+  alert("ÇA FONCTIONNE !");
+
+}
+
+function creerCompte() {
+
+  const nom =
+  document.getElementById("fullName").value.trim();
+
+  const telephone =
+  document.getElementById("phone").value.trim();
+
+  const motDePasse =
+  document.getElementById("password").value;
+
+  if (!nom || !telephone || !motDePasse) {
+
+    alert("Veuillez remplir tous les champs.");
+
+    return;
+  }
+
+  alert("Compte créé pour la démonstration.");
 
 }
 
 document.querySelectorAll(".modal")
 .forEach(function(modal) {
 
-modal.addEventListener("click", function(event) {
+  modal.addEventListener("click", function(event) {
 
-if (event.target === modal) {
-modal.style.display = "none";
-}
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+
+  });
 
 });
 
-});
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-  const SUPABASE_URL = "https://meernnpwtcgqjppyccqk.supabase.co/rest/v1/";
-  const SUPABASE_KEY = "sb_publishable_RQUvUH0EYETyddgkKFgbAQ_ZKQubV-Z";
-
-  const supabase = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
 </script>
 
-<script>
-function enregistrerAnnonce() {
-    alert("ÇA FONCTIONNE !");
-}
-
-</script>
 </body>
 </html>

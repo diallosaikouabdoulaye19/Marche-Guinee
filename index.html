@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Marché Guinée 🇬🇳</title>
 
 <style>
@@ -289,6 +288,66 @@ nav .active {
   line-height: 1.4;
 }
 
+/* PHOTOS */
+
+.photo-upload {
+  margin-top: 10px;
+  padding: 15px;
+  border: 2px dashed #0b8f4d;
+  border-radius: 15px;
+  text-align: center;
+  background: #f8fffb;
+}
+
+.photo-upload label {
+  display: block;
+  color: #0b8f4d;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.photo-upload input {
+  display: none;
+}
+
+.photo-preview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.photo-preview img {
+  width: 100%;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* MESSAGERIE */
+
+.message-box {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.message-box textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.security-notice {
+  background: #fff8df;
+  border: 1px solid #f0d76a;
+  color: #6d5900;
+  padding: 11px;
+  border-radius: 12px;
+  font-size: 12px;
+  line-height: 1.4;
+  margin-top: 10px;
+}
+
 @media (min-width:700px) {
   .products {
     grid-template-columns: repeat(4,1fr);
@@ -430,17 +489,9 @@ data-category="Téléphone">
 </div>
 
 <div class="info">
-
 <h3>iPhone 13</h3>
-
-<div class="price">
-7 500 000 GNF
-</div>
-
-<div class="place">
-📍 Conakry
-</div>
-
+<div class="price">7 500 000 GNF</div>
+<div class="place">📍 Conakry</div>
 </div>
 
 </div>
@@ -450,22 +501,12 @@ class="card"
 data-name="Canapé moderne"
 data-category="Maison">
 
-<div class="photo">
-🛋️
-</div>
+<div class="photo">🛋️</div>
 
 <div class="info">
-
 <h3>Canapé moderne</h3>
-
-<div class="price">
-4 200 000 GNF
-</div>
-
-<div class="place">
-📍 Ratoma
-</div>
-
+<div class="price">4 200 000 GNF</div>
+<div class="place">📍 Ratoma</div>
 </div>
 
 </div>
@@ -475,22 +516,12 @@ class="card"
 data-name="Boubou homme"
 data-category="Mode">
 
-<div class="photo">
-👕
-</div>
+<div class="photo">👕</div>
 
 <div class="info">
-
 <h3>Boubou homme</h3>
-
-<div class="price">
-450 000 GNF
-</div>
-
-<div class="place">
-📍 Matoto
-</div>
-
+<div class="price">450 000 GNF</div>
+<div class="place">📍 Matoto</div>
 </div>
 
 </div>
@@ -500,22 +531,12 @@ class="card"
 data-name="Toyota Corolla"
 data-category="Véhicule">
 
-<div class="photo">
-🚗
-</div>
+<div class="photo">🚗</div>
 
 <div class="info">
-
 <h3>Toyota Corolla</h3>
-
-<div class="price">
-120 000 000 GNF
-</div>
-
-<div class="place">
-📍 Conakry
-</div>
-
+<div class="price">120 000 000 GNF</div>
+<div class="place">📍 Conakry</div>
 </div>
 
 </div>
@@ -533,9 +554,7 @@ onclick="openModal('sell')">
 
 <nav>
 
-<button
-type="button"
-class="active">
+<button type="button" class="active">
 <span>🏠</span>
 Accueil
 </button>
@@ -564,13 +583,9 @@ Compte
 </nav>
 
 
-<!-- ========================= -->
-<!-- MODAL PUBLICATION -->
-<!-- ========================= -->
+<!-- PUBLICATION -->
 
-<div
-class="modal"
-id="sell">
+<div class="modal" id="sell">
 
 <div class="modal-box">
 
@@ -632,6 +647,32 @@ id="productDescription"
 rows="4"
 placeholder="Description du produit"></textarea>
 
+<div class="security-notice">
+🔒 Pour protéger les ventes sur Marché Guinée,
+le partage de numéros de téléphone est interdit
+dans les annonces.
+</div>
+
+<div class="photo-upload">
+
+<label for="productPhotos">
+📷 Ajouter des photos du produit
+</label>
+
+<input
+id="productPhotos"
+type="file"
+accept="image/*"
+multiple
+onchange="previewPhotos(event)">
+
+<div
+id="photoPreview"
+class="photo-preview">
+</div>
+
+</div>
+
 <button
 type="button"
 class="primary"
@@ -644,13 +685,9 @@ Publier l'annonce
 </div>
 
 
-<!-- ========================= -->
-<!-- MODAL COMPTE -->
-<!-- ========================= -->
+<!-- COMPTE -->
 
-<div
-class="modal"
-id="account">
+<div class="modal" id="account">
 
 <div class="modal-box">
 
@@ -661,9 +698,7 @@ onclick="closeModal('account')">
 ✕
 </button>
 
-<h2 id="accountTitle">
-Créer mon compte
-</h2>
+<h2>Créer mon compte</h2>
 
 <input
 id="fullName"
@@ -708,9 +743,51 @@ class="status">
 </div>
 
 
-<!-- ========================= -->
-<!-- SUPABASE -->
-<!-- ========================= -->
+<!-- CONVERSATION -->
+
+<div class="modal" id="conversation">
+
+<div class="modal-box">
+
+<button
+type="button"
+class="close"
+onclick="closeModal('conversation')">
+✕
+</button>
+
+<h2>💬 Conversation</h2>
+
+<div class="security-notice">
+🔒 Les numéros de téléphone ne peuvent pas être partagés
+dans les conversations. Utilisez la messagerie de
+Marché Guinée pour discuter et conclure votre vente.
+</div>
+
+<div class="message-box">
+
+<textarea
+id="messageInput"
+placeholder="Écrire votre message..."></textarea>
+
+<button
+type="button"
+class="primary"
+onclick="envoyerMessage()">
+Envoyer le message
+</button>
+
+<div
+id="messageStatus"
+class="status">
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -729,9 +806,9 @@ SUPABASE_KEY
 );
 
 
-/* ========================= */
-/* OUVRIR / FERMER LES MODALS */
-/* ========================= */
+/* =========================
+   OUVERTURE / FERMETURE
+========================= */
 
 function openModal(id) {
 
@@ -743,7 +820,6 @@ function openModal(id) {
   }
 
 }
-
 
 function closeModal(id) {
 
@@ -757,9 +833,9 @@ function closeModal(id) {
 }
 
 
-/* ========================= */
-/* RECHERCHE */
-/* ========================= */
+/* =========================
+   RECHERCHE
+========================= */
 
 function searchProducts() {
 
@@ -788,9 +864,9 @@ function searchProducts() {
 }
 
 
-/* ========================= */
-/* FILTRE CATÉGORIE */
-/* ========================= */
+/* =========================
+   CATÉGORIES
+========================= */
 
 function filterCategory(category) {
 
@@ -817,9 +893,116 @@ function filterCategory(category) {
 }
 
 
-/* ========================= */
-/* CRÉATION DU COMPTE */
-/* ========================= */
+/* =========================
+   PROTECTION NUMÉRO
+========================= */
+
+function contientNumeroTelephone(texte) {
+
+  if (!texte) {
+    return false;
+  }
+
+  const texteNormalise =
+  String(texte)
+  .toLowerCase()
+  .replace(/[()\-./]/g, " ")
+  .replace(/\s+/g, " ")
+  .trim();
+
+
+  /* Formats avec indicatif Guinée */
+
+  const indicatifGuinee =
+  /(?:\+224|00224)\s*(?:6\s*)\d(?:\s*\d){7,8}/;
+
+  if (indicatifGuinee.test(texteNormalise)) {
+    return true;
+  }
+
+
+  /*
+     Numéro guinéen local.
+     On cherche une suite commençant par 6
+     avec 8 chiffres supplémentaires,
+     même si des espaces sont placés entre les chiffres.
+  */
+
+  const chiffresSeulement =
+  texteNormalise.replace(/\D/g, "");
+
+
+  const numeroLocal =
+  /6\d{8}/;
+
+  if (numeroLocal.test(chiffresSeulement)) {
+    return true;
+  }
+
+
+  /*
+     Détection générale de longs numéros
+     écrits avec espaces.
+  */
+
+  const longuesSuites =
+  /\b\d{8,15}\b/;
+
+  if (longuesSuites.test(texteNormalise)) {
+    return true;
+  }
+
+
+  return false;
+
+}
+
+
+/* =========================
+   PHOTOS
+========================= */
+
+function previewPhotos(event) {
+
+  const preview =
+  document.getElementById("photoPreview");
+
+  preview.innerHTML = "";
+
+  const files =
+  Array.from(event.target.files);
+
+  files.forEach(function(file) {
+
+    if (!file.type.startsWith("image/")) {
+      return;
+    }
+
+    const reader =
+    new FileReader();
+
+    reader.onload = function(e) {
+
+      const image =
+      document.createElement("img");
+
+      image.src =
+      e.target.result;
+
+      preview.appendChild(image);
+
+    };
+
+    reader.readAsDataURL(file);
+
+  });
+
+}
+
+
+/* =========================
+   CRÉER UN COMPTE
+========================= */
 
 async function creerCompte() {
 
@@ -868,62 +1051,49 @@ async function creerCompte() {
   "Création du compte en cours...";
 
 
-  try {
+  const result =
+  await supabaseClient.auth.signUp({
 
-    const result =
-    await supabaseClient.auth.signUp({
+    email: email,
 
-      email: email,
+    password: motDePasse,
 
-      password: motDePasse,
+    options: {
 
-      options: {
-
-        data: {
-
-          full_name: nom,
-
-          phone: telephone
-
-        }
-
+      data: {
+        full_name: nom,
+        phone: telephone
       }
 
-    });
-
-
-    if (result.error) {
-
-      status.innerText =
-      "Erreur : " + result.error.message;
-
-      return;
     }
 
+  });
+
+
+  if (result.error) {
 
     status.innerText =
-    "Compte créé avec succès ! Vérifie ton e-mail si Supabase demande une confirmation.";
+    "Erreur : " +
+    result.error.message;
 
-    alert(
-      "Compte créé avec succès !"
-    );
-
-
-  } catch (error) {
-
-    status.innerText =
-    "Une erreur est survenue.";
-
-    console.error(error);
-
+    return;
   }
+
+
+  status.innerText =
+  "Compte créé avec succès !";
+
+
+  alert(
+    "Compte créé avec succès ! 🇬🇳"
+  );
 
 }
 
 
-/* ========================= */
-/* CONNEXION */
-/* ========================= */
+/* =========================
+   CONNEXION
+========================= */
 
 async function seConnecter() {
 
@@ -953,52 +1123,43 @@ async function seConnecter() {
   "Connexion en cours...";
 
 
-  try {
+  const result =
+  await supabaseClient.auth.signInWithPassword({
 
-    const result =
-    await supabaseClient.auth.signInWithPassword({
+    email: email,
 
-      email: email,
+    password: motDePasse
 
-      password: motDePasse
-
-    });
+  });
 
 
-    if (result.error) {
-
-      status.innerText =
-      "Erreur : " + result.error.message;
-
-      return;
-    }
-
+  if (result.error) {
 
     status.innerText =
-    "Connexion réussie !";
+    "Erreur : " +
+    result.error.message;
 
-    alert(
-      "Tu es maintenant connecté !"
-    );
-
-    closeModal("account");
-
-
-  } catch (error) {
-
-    status.innerText =
-    "Une erreur est survenue.";
-
-    console.error(error);
-
+    return;
   }
+
+
+  status.innerText =
+  "Connexion réussie !";
+
+
+  alert(
+    "Tu es maintenant connecté !"
+  );
+
+
+  closeModal("account");
 
 }
 
 
-/* ========================= */
-/* PUBLICATION D'ANNONCE */
-/* ========================= */
+/* =========================
+   PUBLICATION D'ANNONCE
+========================= */
 
 async function enregistrerAnnonce() {
 
@@ -1013,7 +1174,8 @@ async function enregistrerAnnonce() {
 
   const prix =
   document.getElementById("productPrice")
-  .value;
+  .value
+  .trim();
 
   const condition =
   document.getElementById("productCondition")
@@ -1035,21 +1197,52 @@ async function enregistrerAnnonce() {
   .trim();
 
 
-  if (
-    !nom ||
-    !categorie ||
-    !prix ||
-    !condition ||
-    !ville
-  ) {
+  /* Vérifications */
+
+  if (!nom) {
+    alert("Le nom du produit est vide.");
+    return;
+  }
+
+  if (!categorie) {
+    alert("La catégorie est vide.");
+    return;
+  }
+
+  if (!prix) {
+    alert("Le prix est vide.");
+    return;
+  }
+
+  if (!condition) {
+    alert("L'état du produit est vide.");
+    return;
+  }
+
+  if (!ville) {
+    alert("La ville est vide.");
+    return;
+  }
+
+
+  /* =========================
+     BLOCAGE NUMÉRO
+  ========================= */
+
+  if (contientNumeroTelephone(description)) {
 
     alert(
-      "Veuillez remplir les informations principales de l'annonce."
+      "🚫 Numéro de téléphone interdit\n\n" +
+      "Pour protéger les ventes sur Marché Guinée, " +
+      "les numéros de téléphone ne peuvent pas être " +
+      "publiés dans la description."
     );
 
     return;
   }
 
+
+  /* Vérification du compte */
 
   const {
     data: sessionData,
@@ -1075,7 +1268,7 @@ async function enregistrerAnnonce() {
   if (!utilisateur) {
 
     alert(
-      "Connecte-toi à ton compte avant de publier une annonce."
+      "Connecte-toi à ton compte avant de publier."
     );
 
     openModal("account");
@@ -1084,125 +1277,91 @@ async function enregistrerAnnonce() {
   }
 
 
-  /* Recherche de la catégorie */
-
-  const {
-    data: categorieData,
-    error: categorieError
-  } =
-  await supabaseClient
-  .from("Catégorie")
-  .select("id")
-  .eq("Name", categorie)
-  .single();
-
-
-  if (categorieError) {
-
-    alert(
-      "Impossible de trouver cette catégorie."
-    );
-
-    console.error(categorieError);
-
-    return;
-  }
-
-
-  /* Création de l'annonce */
-
-  const {
-    data: annonce,
-    error: annonceError
-  } =
-  await supabaseClient
-  .from("Listing")
-  .insert({
-
-    "Seller id":
-    utilisateur.id,
-
-    "Catégorie id":
-    categorieData.id,
-
-    "Title":
-    nom,
-
-    "description":
-    description,
-
-    "Price gnf":
-    Number(prix),
-
-    "Condition":
-    condition,
-
-    "City":
-    ville,
-
-    "Neighborhood":
-    quartier,
-
-    "Status":
-    "active",
-
-    "Views":
-    0
-
-  })
-  .select()
-  .single();
-
-
-  if (annonceError) {
-
-    alert(
-      "Erreur lors de la publication : " +
-      annonceError.message
-    );
-
-    console.error(annonceError);
-
-    return;
-  }
-
-
-  alert(
-    "Annonce publiée avec succès ! 🇬🇳"
-  );
-
-
-  closeModal("sell");
-
-
-  /* Nettoyage du formulaire */
-
-  document.getElementById("productName").value = "";
-
-  document.getElementById("productCategory").value = "";
-
-  document.getElementById("productPrice").value = "";
-
-  document.getElementById("productCondition").value = "";
-
-  document.getElementById("productCity").value = "";
-
-  document.getElementById("productNeighborhood").value = "";
-
-  document.getElementById("productDescription").value = "";
+  const photos =
+  document.getElementById("productPhotos")
+  .files;
 
 
   console.log(
-    "Annonce enregistrée :",
-    annonce
+    "Photos sélectionnées :",
+    photos.length
+  );
+
+
+  alert(
+    "Formulaire et photos récupérés avec succès ! 🇬🇳"
   );
 
 }
 
 
-/* ========================= */
-/* FERMER EN CLIQUANT DEHORS */
-/* ========================= */
+/* =========================
+   ENVOI MESSAGE
+========================= */
+
+async function envoyerMessage() {
+
+  const champ =
+  document.getElementById("messageInput");
+
+  const status =
+  document.getElementById("messageStatus");
+
+  const message =
+  champ.value.trim();
+
+
+  if (!message) {
+
+    status.innerText =
+    "Écris un message avant de l'envoyer.";
+
+    return;
+  }
+
+
+  /* =========================
+     BLOCAGE NUMÉRO
+  ========================= */
+
+  if (contientNumeroTelephone(message)) {
+
+    status.innerText =
+    "🚫 Message non envoyé : " +
+    "le partage de numéros de téléphone " +
+    "est interdit dans les conversations.";
+
+    alert(
+      "🚫 Numéro de téléphone détecté\n\n" +
+      "Tu ne peux pas partager de numéro " +
+      "de téléphone dans Marché Guinée."
+    );
+
+    return;
+  }
+
+
+  /*
+     Pour le moment, cette partie bloque
+     correctement les numéros.
+     L'enregistrement réel dans la table
+     Message sera connecté à Supabase
+     lorsque nous vérifierons ses colonnes.
+  */
+
+  status.innerText =
+  "Message accepté. 🇬🇳";
+
+
+  champ.value = "";
+
+}
+
+
+/* =========================
+   FERMETURE EN CLIQUANT
+   EN DEHORS DU MODAL
+========================= */
 
 document
 .querySelectorAll(".modal")
@@ -1214,7 +1373,8 @@ document
 
       if (event.target === modal) {
 
-        modal.style.display = "none";
+        modal.style.display =
+        "none";
 
       }
 
@@ -1222,37 +1382,6 @@ document
   );
 
 });
-
-
-/* ========================= */
-/* VÉRIFICATION DU COMPTE */
-/* ========================= */
-
-async function verifierConnexion() {
-
-  const {
-    data
-  } =
-  await supabaseClient.auth.getSession();
-
-  if (data.session) {
-
-    console.log(
-      "Utilisateur connecté :",
-      data.session.user.id
-    );
-
-  } else {
-
-    console.log(
-      "Aucun utilisateur connecté."
-    );
-
-  }
-
-}
-
-verifierConnexion();
 
 </script>
 

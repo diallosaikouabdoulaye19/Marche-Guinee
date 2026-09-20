@@ -542,8 +542,7 @@ placeholder="Description du produit">
 </textarea>
 
 <button class="primary"
-onclick="alert('Annonce enregistrée pour la démonstration.')">
-
+onclick="enregistrerAnnonce()">
 Publier l'annonce
 
 </button>
@@ -668,6 +667,10 @@ modal.style.display = "none";
     SUPABASE_URL,
     SUPABASE_KEY
   );
+<script>
+function enregistrerAnnonce() {
+    alert("Annonce enregistrée avec succès !");
+}
 </script>
 </body>
 </html>

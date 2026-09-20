@@ -6,352 +6,388 @@
 <title>Marché Guinée 🇬🇳</title>
 
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background: #f5f7f6;
-  color: #17221c;
+body{
+font-family:Arial,sans-serif;
+background:#f5f7f6;
+color:#17221c;
 }
 
-header {
-  background: #0b8f4d;
-  color: white;
-  padding: 20px 16px;
-  border-radius: 0 0 25px 25px;
+header{
+background:#0b8f4d;
+color:white;
+padding:20px 16px;
+border-radius:0 0 25px 25px;
 }
 
-.top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.top{
+display:flex;
+justify-content:space-between;
+align-items:center;
 }
 
-.logo {
-  font-size: 25px;
-  font-weight: bold;
+.logo{
+font-size:25px;
+font-weight:bold;
 }
 
-.logo span {
-  color: #ffd43b;
+.logo span{
+color:#ffd43b;
 }
 
-.subtitle {
-  font-size: 13px;
-  margin-top: 5px;
+.subtitle{
+font-size:13px;
+margin-top:5px;
 }
 
-.account {
-  background: rgba(255,255,255,0.2);
-  border: none;
-  color: white;
-  font-size: 22px;
-  padding: 10px;
-  border-radius: 12px;
+.account{
+background:rgba(255,255,255,.2);
+border:none;
+color:white;
+font-size:22px;
+padding:10px;
+border-radius:12px;
 }
 
-.search {
-  margin-top: 18px;
-  background: white;
-  display: flex;
-  border-radius: 14px;
-  overflow: hidden;
+.search{
+margin-top:18px;
+background:white;
+display:flex;
+border-radius:14px;
+overflow:hidden;
 }
 
-.search input {
-  flex: 1;
-  border: none;
-  outline: none;
-  padding: 14px;
-  font-size: 15px;
+.search input{
+flex:1;
+border:none;
+outline:none;
+padding:14px;
+font-size:15px;
 }
 
-.search button {
-  border: none;
-  background: #ffd43b;
-  padding: 0 17px;
-  font-size: 18px;
+.search button{
+border:none;
+background:#ffd43b;
+padding:0 17px;
+font-size:18px;
 }
 
-main {
-  padding: 18px 16px 100px;
+main{
+padding:18px 16px 110px;
 }
 
-h2 {
-  font-size: 19px;
-  margin: 20px 0 12px;
+h2{
+font-size:19px;
+margin:20px 0 12px;
 }
 
-.categories {
-  display: flex;
-  gap: 10px;
-  overflow-x: auto;
+.categories{
+display:flex;
+gap:10px;
+overflow-x:auto;
 }
 
-.category {
-  min-width: 82px;
-  background: white;
-  border: 1px solid #e3e9e5;
-  border-radius: 15px;
-  padding: 12px 7px;
-  text-align: center;
+.category{
+min-width:82px;
+background:white;
+border:1px solid #e3e9e5;
+border-radius:15px;
+padding:12px 7px;
+text-align:center;
 }
 
-.category div {
-  font-size: 26px;
-  margin-bottom: 6px;
+.category div{
+font-size:26px;
+margin-bottom:6px;
 }
 
-.category small {
-  font-size: 12px;
+.category small{
+font-size:12px;
 }
 
-.banner {
-  margin-top: 18px;
-  background: linear-gradient(135deg,#08763f,#0b9b55);
-  color: white;
-  padding: 20px;
-  border-radius: 20px;
+.banner{
+margin-top:18px;
+background:linear-gradient(135deg,#08763f,#0b9b55);
+color:white;
+padding:20px;
+border-radius:20px;
 }
 
-.banner h3 {
-  font-size: 20px;
-  margin-bottom: 7px;
+.banner h3{
+font-size:20px;
+margin-bottom:7px;
 }
 
-.banner p {
-  font-size: 13px;
-  line-height: 1.4;
+.banner p{
+font-size:13px;
+line-height:1.4;
 }
 
-.banner button {
-  margin-top: 13px;
-  background: #ffd43b;
-  border: none;
-  border-radius: 12px;
-  padding: 11px 15px;
-  font-weight: bold;
+.banner button{
+margin-top:13px;
+background:#ffd43b;
+border:none;
+border-radius:12px;
+padding:11px 15px;
+font-weight:bold;
 }
 
-.products {
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-  gap: 12px;
+.products{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px;
 }
 
-.card {
-  background: white;
-  border-radius: 17px;
-  overflow: hidden;
-  border: 1px solid #e4e9e6;
+.card{
+background:white;
+border-radius:17px;
+overflow:hidden;
+border:1px solid #e4e9e6;
 }
 
-.photo {
-  height: 140px;
-  background: #e8eee9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 55px;
+.photo{
+height:140px;
+background:#e8eee9;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:55px;
 }
 
-.info {
-  padding: 11px;
+.info{
+padding:11px;
 }
 
-.info h3 {
-  font-size: 15px;
-  margin-bottom: 6px;
+.info h3{
+font-size:15px;
+margin-bottom:6px;
 }
 
-.price {
-  color: #0b8f4d;
-  font-weight: bold;
+.price{
+color:#0b8f4d;
+font-weight:bold;
 }
 
-.place {
-  color: #758179;
-  font-size: 11px;
-  margin-top: 6px;
+.place{
+color:#758179;
+font-size:11px;
+margin-top:6px;
 }
 
-.sell {
-  position: fixed;
-  right: 18px;
-  bottom: 75px;
-  background: #0b8f4d;
-  color: white;
-  border: none;
-  border-radius: 30px;
-  padding: 14px 18px;
-  font-weight: bold;
-  box-shadow: 0 5px 18px rgba(0,0,0,0.2);
+.sell{
+position:fixed;
+right:18px;
+bottom:75px;
+background:#0b8f4d;
+color:white;
+border:none;
+border-radius:30px;
+padding:14px 18px;
+font-weight:bold;
+box-shadow:0 5px 18px rgba(0,0,0,.2);
+z-index:6;
 }
 
-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: white;
-  border-top: 1px solid #ddd;
-  display: flex;
-  justify-content: space-around;
-  padding: 9px 5px;
-  z-index: 5;
+nav{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+background:white;
+border-top:1px solid #ddd;
+display:flex;
+justify-content:space-around;
+padding:9px 5px;
+z-index:5;
 }
 
-nav button {
-  border: none;
-  background: none;
-  color: #65716a;
-  font-size: 11px;
+nav button{
+border:none;
+background:none;
+color:#65716a;
+font-size:11px;
 }
 
-nav span {
-  display: block;
-  font-size: 21px;
-  margin-bottom: 3px;
+nav span{
+display:block;
+font-size:21px;
+margin-bottom:3px;
 }
 
-nav .active {
-  color: #0b8f4d;
-  font-weight: bold;
+nav .active{
+color:#0b8f4d;
+font-weight:bold;
 }
 
-.modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.45);
-  align-items: flex-end;
-  z-index: 10;
+.modal{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.45);
+align-items:flex-end;
+z-index:10;
 }
 
-.modal-box {
-  background: white;
-  width: 100%;
-  padding: 22px;
-  border-radius: 25px 25px 0 0;
-  max-height: 90vh;
-  overflow-y: auto;
+.modal-box{
+background:white;
+width:100%;
+padding:22px;
+border-radius:25px 25px 0 0;
+max-height:92vh;
+overflow-y:auto;
 }
 
-.close {
-  float: right;
-  border: none;
-  background: #eee;
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
+.close{
+float:right;
+border:none;
+background:#eee;
+border-radius:50%;
+width:32px;
+height:32px;
 }
 
 .modal-box input,
 .modal-box textarea,
-.modal-box select {
-  width: 100%;
-  padding: 13px;
-  margin: 7px 0;
-  border: 1px solid #ddd;
-  border-radius: 12px;
+.modal-box select{
+width:100%;
+padding:13px;
+margin:7px 0;
+border:1px solid #ddd;
+border-radius:12px;
 }
 
-.primary {
-  width: 100%;
-  padding: 14px;
-  background: #0b8f4d;
-  color: white;
-  border: none;
-  border-radius: 13px;
-  font-weight: bold;
-  margin-top: 8px;
+.primary{
+width:100%;
+padding:14px;
+background:#0b8f4d;
+color:white;
+border:none;
+border-radius:13px;
+font-weight:bold;
+margin-top:8px;
 }
 
-.secondary {
-  width: 100%;
-  padding: 14px;
-  background: #eeeeee;
-  color: #17221c;
-  border: none;
-  border-radius: 13px;
-  font-weight: bold;
-  margin-top: 8px;
+.secondary{
+width:100%;
+padding:14px;
+background:#eee;
+color:#17221c;
+border:none;
+border-radius:13px;
+font-weight:bold;
+margin-top:8px;
 }
 
-.status {
-  margin-top: 10px;
-  font-size: 13px;
-  line-height: 1.4;
+.status{
+margin-top:10px;
+font-size:13px;
+line-height:1.4;
 }
 
-/* PHOTOS */
-
-.photo-upload {
-  margin-top: 10px;
-  padding: 15px;
-  border: 2px dashed #0b8f4d;
-  border-radius: 15px;
-  text-align: center;
-  background: #f8fffb;
+.security-notice{
+background:#fff8df;
+border:1px solid #f0d76a;
+color:#6d5900;
+padding:11px;
+border-radius:12px;
+font-size:12px;
+line-height:1.4;
+margin-top:10px;
 }
 
-.photo-upload label {
-  display: block;
-  color: #0b8f4d;
-  font-weight: bold;
-  cursor: pointer;
+.photo-upload{
+margin-top:10px;
+padding:15px;
+border:2px dashed #0b8f4d;
+border-radius:15px;
+text-align:center;
+background:#f8fffb;
 }
 
-.photo-upload input {
-  display: none;
+.photo-upload label{
+display:block;
+color:#0b8f4d;
+font-weight:bold;
+cursor:pointer;
 }
 
-.photo-preview {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-top: 12px;
+.photo-upload input{
+display:none;
 }
 
-.photo-preview img {
-  width: 100%;
-  height: 90px;
-  object-fit: cover;
-  border-radius: 10px;
+.photo-preview{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:8px;
+margin-top:12px;
 }
 
-/* MESSAGERIE */
-
-.message-box {
-  margin-top: 20px;
-  padding-top: 15px;
-  border-top: 1px solid #eee;
+.photo-preview img{
+width:100%;
+height:90px;
+object-fit:cover;
+border-radius:10px;
 }
 
-.message-box textarea {
-  min-height: 90px;
-  resize: vertical;
+.payment-option{
+border:1px solid #ddd;
+border-radius:14px;
+padding:14px;
+margin:8px 0;
+background:#fff;
 }
 
-.security-notice {
-  background: #fff8df;
-  border: 1px solid #f0d76a;
-  color: #6d5900;
-  padding: 11px;
-  border-radius: 12px;
-  font-size: 12px;
-  line-height: 1.4;
-  margin-top: 10px;
+.payment-option label{
+display:flex;
+align-items:center;
+gap:10px;
+font-weight:bold;
+cursor:pointer;
 }
 
-@media (min-width:700px) {
-  .products {
-    grid-template-columns: repeat(4,1fr);
-  }
+.payment-option input{
+width:auto;
+margin:0;
+}
+
+.payment-icon{
+font-size:25px;
+}
+
+.order-box{
+background:#f5f7f6;
+padding:15px;
+border-radius:15px;
+margin-top:12px;
+line-height:1.7;
+}
+
+.menu-button{
+width:100%;
+padding:13px;
+margin-top:8px;
+border:none;
+background:#f1f4f2;
+border-radius:12px;
+text-align:left;
+font-weight:bold;
+}
+
+.empty{
+text-align:center;
+padding:25px;
+color:#758179;
+}
+
+@media(min-width:700px){
+.products{
+grid-template-columns:repeat(4,1fr);
+}
 }
 </style>
 </head>
@@ -388,13 +424,12 @@ id="searchInput"
 placeholder="Rechercher un produit..."
 oninput="searchProducts()">
 
-<button type="button">
-🔎
-</button>
+<button type="button">🔎</button>
 
 </div>
 
 </header>
+
 
 <main>
 
@@ -459,6 +494,7 @@ oninput="searchProducts()">
 
 </div>
 
+
 <div class="banner">
 
 <h3>Vendez facilement 🇬🇳</h3>
@@ -475,6 +511,7 @@ onclick="openModal('sell')">
 
 </div>
 
+
 <h2>Annonces récentes</h2>
 
 <div class="products" id="products">
@@ -484,9 +521,7 @@ class="card"
 data-name="iPhone 13"
 data-category="Téléphone">
 
-<div class="photo">
-📱
-</div>
+<div class="photo">📱</div>
 
 <div class="info">
 <h3>iPhone 13</h3>
@@ -495,6 +530,7 @@ data-category="Téléphone">
 </div>
 
 </div>
+
 
 <div
 class="card"
@@ -511,6 +547,7 @@ data-category="Maison">
 
 </div>
 
+
 <div
 class="card"
 data-name="Boubou homme"
@@ -525,6 +562,7 @@ data-category="Mode">
 </div>
 
 </div>
+
 
 <div
 class="card"
@@ -545,12 +583,14 @@ data-category="Véhicule">
 
 </main>
 
+
 <button
 type="button"
 class="sell"
 onclick="openModal('sell')">
 ＋ Vendre
 </button>
+
 
 <nav>
 
@@ -583,7 +623,9 @@ Compte
 </nav>
 
 
-<!-- PUBLICATION -->
+<!-- =========================
+PUBLICATION
+========================= -->
 
 <div class="modal" id="sell">
 
@@ -648,10 +690,10 @@ rows="4"
 placeholder="Description du produit"></textarea>
 
 <div class="security-notice">
-🔒 Pour protéger les ventes sur Marché Guinée,
-le partage de numéros de téléphone est interdit
-dans les annonces.
+🔒 Le partage de numéros de téléphone est interdit
+dans les annonces et les conversations.
 </div>
+
 
 <div class="photo-upload">
 
@@ -673,6 +715,7 @@ class="photo-preview">
 
 </div>
 
+
 <button
 type="button"
 class="primary"
@@ -685,7 +728,9 @@ Publier l'annonce
 </div>
 
 
-<!-- COMPTE -->
+<!-- =========================
+COMPTE
+========================= -->
 
 <div class="modal" id="account">
 
@@ -698,7 +743,7 @@ onclick="closeModal('account')">
 ✕
 </button>
 
-<h2>Créer mon compte</h2>
+<h2>👤 Mon compte</h2>
 
 <input
 id="fullName"
@@ -733,6 +778,27 @@ onclick="seConnecter()">
 J'ai déjà un compte
 </button>
 
+<button
+type="button"
+class="menu-button"
+onclick="motDePasseOublie()">
+🔑 Mot de passe oublié ?
+</button>
+
+<button
+type="button"
+class="menu-button"
+onclick="openModal('profile')">
+👤 Mon profil
+</button>
+
+<button
+type="button"
+class="menu-button"
+onclick="openModal('notifications')">
+🔔 Notifications
+</button>
+
 <div
 id="accountStatus"
 class="status">
@@ -743,7 +809,118 @@ class="status">
 </div>
 
 
-<!-- CONVERSATION -->
+<!-- =========================
+RÉINITIALISATION
+========================= -->
+
+<div class="modal" id="reset">
+
+<div class="modal-box">
+
+<button
+type="button"
+class="close"
+onclick="closeModal('reset')">
+✕
+</button>
+
+<h2>🔑 Mot de passe oublié</h2>
+
+<p style="font-size:13px;line-height:1.5;margin-bottom:10px;">
+Entre l'adresse e-mail utilisée pour ton compte.
+Supabase t'enverra le lien de récupération.
+</p>
+
+<input
+id="resetEmail"
+type="email"
+placeholder="Adresse e-mail">
+
+<button
+type="button"
+class="primary"
+onclick="envoyerLienRecuperation()">
+Envoyer le lien
+</button>
+
+<div
+id="resetStatus"
+class="status">
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+PROFIL
+========================= -->
+
+<div class="modal" id="profile">
+
+<div class="modal-box">
+
+<button
+type="button"
+class="close"
+onclick="closeModal('profile')">
+✕
+</button>
+
+<h2>👤 Mon profil</h2>
+
+<div class="order-box">
+
+<div><strong>Nom :</strong> <span id="profileName">Utilisateur</span></div>
+
+<div><strong>E-mail :</strong> <span id="profileEmail">-</span></div>
+
+<div><strong>Statut :</strong> Membre Marché Guinée</div>
+
+</div>
+
+<button
+type="button"
+class="secondary"
+onclick="seDeconnecter()">
+Se déconnecter
+</button>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+NOTIFICATIONS
+========================= -->
+
+<div class="modal" id="notifications">
+
+<div class="modal-box">
+
+<button
+type="button"
+class="close"
+onclick="closeModal('notifications')">
+✕
+</button>
+
+<h2>🔔 Notifications</h2>
+
+<div class="empty">
+Aucune nouvelle notification.
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+CONVERSATION
+========================= -->
 
 <div class="modal" id="conversation">
 
@@ -760,14 +937,12 @@ onclick="closeModal('conversation')">
 
 <div class="security-notice">
 🔒 Les numéros de téléphone ne peuvent pas être partagés
-dans les conversations. Utilisez la messagerie de
-Marché Guinée pour discuter et conclure votre vente.
+dans les conversations.
 </div>
-
-<div class="message-box">
 
 <textarea
 id="messageInput"
+rows="4"
 placeholder="Écrire votre message..."></textarea>
 
 <button
@@ -786,12 +961,119 @@ class="status">
 
 </div>
 
+
+<!-- =========================
+COMMANDE / PAIEMENT
+========================= -->
+
+<div class="modal" id="payment">
+
+<div class="modal-box">
+
+<button
+type="button"
+class="close"
+onclick="closeModal('payment')">
+✕
+</button>
+
+<h2>🛒 Finaliser la commande</h2>
+
+<div class="order-box">
+
+<div>
+<strong>Produit :</strong>
+<span id="orderProduct">Produit</span>
+</div>
+
+<div>
+<strong>Prix :</strong>
+<span id="orderPrice">0 GNF</span>
+</div>
+
+<div>
+<strong>Commission :</strong>
+<span id="orderCommission">0 GNF</span>
+</div>
+
+<div>
+<strong>Total :</strong>
+<span id="orderTotal">0 GNF</span>
+</div>
+
+</div>
+
+<h3 style="margin-top:18px;">
+Choisir le paiement
+</h3>
+
+
+<div class="payment-option">
+
+<label>
+
+<input
+type="radio"
+name="paymentMethod"
+value="Orange Money">
+
+<span class="payment-icon">🟠</span>
+
+Orange Money
+
+</label>
+
+</div>
+
+
+<div class="payment-option">
+
+<label>
+
+<input
+type="radio"
+name="paymentMethod"
+value="Mobile Money">
+
+<span class="payment-icon">🟡</span>
+
+Mobile Money
+
+</label>
+
+</div>
+
+
+<div class="security-notice">
+🔐 Le paiement réel sera connecté aux services
+officiels de paiement lors de l'intégration finale.
+</div>
+
+
+<button
+type="button"
+class="primary"
+onclick="preparerPaiement()">
+Continuer vers le paiement
+</button>
+
+<div
+id="paymentStatus"
+class="status">
+</div>
+
+</div>
+
 </div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
+
+/* =========================
+SUPABASE
+========================= */
 
 const SUPABASE_URL =
 "https://meernnpwtcgqjppyccqk.supabase.co";
@@ -807,579 +1089,775 @@ SUPABASE_KEY
 
 
 /* =========================
-   OUVERTURE / FERMETURE
+MODALS
 ========================= */
 
-function openModal(id) {
+function openModal(id){
 
-  const modal =
-  document.getElementById(id);
+const modal =
+document.getElementById(id);
 
-  if (modal) {
-    modal.style.display = "flex";
-  }
+if(modal){
+modal.style.display="flex";
+}
 
 }
 
-function closeModal(id) {
 
-  const modal =
-  document.getElementById(id);
+function closeModal(id){
 
-  if (modal) {
-    modal.style.display = "none";
-  }
+const modal =
+document.getElementById(id);
+
+if(modal){
+modal.style.display="none";
+}
 
 }
 
 
 /* =========================
-   RECHERCHE
+RECHERCHE
 ========================= */
 
-function searchProducts() {
+function searchProducts(){
 
-  const search =
-  document.getElementById("searchInput")
-  .value
-  .toLowerCase()
-  .trim();
+const search =
+document.getElementById("searchInput")
+.value
+.toLowerCase()
+.trim();
 
-  const cards =
-  document.querySelectorAll(".card");
+const cards =
+document.querySelectorAll(".card");
 
-  cards.forEach(function(card) {
+cards.forEach(function(card){
 
-    const name =
-    (card.dataset.name || "")
-    .toLowerCase();
+const name =
+(card.dataset.name || "")
+.toLowerCase();
 
-    card.style.display =
-    name.includes(search)
-    ? "block"
-    : "none";
+card.style.display =
+name.includes(search)
+? "block"
+: "none";
 
-  });
+});
 
 }
 
 
 /* =========================
-   CATÉGORIES
+CATÉGORIES
 ========================= */
 
-function filterCategory(category) {
+function filterCategory(category){
 
-  const cards =
-  document.querySelectorAll(".card");
+const cards =
+document.querySelectorAll(".card");
 
-  cards.forEach(function(card) {
+cards.forEach(function(card){
 
-    if (
-      category === "Tous" ||
-      card.dataset.category === category
-    ) {
+if(
+category==="Tous" ||
+card.dataset.category===category
+){
 
-      card.style.display = "block";
+card.style.display="block";
 
-    } else {
+}else{
 
-      card.style.display = "none";
+card.style.display="none";
 
-    }
+}
 
-  });
+});
 
 }
 
 
 /* =========================
-   PROTECTION NUMÉRO
+DÉTECTION NUMÉRO
 ========================= */
 
-function contientNumeroTelephone(texte) {
+function contientNumeroTelephone(texte){
 
-  if (!texte) {
-    return false;
-  }
+if(!texte){
+return false;
+}
 
-  const texteNormalise =
-  String(texte)
-  .toLowerCase()
-  .replace(/[()\-./]/g, " ")
-  .replace(/\s+/g, " ")
-  .trim();
-
-
-  /* Formats avec indicatif Guinée */
-
-  const indicatifGuinee =
-  /(?:\+224|00224)\s*(?:6\s*)\d(?:\s*\d){7,8}/;
-
-  if (indicatifGuinee.test(texteNormalise)) {
-    return true;
-  }
+const normalise =
+String(texte)
+.toLowerCase()
+.replace(/[()\-./]/g," ")
+.replace(/\s+/g," ")
+.trim();
 
 
-  /*
-     Numéro guinéen local.
-     On cherche une suite commençant par 6
-     avec 8 chiffres supplémentaires,
-     même si des espaces sont placés entre les chiffres.
-  */
+const indicatifGuinee =
+/(?:\+224|00224)\s*(?:6\s*)\d(?:\s*\d){7,8}/;
 
-  const chiffresSeulement =
-  texteNormalise.replace(/\D/g, "");
+if(indicatifGuinee.test(normalise)){
+return true;
+}
 
 
-  const numeroLocal =
-  /6\d{8}/;
+const chiffres =
+normalise.replace(/\D/g,"");
 
-  if (numeroLocal.test(chiffresSeulement)) {
-    return true;
-  }
-
-
-  /*
-     Détection générale de longs numéros
-     écrits avec espaces.
-  */
-
-  const longuesSuites =
-  /\b\d{8,15}\b/;
-
-  if (longuesSuites.test(texteNormalise)) {
-    return true;
-  }
+if(/6\d{8}/.test(chiffres)){
+return true;
+}
 
 
-  return false;
+if(/\b\d{8,15}\b/.test(normalise)){
+return true;
+}
+
+
+return false;
 
 }
 
 
 /* =========================
-   PHOTOS
+PHOTOS
 ========================= */
 
-function previewPhotos(event) {
+function previewPhotos(event){
 
-  const preview =
-  document.getElementById("photoPreview");
+const preview =
+document.getElementById("photoPreview");
 
-  preview.innerHTML = "";
+preview.innerHTML="";
 
-  const files =
-  Array.from(event.target.files);
+const files =
+Array.from(event.target.files);
 
-  files.forEach(function(file) {
+files.forEach(function(file){
 
-    if (!file.type.startsWith("image/")) {
-      return;
-    }
+if(!file.type.startsWith("image/")){
+return;
+}
 
-    const reader =
-    new FileReader();
+const reader =
+new FileReader();
 
-    reader.onload = function(e) {
+reader.onload=function(e){
 
-      const image =
-      document.createElement("img");
+const image =
+document.createElement("img");
 
-      image.src =
-      e.target.result;
+image.src=e.target.result;
 
-      preview.appendChild(image);
+preview.appendChild(image);
 
-    };
+};
 
-    reader.readAsDataURL(file);
+reader.readAsDataURL(file);
 
-  });
+});
 
 }
 
 
 /* =========================
-   CRÉER UN COMPTE
+CRÉER COMPTE
 ========================= */
 
-async function creerCompte() {
+async function creerCompte(){
 
-  const nom =
-  document.getElementById("fullName")
-  .value
-  .trim();
+const nom =
+document.getElementById("fullName")
+.value
+.trim();
 
-  const telephone =
-  document.getElementById("phone")
-  .value
-  .trim();
+const telephone =
+document.getElementById("phone")
+.value
+.trim();
 
-  const email =
-  document.getElementById("email")
-  .value
-  .trim();
+const email =
+document.getElementById("email")
+.value
+.trim();
 
-  const motDePasse =
-  document.getElementById("password")
-  .value;
+const motDePasse =
+document.getElementById("password")
+.value;
 
-  const status =
-  document.getElementById("accountStatus");
-
-
-  if (!nom || !telephone || !email || !motDePasse) {
-
-    status.innerText =
-    "Veuillez remplir tous les champs.";
-
-    return;
-  }
+const status =
+document.getElementById("accountStatus");
 
 
-  if (motDePasse.length < 6) {
+if(!nom || !telephone || !email || !motDePasse){
 
-    status.innerText =
-    "Le mot de passe doit contenir au moins 6 caractères.";
+status.innerText =
+"Veuillez remplir tous les champs.";
 
-    return;
-  }
+return;
 
-
-  status.innerText =
-  "Création du compte en cours...";
+}
 
 
-  const result =
-  await supabaseClient.auth.signUp({
+if(motDePasse.length<6){
 
-    email: email,
+status.innerText =
+"Le mot de passe doit contenir au moins 6 caractères.";
 
-    password: motDePasse,
+return;
 
-    options: {
-
-      data: {
-        full_name: nom,
-        phone: telephone
-      }
-
-    }
-
-  });
+}
 
 
-  if (result.error) {
-
-    status.innerText =
-    "Erreur : " +
-    result.error.message;
-
-    return;
-  }
+status.innerText =
+"Création du compte en cours...";
 
 
-  status.innerText =
-  "Compte créé avec succès !";
+const result =
+await supabaseClient.auth.signUp({
+
+email:email,
+
+password:motDePasse,
+
+options:{
+data:{
+full_name:nom,
+phone:telephone
+}
+}
+
+});
 
 
-  alert(
-    "Compte créé avec succès ! 🇬🇳"
-  );
+if(result.error){
+
+status.innerText =
+"Erreur : "+result.error.message;
+
+return;
+
+}
+
+
+status.innerText =
+"Compte créé avec succès !";
+
+alert(
+"Compte créé avec succès ! 🇬🇳"
+);
 
 }
 
 
 /* =========================
-   CONNEXION
+CONNEXION
 ========================= */
 
-async function seConnecter() {
+async function seConnecter(){
 
-  const email =
-  document.getElementById("email")
-  .value
-  .trim();
+const email =
+document.getElementById("email")
+.value
+.trim();
 
-  const motDePasse =
-  document.getElementById("password")
-  .value;
+const motDePasse =
+document.getElementById("password")
+.value;
 
-  const status =
-  document.getElementById("accountStatus");
-
-
-  if (!email || !motDePasse) {
-
-    status.innerText =
-    "Entre ton e-mail et ton mot de passe.";
-
-    return;
-  }
+const status =
+document.getElementById("accountStatus");
 
 
-  status.innerText =
-  "Connexion en cours...";
+if(!email || !motDePasse){
+
+status.innerText =
+"Entre ton e-mail et ton mot de passe.";
+
+return;
+
+}
 
 
-  const result =
-  await supabaseClient.auth.signInWithPassword({
-
-    email: email,
-
-    password: motDePasse
-
-  });
+status.innerText =
+"Connexion en cours...";
 
 
-  if (result.error) {
+const result =
+await supabaseClient.auth.signInWithPassword({
 
-    status.innerText =
-    "Erreur : " +
-    result.error.message;
+email:email,
 
-    return;
-  }
+password:motDePasse
 
-
-  status.innerText =
-  "Connexion réussie !";
+});
 
 
-  alert(
-    "Tu es maintenant connecté !"
-  );
+if(result.error){
+
+status.innerText =
+"Erreur : "+result.error.message;
+
+return;
+
+}
 
 
-  closeModal("account");
+status.innerText =
+"Connexion réussie !";
+
+alert(
+"Tu es maintenant connecté ! 🇬🇳"
+);
+
+await afficherProfil();
+
+closeModal("account");
 
 }
 
 
 /* =========================
-   PUBLICATION D'ANNONCE
+MOT DE PASSE OUBLIÉ
 ========================= */
 
-async function enregistrerAnnonce() {
+function motDePasseOublie(){
 
-  const nom =
-  document.getElementById("productName")
-  .value
-  .trim();
+const email =
+document.getElementById("email")
+.value
+.trim();
 
-  const categorie =
-  document.getElementById("productCategory")
-  .value;
+if(email){
 
-  const prix =
-  document.getElementById("productPrice")
-  .value
-  .trim();
+document.getElementById("resetEmail")
+.value=email;
 
-  const condition =
-  document.getElementById("productCondition")
-  .value;
+}
 
-  const ville =
-  document.getElementById("productCity")
-  .value
-  .trim();
+closeModal("account");
 
-  const quartier =
-  document.getElementById("productNeighborhood")
-  .value
-  .trim();
+openModal("reset");
 
-  const description =
-  document.getElementById("productDescription")
-  .value
-  .trim();
+}
 
 
-  /* Vérifications */
+async function envoyerLienRecuperation(){
 
-  if (!nom) {
-    alert("Le nom du produit est vide.");
-    return;
-  }
+const email =
+document.getElementById("resetEmail")
+.value
+.trim();
 
-  if (!categorie) {
-    alert("La catégorie est vide.");
-    return;
-  }
-
-  if (!prix) {
-    alert("Le prix est vide.");
-    return;
-  }
-
-  if (!condition) {
-    alert("L'état du produit est vide.");
-    return;
-  }
-
-  if (!ville) {
-    alert("La ville est vide.");
-    return;
-  }
+const status =
+document.getElementById("resetStatus");
 
 
-  /* =========================
-     BLOCAGE NUMÉRO
-  ========================= */
+if(!email){
 
-  if (contientNumeroTelephone(description)) {
+status.innerText =
+"Entre ton adresse e-mail.";
 
-    alert(
-      "🚫 Numéro de téléphone interdit\n\n" +
-      "Pour protéger les ventes sur Marché Guinée, " +
-      "les numéros de téléphone ne peuvent pas être " +
-      "publiés dans la description."
-    );
+return;
 
-    return;
-  }
+}
 
 
-  /* Vérification du compte */
-
-  const {
-    data: sessionData,
-    error: sessionError
-  } =
-  await supabaseClient.auth.getSession();
+status.innerText =
+"Envoi du lien en cours...";
 
 
-  if (sessionError) {
-
-    alert(
-      "Impossible de vérifier le compte."
-    );
-
-    return;
-  }
-
-
-  const utilisateur =
-  sessionData.session?.user;
+const result =
+await supabaseClient.auth.resetPasswordForEmail(
+email,
+{
+redirectTo:window.location.origin
+}
+);
 
 
-  if (!utilisateur) {
+if(result.error){
 
-    alert(
-      "Connecte-toi à ton compte avant de publier."
-    );
+status.innerText =
+"Erreur : "+result.error.message;
 
-    openModal("account");
+return;
 
-    return;
-  }
+}
 
 
-  const photos =
-  document.getElementById("productPhotos")
-  .files;
-
-
-  console.log(
-    "Photos sélectionnées :",
-    photos.length
-  );
-
-
-  alert(
-    "Formulaire et photos récupérés avec succès ! 🇬🇳"
-  );
+status.innerText =
+"✅ Le lien de récupération a été envoyé à ton adresse e-mail.";
 
 }
 
 
 /* =========================
-   ENVOI MESSAGE
+PROFIL
 ========================= */
 
-async function envoyerMessage() {
+async function afficherProfil(){
 
-  const champ =
-  document.getElementById("messageInput");
+const {
+data,
+error
+} =
+await supabaseClient.auth.getUser();
 
-  const status =
-  document.getElementById("messageStatus");
-
-  const message =
-  champ.value.trim();
-
-
-  if (!message) {
-
-    status.innerText =
-    "Écris un message avant de l'envoyer.";
-
-    return;
-  }
+if(error || !data.user){
+return;
+}
 
 
-  /* =========================
-     BLOCAGE NUMÉRO
-  ========================= */
-
-  if (contientNumeroTelephone(message)) {
-
-    status.innerText =
-    "🚫 Message non envoyé : " +
-    "le partage de numéros de téléphone " +
-    "est interdit dans les conversations.";
-
-    alert(
-      "🚫 Numéro de téléphone détecté\n\n" +
-      "Tu ne peux pas partager de numéro " +
-      "de téléphone dans Marché Guinée."
-    );
-
-    return;
-  }
+document.getElementById("profileEmail")
+.innerText =
+data.user.email || "-";
 
 
-  /*
-     Pour le moment, cette partie bloque
-     correctement les numéros.
-     L'enregistrement réel dans la table
-     Message sera connecté à Supabase
-     lorsque nous vérifierons ses colonnes.
-  */
+document.getElementById("profileName")
+.innerText =
+data.user.user_metadata?.full_name ||
+"Utilisateur";
 
-  status.innerText =
-  "Message accepté. 🇬🇳";
+}
 
 
-  champ.value = "";
+async function seDeconnecter(){
+
+await supabaseClient.auth.signOut();
+
+alert(
+"Tu es déconnecté."
+);
+
+closeModal("profile");
 
 }
 
 
 /* =========================
-   FERMETURE EN CLIQUANT
-   EN DEHORS DU MODAL
+PUBLICATION
+========================= */
+
+async function enregistrerAnnonce(){
+
+const nom =
+document.getElementById("productName")
+.value
+.trim();
+
+const categorie =
+document.getElementById("productCategory")
+.value;
+
+const prix =
+document.getElementById("productPrice")
+.value
+.trim();
+
+const condition =
+document.getElementById("productCondition")
+.value;
+
+const ville =
+document.getElementById("productCity")
+.value
+.trim();
+
+const quartier =
+document.getElementById("productNeighborhood")
+.value
+.trim();
+
+const description =
+document.getElementById("productDescription")
+.value
+.trim();
+
+
+if(!nom){
+
+alert("Le nom du produit est vide.");
+
+return;
+
+}
+
+
+if(!categorie){
+
+alert("La catégorie est vide.");
+
+return;
+
+}
+
+
+if(!prix){
+
+alert("Le prix est vide.");
+
+return;
+
+}
+
+
+if(!condition){
+
+alert("L'état du produit est vide.");
+
+return;
+
+}
+
+
+if(!ville){
+
+alert("La ville est vide.");
+
+return;
+
+}
+
+
+/* PROTECTION NUMÉRO */
+
+if(contientNumeroTelephone(description)){
+
+alert(
+"🚫 Numéro de téléphone interdit\n\n"+
+"Les numéros de téléphone ne peuvent pas être "+
+"publiés dans la description."
+);
+
+return;
+
+}
+
+
+const {
+data:sessionData,
+error:sessionError
+} =
+await supabaseClient.auth.getSession();
+
+
+if(sessionError){
+
+alert(
+"Impossible de vérifier le compte."
+);
+
+return;
+
+}
+
+
+const utilisateur =
+sessionData.session?.user;
+
+
+if(!utilisateur){
+
+alert(
+"Connecte-toi à ton compte avant de publier."
+);
+
+openModal("account");
+
+return;
+
+}
+
+
+const photos =
+document.getElementById("productPhotos")
+.files;
+
+
+console.log(
+"Photos sélectionnées :",
+photos.length
+);
+
+
+alert(
+"Annonce vérifiée avec succès ! 🇬🇳\n\n"+
+"Prochaine étape : enregistrement réel dans Supabase."
+);
+
+}
+
+
+/* =========================
+MESSAGE
+========================= */
+
+async function envoyerMessage(){
+
+const champ =
+document.getElementById("messageInput");
+
+const status =
+document.getElementById("messageStatus");
+
+const message =
+champ.value.trim();
+
+
+if(!message){
+
+status.innerText =
+"Écris un message avant de l'envoyer.";
+
+return;
+
+}
+
+
+if(contientNumeroTelephone(message)){
+
+status.innerText =
+"🚫 Message non envoyé : numéro de téléphone interdit.";
+
+alert(
+"🚫 Numéro de téléphone détecté.\n\n"+
+"Le partage de numéros est interdit dans Marché Guinée."
+);
+
+return;
+
+}
+
+
+status.innerText =
+"Message accepté. 🇬🇳";
+
+
+champ.value="";
+
+}
+
+
+/* =========================
+PAIEMENT
+========================= */
+
+function ouvrirPaiement(
+produit,
+prix
+){
+
+document.getElementById("orderProduct")
+.innerText=produit;
+
+const montant =
+Number(prix) || 0;
+
+
+/*
+   Exemple de commission provisoire.
+   Elle sera remplacée par le taux
+   définitif choisi pour Marché Guinée.
+*/
+
+const commission =
+Math.round(montant * 0.02);
+
+const total =
+montant + commission;
+
+
+document.getElementById("orderPrice")
+.innerText =
+montant.toLocaleString("fr-FR")+" GNF";
+
+
+document.getElementById("orderCommission")
+.innerText =
+commission.toLocaleString("fr-FR")+" GNF";
+
+
+document.getElementById("orderTotal")
+.innerText =
+total.toLocaleString("fr-FR")+" GNF";
+
+
+openModal("payment");
+
+}
+
+
+function preparerPaiement(){
+
+const methode =
+document.querySelector(
+'input[name="paymentMethod"]:checked'
+);
+
+
+const status =
+document.getElementById("paymentStatus");
+
+
+if(!methode){
+
+status.innerText =
+"Choisis Orange Money ou Mobile Money.";
+
+return;
+
+}
+
+
+status.innerText =
+"Paiement "+methode.value+
+" sélectionné. 🇬🇳\n\n"+
+"La connexion au service de paiement réel sera effectuée lors de l'intégration officielle.";
+
+}
+
+
+/* =========================
+FERMETURE MODALS
 ========================= */
 
 document
 .querySelectorAll(".modal")
-.forEach(function(modal) {
+.forEach(function(modal){
 
-  modal.addEventListener(
-    "click",
-    function(event) {
+modal.addEventListener(
+"click",
+function(event){
 
-      if (event.target === modal) {
+if(event.target===modal){
 
-        modal.style.display =
-        "none";
+modal.style.display="none";
 
-      }
+}
 
-    }
-  );
+}
+);
+
+});
+
+
+/* =========================
+SESSION
+========================= */
+
+supabaseClient.auth.onAuthStateChange(
+function(event,session){
+
+if(session){
+
+console.log(
+"Utilisateur connecté :",
+session.user.id
+);
+
+}
 
 });
 

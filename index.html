@@ -1,1630 +1,1470 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Marché Guinée 🇬🇳</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marché Guinée 🇬🇳</title>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial;background:#f5f5f5;color:#222}
-header{background:#00843D;color:white;padding:15px;position:sticky;top:0;z-index:10}
-.top{display:flex;justify-content:space-between;align-items:center}
-.logo{font-size:22px;font-weight:bold}
-.account{border:0;border-radius:50%;width:44px;height:44px;font-size:22px}
-.search{width:100%;margin-top:12px;padding:13px;border:0;border-radius:10px}
-main{max-width:800px;margin:auto;padding:15px}
-.box{background:white;padding:18px;border-radius:15px;margin-bottom:15px}
-h1,h2{color:#00843D}
-button{border:0;border-radius:9px;padding:12px 16px;margin:5px;cursor:pointer;font-size:15px}
-.primary{background:#00843D;color:white}
-.secondary{background:#eee}
-.danger{background:#d93025;color:white}
-.categories{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.category{background:#fff;border:1px solid #ddd;border-radius:10px;padding:15px;text-align:center}
-.modal{display:none;position:fixed;inset:0;background:#0008;z-index:100;padding:15px;overflow:auto}
-.modalbox{background:white;max-width:500px;margin:40px auto;padding:20px;border-radius:15px}
-.close{float:right;font-size:28px;cursor:pointer}
-input,textarea,select{width:100%;padding:12px;margin:6px 0 13px;border:1px solid #ccc;border-radius:9px}
-textarea{min-height:100px}
-.status{padding:10px;border-radius:8px;margin:10px 0}
-.ok{background:#d9f7e5;color:#086b32}
-.err{background:#ffe0e0;color:#a40000}
-.photos{display:flex;flex-wrap:wrap;gap:8px}
-.photos img{width:80px;height:80px;object-fit:cover;border-radius:8px}
-.connected{text-align:center}
-.avatar{font-size:55px}
-footer{text-align:center;padding:30px;color:#777}
-.info{background:#f0f7f3;padding:10px;border-radius:9px;font-size:14px;margin-bottom:12px}
-</style>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f5f6f8;
+      color: #222;
+    }
+
+    header {
+      background: #00843d;
+      color: white;
+      padding: 15px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .account-btn {
+      border: none;
+      background: white;
+      color: #00843d;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      font-size: 21px;
+      cursor: pointer;
+    }
+
+    .search {
+      width: 100%;
+      margin-top: 12px;
+      padding: 13px;
+      border: none;
+      border-radius: 10px;
+      outline: none;
+      font-size: 15px;
+    }
+
+    .categories {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 12px;
+      background: white;
+    }
+
+    .category {
+      border: 1px solid #ddd;
+      background: white;
+      padding: 9px 13px;
+      border-radius: 20px;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    main {
+      padding: 15px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .welcome {
+      background: white;
+      padding: 20px;
+      border-radius: 14px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    }
+
+    .welcome h1 {
+      color: #00843d;
+      margin-bottom: 8px;
+    }
+
+    .action-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .action {
+      background: white;
+      border: none;
+      border-radius: 14px;
+      padding: 20px 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .action strong {
+      display: block;
+      font-size: 27px;
+      margin-bottom: 8px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.55);
+      z-index: 100;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .modal-content {
+      background: white;
+      max-width: 500px;
+      margin: 40px auto;
+      border-radius: 16px;
+      padding: 20px;
+      position: relative;
+    }
+
+    .close {
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      font-size: 27px;
+      cursor: pointer;
+      color: #777;
+    }
+
+    .modal h2 {
+      color: #00843d;
+      margin-bottom: 15px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 13px;
+      margin: 7px 0;
+      border: 1px solid #ddd;
+      border-radius: 9px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .primary {
+      width: 100%;
+      background: #00843d;
+      color: white;
+      border: none;
+      padding: 13px;
+      border-radius: 9px;
+      margin-top: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .secondary {
+      width: 100%;
+      background: #eee;
+      color: #222;
+      border: none;
+      padding: 12px;
+      border-radius: 9px;
+      margin-top: 8px;
+      cursor: pointer;
+    }
+
+    .danger {
+      width: 100%;
+      background: #d93025;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 9px;
+      margin-top: 8px;
+      cursor: pointer;
+    }
+
+    .message {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 8px;
+      display: none;
+      background: #f1f1f1;
+    }
+
+    .account-info {
+      background: #f4f8f5;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 12px;
+    }
+
+    .account-info strong {
+      color: #00843d;
+    }
+
+    .photo-preview {
+      width: 100%;
+      max-height: 200px;
+      object-fit: contain;
+      display: none;
+      margin-top: 10px;
+      border-radius: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 15px;
+      color: #777;
+    }
+  </style>
 </head>
 
 <body>
 
 <header>
-<div class="top">
-<div class="logo">Marché Guinée 🇬🇳</div>
-<button class="account" onclick="ouvrirCompte()">👤</button>
-</div>
+  <div class="header-top">
+    <div class="logo">🇬🇳 Marché Guinée</div>
+    <button class="account-btn" onclick="ouvrirCompte()">👤</button>
+  </div>
 
-<input
-class="search"
-id="searchInput"
-type="search"
-placeholder="Rechercher un produit..."
-oninput="searchProducts()">
+  <input
+    class="search"
+    id="searchInput"
+    type="search"
+    placeholder="Rechercher un produit..."
+  >
 </header>
+
+<div class="categories">
+  <button class="category">Tous</button>
+  <button class="category">Téléphones</button>
+  <button class="category">Vêtements</button>
+  <button class="category">Maison</button>
+  <button class="category">Électronique</button>
+  <button class="category">Véhicules</button>
+  <button class="category">Autres</button>
+</div>
 
 <main>
 
-<div class="box" style="text-align:center">
-<h1>Bienvenue sur Marché Guinée 🇬🇳</h1>
-<p>Achète, vends et échange facilement en Guinée.</p>
-<button class="primary" onclick="ouvrirPublication()">➕ Publier une annonce</button>
-</div>
+  <section class="welcome">
+    <h1>Bienvenue sur Marché Guinée 🇬🇳</h1>
+    <p>Achetez et vendez facilement en Guinée.</p>
 
-<div class="box">
-<h2>Catégories</h2>
+    <div class="action-grid">
 
-<div class="categories">
+      <button class="action" onclick="ouvrirPublication()">
+        <strong>📦</strong>
+        Vendre un produit
+      </button>
 
-<div class="category" onclick="filterCategory('Téléphone')">📱 Téléphone</div>
-<div class="category" onclick="filterCategory('Mode')">👕 Mode</div>
-<div class="category" onclick="filterCategory('Beauté')">💄 Beauté</div>
-<div class="category" onclick="filterCategory('Maison')">🏠 Maison</div>
-<div class="category" onclick="filterCategory('Informatique')">💻 Informatique</div>
-<div class="category" onclick="filterCategory('Électronique')">🔌 Électronique</div>
-<div class="category" onclick="filterCategory('Sport')">⚽ Sport</div>
-<div class="category" onclick="filterCategory('Véhicule')">🚗 Véhicule</div>
-<div class="category" onclick="filterCategory('Alimentation')">🍎 Alimentation</div>
-<div class="category" onclick="filterCategory('Autre')">📦 Autre</div>
+      <button class="action" onclick="ouvrirCompte()">
+        <strong>👤</strong>
+        Mon compte
+      </button>
 
-</div>
-</div>
+      <button class="action" onclick="ouvrirMessages()">
+        <strong>💬</strong>
+        Messages
+      </button>
 
-<div class="box">
-<h2>Marché Guinée</h2>
-<p>Publie gratuitement tes produits et échange avec les acheteurs.</p>
-<button class="primary" onclick="ouvrirPublication()">Vendre un produit</button>
-<button class="secondary" onclick="ouvrirCompte()">👤 Mon compte</button>
-</div>
+      <button class="action" onclick="ouvrirPaiement()">
+        <strong>💰</strong>
+        Paiement
+      </button>
+
+    </div>
+  </section>
 
 </main>
 
 <footer>
-Marché Guinée 🇬🇳 — Marketplace guinéenne
+  Marché Guinée 🇬🇳<br>
+  Acheter • Vendre • Échanger
 </footer>
 
 
-<!-- COMPTE -->
+<!-- ================= COMPTE ================= -->
 
 <div class="modal" id="accountModal">
-<div class="modalbox">
+  <div class="modal-content">
 
-<span class="close" onclick="closeModal('accountModal')">×</span>
+    <span class="close" onclick="fermer('accountModal')">×</span>
 
-<div id="zoneCompte"></div>
+    <h2>Mon compte</h2>
 
+    <div id="accountLoggedOut">
+
+      <button class="primary" onclick="ouvrirInscription()">
+        Créer mon compte gratuitement
+      </button>
+
+      <button class="secondary" onclick="ouvrirConnexion()">
+        Se connecter
+      </button>
+
+    </div>
+
+    <div id="accountLoggedIn" style="display:none;">
+
+      <div class="account-info">
+        <p>Bienvenue 👋</p>
+        <p><strong id="accountName"></strong></p>
+        <p id="accountPhone"></p>
+      </div>
+
+      <button class="primary" onclick="ouvrirPublication()">
+        📦 Publier une annonce
+      </button>
+
+      <button class="danger" onclick="deconnexion()">
+        Se déconnecter
+      </button>
+
+    </div>
+
+    <div id="accountMessage" class="message"></div>
+
+  </div>
 </div>
-</div>
 
 
-<!-- INSCRIPTION -->
+<!-- ================= INSCRIPTION ================= -->
 
 <div class="modal" id="signupModal">
-<div class="modalbox">
+  <div class="modal-content">
 
-<span class="close" onclick="closeModal('signupModal')">×</span>
+    <span class="close" onclick="fermer('signupModal')">×</span>
 
-<h2>Créer mon compte gratuitement 🇬🇳</h2>
+    <h2>Créer mon compte</h2>
 
-<div class="info">
-📱 Ton numéro sera utilisé pour te connecter à ton compte.
+    <p style="margin-bottom:10px;color:#666;">
+      L'inscription est gratuite.
+    </p>
+
+    <input
+      id="signupName"
+      type="text"
+      placeholder="Nom complet"
+    >
+
+    <input
+      id="signupPhone"
+      type="tel"
+      placeholder="Numéro de téléphone"
+      inputmode="numeric"
+    >
+
+    <input
+      id="signupPassword"
+      type="password"
+      placeholder="Mot de passe"
+    >
+
+    <input
+      id="signupPasswordConfirm"
+      type="password"
+      placeholder="Confirmer le mot de passe"
+    >
+
+    <button class="primary" onclick="creerCompte()">
+      Créer mon compte
+    </button>
+
+    <div id="signupMessage" class="message"></div>
+
+  </div>
 </div>
 
-<label>Nom complet</label>
-<input
-id="fullName"
-type="text"
-placeholder="Ton nom complet">
 
-<label>Numéro de téléphone</label>
-<input
-id="phone"
-type="tel"
-placeholder="Ex : 622 00 00 00">
-
-<label>Mot de passe</label>
-<input
-id="password"
-type="password"
-placeholder="Minimum 6 caractères">
-
-<label>Confirmer le mot de passe</label>
-<input
-id="passwordConfirm"
-type="password"
-placeholder="Retape ton mot de passe">
-
-<button class="primary" onclick="creerCompte()">
-Créer mon compte
-</button>
-
-<div id="signupStatus"></div>
-
-</div>
-</div>
-
-
-<!-- CONNEXION -->
+<!-- ================= CONNEXION ================= -->
 
 <div class="modal" id="loginModal">
-<div class="modalbox">
+  <div class="modal-content">
 
-<span class="close" onclick="closeModal('loginModal')">×</span>
+    <span class="close" onclick="fermer('loginModal')">×</span>
 
-<h2>Se connecter 🇬🇳</h2>
+    <h2>Se connecter</h2>
 
-<div class="info">
-📱 Connecte-toi avec ton numéro de téléphone et ton mot de passe.
-</div>
+    <input
+      id="loginPhone"
+      type="tel"
+      placeholder="Numéro de téléphone"
+      inputmode="numeric"
+    >
 
-<label>Numéro de téléphone</label>
-<input
-id="loginPhone"
-type="tel"
-placeholder="Ex : 622 00 00 00">
+    <input
+      id="loginPassword"
+      type="password"
+      placeholder="Mot de passe"
+    >
 
-<label>Mot de passe</label>
-<input
-id="loginPassword"
-type="password"
-placeholder="Ton mot de passe">
+    <button class="primary" onclick="connexion()">
+      Se connecter
+    </button>
 
-<button class="primary" onclick="seConnecter()">
-Se connecter
-</button>
+    <div id="loginMessage" class="message"></div>
 
-<button class="secondary"
-onclick="closeModal('loginModal');openModal('signupModal')">
-Créer un nouveau compte
-</button>
-
-<div id="loginStatus"></div>
-
-</div>
+  </div>
 </div>
 
 
-<!-- PUBLICATION -->
+<!-- ================= PUBLICATION ================= -->
 
-<div class="modal" id="publishModal">
-<div class="modalbox">
+<div class="modal" id="publicationModal">
+  <div class="modal-content">
 
-<span class="close" onclick="closeModal('publishModal')">×</span>
+    <span class="close" onclick="fermer('publicationModal')">×</span>
 
-<h2>Publier une annonce 🇬🇳</h2>
+    <h2>Publier un produit 📦</h2>
 
-<label>Nom du produit</label>
-<input id="productName" placeholder="Ex : iPhone 12">
+    <input
+      id="productName"
+      type="text"
+      placeholder="Nom du produit"
+    >
 
-<label>Catégorie</label>
-<select id="productCategory">
-<option value="">Choisir une catégorie</option>
-<option>Téléphone</option>
-<option>Beauté</option>
-<option>Maison</option>
-<option>Autre</option>
-<option>Mode</option>
-<option>Informatique</option>
-<option>Alimentation</option>
-<option>Électronique</option>
-<option>Sport</option>
-<option>Véhicule</option>
-</select>
+    <textarea
+      id="productDescription"
+      placeholder="Description du produit"
+    ></textarea>
 
-<label>Prix en GNF</label>
-<input id="productPrice" type="number" placeholder="500000">
+    <input
+      id="productPrice"
+      type="number"
+      placeholder="Prix en GNF"
+    >
 
-<label>État</label>
-<select id="productCondition">
-<option value="">Choisir l'état</option>
-<option>Neuf</option>
-<option>Très bon état</option>
-<option>Bon état</option>
-<option>État moyen</option>
-<option>À réparer</option>
-</select>
+    <select id="productCondition">
+      <option value="">État du produit</option>
+      <option value="Good">Bon état</option>
+      <option value="New">Neuf</option>
+      <option value="Used">Occasion</option>
+    </select>
 
-<label>Ville</label>
-<input id="productCity" placeholder="Conakry">
+    <input
+      id="productCity"
+      type="text"
+      placeholder="Ville"
+      value="Conakry"
+    >
 
-<label>Quartier</label>
-<input id="productNeighborhood" placeholder="Ratoma">
+    <input
+      id="productNeighborhood"
+      type="text"
+      placeholder="Quartier"
+    >
 
-<label>Description</label>
-<textarea
-id="productDescription"
-placeholder="Décris ton produit..."></textarea>
+    <input
+      id="productPhoto"
+      type="file"
+      accept="image/*"
+      onchange="aperçuPhoto(event)"
+    >
 
-<label>Photos</label>
-<input
-id="productPhotos"
-type="file"
-accept="image/*"
-multiple
-onchange="previewPhotos()">
+    <img id="photoPreview" class="photo-preview">
 
-<div id="photoPreview" class="photos"></div>
+    <button class="primary" onclick="publierProduit()">
+      Publier l'annonce
+    </button>
 
-<button class="primary" onclick="enregistrerAnnonce()">
-Publier l'annonce
-</button>
+    <div id="publicationMessage" class="message"></div>
 
-<div id="publishStatus"></div>
-
-</div>
+  </div>
 </div>
 
 
-<!-- CONVERSATION -->
+<!-- ================= MESSAGES ================= -->
 
-<div class="modal" id="conversationModal">
-<div class="modalbox">
+<div class="modal" id="messageModal">
+  <div class="modal-content">
 
-<span class="close" onclick="closeModal('conversationModal')">×</span>
+    <span class="close" onclick="fermer('messageModal')">×</span>
 
-<h2>Conversation 💬</h2>
+    <h2>Messages 💬</h2>
 
-<textarea
-id="messageInput"
-placeholder="Écris ton message..."></textarea>
+    <textarea
+      id="messageText"
+      placeholder="Écrire un message..."
+    ></textarea>
 
-<button class="primary" onclick="envoyerMessage()">
-Envoyer
-</button>
+    <button class="primary" onclick="envoyerMessage()">
+      Envoyer
+    </button>
 
-<div id="messageStatus"></div>
+    <div id="messageResult" class="message"></div>
 
+  </div>
 </div>
-</div>
 
 
-<!-- PAIEMENT -->
+<!-- ================= PAIEMENT ================= -->
 
 <div class="modal" id="paymentModal">
-<div class="modalbox">
+  <div class="modal-content">
 
-<span class="close" onclick="closeModal('paymentModal')">×</span>
+    <span class="close" onclick="fermer('paymentModal')">×</span>
 
-<h2>Paiement 🇬🇳</h2>
+    <h2>Paiement 💰</h2>
 
-<div id="paymentProduct"></div>
-<div id="paymentPrice"></div>
+    <p style="margin-bottom:10px;">
+      Choisissez votre moyen de paiement.
+    </p>
 
-<hr>
+    <select id="paymentMethod">
+      <option value="">Choisir un moyen de paiement</option>
+      <option value="Orange Money">Orange Money</option>
+      <option value="Mobile Money">Mobile Money</option>
+    </select>
 
-<label>
-<input type="radio" name="paymentMethod" value="Orange Money" checked>
-🟠 Orange Money
-</label>
+    <input
+      id="paymentAmount"
+      type="number"
+      placeholder="Montant en GNF"
+    >
 
-<br>
+    <button class="primary" onclick="preparerPaiement()">
+      Continuer
+    </button>
 
-<label>
-<input type="radio" name="paymentMethod" value="Mobile Money">
-🔵 Mobile Money
-</label>
+    <div id="paymentResult" class="message"></div>
 
-<br><br>
-
-<div id="paymentCommission"></div>
-
-<button class="primary" onclick="preparerPaiement()">
-Continuer le paiement
-</button>
-
-</div>
+  </div>
 </div>
 
 
 <script>
 
-/* =========================
-   SUPABASE
-========================= */
+  /* =====================================================
+     SUPABASE
+  ===================================================== */
 
-const SUPABASE_URL =
-"https://meernnpwtcgqjppyccqk.supabase.co";
+  const SUPABASE_URL =
+    "https://meernnpwtcgqjppyccqk.supabase.co";
 
-const SUPABASE_KEY =
-"sb_publishable_RQUvUH0EYETyddgkKFgbAQ_ZKQubV-Z";
+  const SUPABASE_KEY =
+    "sb_publishable_RQUvUH0EYETyddgkKFgbAQ_ZKQubV-Z";
 
-const supabaseClient =
-window.supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
-);
+  const supabaseClient =
+    supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
 
 
-/* =========================
-   MODALES
-========================= */
+  /* =====================================================
+     OUTILS
+  ===================================================== */
 
-function openModal(id){
+  function nettoyerTelephone(phone) {
+    return String(phone || "").replace(/\D/g, "");
+  }
 
-const e=document.getElementById(id);
+  function telephoneValide(phone) {
+    const p = nettoyerTelephone(phone);
 
-if(e)e.style.display="block";
+    return /^6\d{8}$/.test(p);
+  }
 
-}
+  /*
+    E-mail technique utilisé uniquement par Supabase Auth.
+    L'utilisateur ne voit jamais cet e-mail.
+  */
 
-function closeModal(id){
+  function emailTechniqueDepuisTelephone(phone) {
+    const numero = nettoyerTelephone(phone);
 
-const e=document.getElementById(id);
+    return numero + "@marche-guinee.netlify.app";
+  }
 
-if(e)e.style.display="none";
 
-}
+  function afficherMessage(id, texte, couleur = "#333") {
 
-function ouvrirCompte(){
+    const element = document.getElementById(id);
 
-mettreAJourInterfaceCompte();
+    if (!element) return;
 
-openModal("accountModal");
+    element.textContent = texte;
+    element.style.display = "block";
+    element.style.color = couleur;
+  }
 
-}
 
-function ouvrirPublication(){
+  function fermer(id) {
 
-openModal("publishModal");
+    const modal = document.getElementById(id);
 
-}
+    if (modal) {
+      modal.style.display = "none";
+    }
+  }
 
 
-/* =========================
-   STATUS
-========================= */
+  function fermerTousLesModals() {
 
-function status(id,message,ok=true){
+    document.querySelectorAll(".modal").forEach(function(modal) {
+      modal.style.display = "none";
+    });
 
-const e=document.getElementById(id);
+  }
 
-if(!e)return;
 
-e.textContent=message;
+  /* =====================================================
+     COMPTE
+  ===================================================== */
 
-e.className=
-"status "+(ok?"ok":"err");
+  function ouvrirCompte() {
 
-}
+    document.getElementById("accountModal").style.display = "block";
 
+    actualiserCompte();
 
-/* =========================
-   RECHERCHE
-========================= */
+  }
 
-function searchProducts(){
 
-console.log(
-"Recherche :",
-document.getElementById("searchInput").value
-);
+  function ouvrirInscription() {
 
-}
+    fermer("accountModal");
 
-function filterCategory(category){
+    document.getElementById("signupModal").style.display = "block";
 
-document.getElementById("searchInput").value=category;
+  }
 
-alert(
-"Catégorie sélectionnée : "+category+
-"\n\nLa recherche des annonces sera connectée à Supabase."
-);
 
-}
+  function ouvrirConnexion() {
 
+    fermer("accountModal");
 
-/* =========================
-   TELEPHONE
-========================= */
+    document.getElementById("loginModal").style.display = "block";
 
-function nettoyerTelephone(phone){
+  }
 
-return String(phone||"")
-.replace(/\D/g,"");
 
-}
+  async function actualiserCompte() {
 
+    const {
+      data: {
+        user
+      }
+    } = await supabaseClient.auth.getUser();
 
-function telephoneValide(phone){
+    const loggedOut =
+      document.getElementById("accountLoggedOut");
 
-const p=
-nettoyerTelephone(phone);
+    const loggedIn =
+      document.getElementById("accountLoggedIn");
 
-return /^6\d{8}$/.test(p);
+    if (!user) {
 
-}
+      loggedOut.style.display = "block";
+      loggedIn.style.display = "none";
 
+      return;
+    }
 
-function contientNumeroTelephone(texte){
 
-if(!texte)return false;
+    loggedOut.style.display = "none";
+    loggedIn.style.display = "block";
 
-let t=String(texte).replace(
-/[\s().\-_/]/g,
-""
-);
 
-return /(?:\+224|00224)?6\d{8}/.test(t);
+    const {
+      data: profil
+    } = await supabaseClient
+      .from("Users")
+      .select('"Full name", Phone')
+      .eq("id", user.id)
+      .maybeSingle();
 
-}
 
+    if (profil) {
 
-/*
- Génère un e-mail technique
- à partir du numéro.
+      document.getElementById("accountName").textContent =
+        profil["Full name"] || "Utilisateur";
 
- L'utilisateur ne voit jamais
- cet e-mail.
-*/
+      document.getElementById("accountPhone").textContent =
+        profil.Phone || "";
 
-function emailTechniqueDepuisTelephone(phone){
+    } else {
 
-const numero=
-nettoyerTelephone(phone);
+      document.getElementById("accountName").textContent =
+        user.user_metadata?.full_name || "Utilisateur";
 
-return numero+
-"@marche-guinee.local";
+      document.getElementById("accountPhone").textContent =
+        user.user_metadata?.phone || "";
 
-}
+    }
 
+  }
 
-/* =========================
-   PHOTOS
-========================= */
 
-function previewPhotos(){
+  /* =====================================================
+     INSCRIPTION
+  ===================================================== */
 
-const input=
-document.getElementById("productPhotos");
+  async function creerCompte() {
 
-const preview=
-document.getElementById("photoPreview");
+    const nom =
+      document.getElementById("signupName").value.trim();
 
-preview.innerHTML="";
+    const phone =
+      nettoyerTelephone(
+        document.getElementById("signupPhone").value
+      );
 
-Array.from(input.files||[]).forEach(file=>{
+    const password =
+      document.getElementById("signupPassword").value;
 
-const reader=new FileReader();
+    const passwordConfirm =
+      document.getElementById("signupPasswordConfirm").value;
 
-reader.onload=e=>{
 
-const img=
-document.createElement("img");
+    if (!nom) {
 
-img.src=e.target.result;
+      afficherMessage(
+        "signupMessage",
+        "Veuillez entrer votre nom complet.",
+        "red"
+      );
 
-preview.appendChild(img);
+      return;
+    }
 
-};
 
-reader.readAsDataURL(file);
+    if (!telephoneValide(phone)) {
 
-});
+      afficherMessage(
+        "signupMessage",
+        "Veuillez entrer un numéro guinéen valide de 9 chiffres commençant par 6.",
+        "red"
+      );
 
-}
+      return;
+    }
 
 
-/* =========================
-   INSCRIPTION
-========================= */
+    if (password.length < 6) {
 
-async function creerCompte(){
+      afficherMessage(
+        "signupMessage",
+        "Le mot de passe doit contenir au moins 6 caractères.",
+        "red"
+      );
 
-const fullName=
-document.getElementById("fullName")
-.value.trim();
+      return;
+    }
 
-const phone=
-document.getElementById("phone")
-.value.trim();
 
-const password=
-document.getElementById("password")
-.value;
+    if (password !== passwordConfirm) {
 
-const passwordConfirm=
-document.getElementById("passwordConfirm")
-.value;
+      afficherMessage(
+        "signupMessage",
+        "Les deux mots de passe ne correspondent pas.",
+        "red"
+      );
 
+      return;
+    }
 
-/* Vérification */
 
-if(
-!fullName||
-!phone||
-!password||
-!passwordConfirm
-){
+    afficherMessage(
+      "signupMessage",
+      "Création du compte...",
+      "#555"
+    );
 
-status(
-"signupStatus",
-"Veuillez remplir toutes les informations.",
-false
-);
 
-return;
+    /*
+      Vérification du numéro dans notre table Users.
+    */
 
-}
+    const {
+      data: utilisateurExistant,
+      error: rechercheErreur
+    } = await supabaseClient
+      .from("Users")
+      .select("id")
+      .eq("Phone", phone)
+      .maybeSingle();
 
 
-/* Vérification téléphone */
+    if (rechercheErreur) {
 
-if(!telephoneValide(phone)){
+      console.warn(
+        "Erreur lors de la vérification du numéro :",
+        rechercheErreur
+      );
 
-status(
-"signupStatus",
-"Entre un numéro guinéen valide à 9 chiffres, par exemple 622000000.",
-false
-);
+    }
 
-return;
 
-}
+    if (utilisateurExistant) {
 
+      afficherMessage(
+        "signupMessage",
+        "Ce numéro possède déjà un compte. Essayez de vous connecter.",
+        "red"
+      );
 
-/* Vérification mot de passe */
+      return;
+    }
 
-if(password.length<6){
 
-status(
-"signupStatus",
-"Le mot de passe doit contenir au moins 6 caractères.",
-false
-);
+    /*
+      Création du compte Auth.
+    */
 
-return;
+    const emailTechnique =
+      emailTechniqueDepuisTelephone(phone);
 
-}
 
+    const {
+      data: authData,
+      error: authErreur
+    } = await supabaseClient.auth.signUp({
 
-/* Confirmation mot de passe */
+      email: emailTechnique,
 
-if(password!==passwordConfirm){
+      password: password,
 
-status(
-"signupStatus",
-"Les deux mots de passe ne correspondent pas.",
-false
-);
+      options: {
 
-return;
+        data: {
+          full_name: nom,
+          phone: phone
+        }
 
-}
+      }
 
+    });
 
-/*
- Numéro normalisé
-*/
 
-const numero=
-nettoyerTelephone(phone);
+    if (authErreur) {
 
+      console.error(authErreur);
 
-/*
- Vérification si le numéro existe
- déjà dans la table Users.
-*/
+      afficherMessage(
+        "signupMessage",
+        "Impossible de créer le compte : " + authErreur.message,
+        "red"
+      );
 
-const {data:ancienUtilisateur,error:rechercheErreur}=
-await supabaseClient
-.from("Users")
-.select("id")
-.eq("Phone",numero)
-.maybeSingle();
+      return;
+    }
 
 
-if(
-!rechercheErreur&&
-ancienUtilisateur
-){
+    if (!authData.user) {
 
-status(
-"signupStatus",
-"Ce numéro est déjà utilisé. Connecte-toi avec ce numéro.",
-false
-);
+      afficherMessage(
+        "signupMessage",
+        "Le compte n'a pas pu être créé.",
+        "red"
+      );
 
-return;
+      return;
+    }
 
-}
 
+    /*
+      Enregistrement du profil dans Users.
+    */
 
-/*
- Création de l'identifiant technique
-*/
+    const {
+      error: profilErreur
+    } = await supabaseClient
+      .from("Users")
+      .upsert(
+        {
+          id: authData.user.id,
+          "Full name": nom,
+          Phone: phone
+        },
+        {
+          onConflict: "id"
+        }
+      );
 
-const emailTechnique=
-emailTechniqueDepuisTelephone(numero);
 
+    /*
+      IMPORTANT :
+      Le compte Auth est déjà créé.
+      Si le profil a été créé malgré une réponse secondaire,
+      on considère l'inscription comme réussie.
+    */
 
-/*
- Création Auth Supabase
-*/
+    if (profilErreur) {
 
-const {data,error}=
-await supabaseClient.auth.signUp({
+      console.warn(
+        "Erreur secondaire lors de l'enregistrement du profil :",
+        profilErreur
+      );
 
-email:emailTechnique,
+    }
 
-password:password,
 
-options:{
+    afficherMessage(
+      "signupMessage",
+      "Compte créé avec succès ! Bienvenue sur Marché Guinée 🇬🇳",
+      "green"
+    );
 
-data:{
-full_name:fullName,
-phone:numero
-}
 
-}
+    /*
+      On vide les champs.
+    */
 
-});
+    document.getElementById("signupName").value = "";
+    document.getElementById("signupPhone").value = "";
+    document.getElementById("signupPassword").value = "";
+    document.getElementById("signupPasswordConfirm").value = "";
 
 
-if(error){
+    /*
+      Actualisation du compte.
+    */
 
-console.error(
-"Erreur création compte :",
-error
-);
+    setTimeout(function() {
 
-status(
-"signupStatus",
-"Impossible de créer le compte : "+
-error.message,
-false
-);
+      fermer("signupModal");
 
-return;
+      ouvrirCompte();
 
-}
+    }, 1200);
 
+  }
 
-/*
- Création / mise à jour du profil
-*/
 
-if(data&&data.user){
+  /* =====================================================
+     CONNEXION
+  ===================================================== */
 
-const {error:profileError}=
-await supabaseClient
-.from("Users")
-.upsert({
+  async function connexion() {
 
-id:data.user.id,
+    const phone =
+      nettoyerTelephone(
+        document.getElementById("loginPhone").value
+      );
 
-"Full name":fullName,
+    const password =
+      document.getElementById("loginPassword").value;
 
-Phone:numero
 
-},{
-onConflict:"id"
-});
+    if (!telephoneValide(phone)) {
 
+      afficherMessage(
+        "loginMessage",
+        "Numéro de téléphone invalide.",
+        "red"
+      );
 
-if(profileError){
+      return;
+    }
 
-console.error(
-"Erreur profil :",
-profileError
-);
 
-status(
-"signupStatus",
-"Compte créé, mais le profil n'a pas pu être enregistré.",
-false
-);
+    if (!password) {
 
-return;
+      afficherMessage(
+        "loginMessage",
+        "Veuillez entrer votre mot de passe.",
+        "red"
+      );
 
-}
+      return;
+    }
 
-}
 
+    afficherMessage(
+      "loginMessage",
+      "Connexion...",
+      "#555"
+    );
 
-/*
- Succès
-*/
 
-status(
-"signupStatus",
-"Compte créé avec succès ! 🇬🇳",
-true
-);
+    const emailTechnique =
+      emailTechniqueDepuisTelephone(phone);
 
 
-/*
- Nettoyage
-*/
+    const {
+      data,
+      error
+    } = await supabaseClient.auth.signInWithPassword({
 
-document.getElementById("fullName").value="";
-document.getElementById("phone").value="";
-document.getElementById("password").value="";
-document.getElementById("passwordConfirm").value="";
+      email: emailTechnique,
 
+      password: password
 
-setTimeout(()=>{
+    });
 
-closeModal("signupModal");
 
-ouvrirCompte();
+    if (error) {
 
-},1000);
+      console.error(error);
 
-}
+      afficherMessage(
+        "loginMessage",
+        "Connexion impossible : numéro ou mot de passe incorrect.",
+        "red"
+      );
 
+      return;
+    }
 
-/* =========================
-   CONNEXION PAR NUMERO
-========================= */
 
-async function seConnecter(){
+    if (!data.user) {
 
-const phone=
-document.getElementById("loginPhone")
-.value.trim();
+      afficherMessage(
+        "loginMessage",
+        "Connexion impossible.",
+        "red"
+      );
 
-const password=
-document.getElementById("loginPassword")
-.value;
+      return;
+    }
 
 
-/* Vérification */
+    afficherMessage(
+      "loginMessage",
+      "Connexion réussie ! Bienvenue 🇬🇳",
+      "green"
+    );
 
-if(!phone||!password){
 
-status(
-"loginStatus",
-"Entre ton numéro et ton mot de passe.",
-false
-);
+    document.getElementById("loginPhone").value = "";
+    document.getElementById("loginPassword").value = "";
 
-return;
 
-}
+    setTimeout(function() {
 
+      fermer("loginModal");
 
-/* Vérification téléphone */
+      ouvrirCompte();
 
-if(!telephoneValide(phone)){
+    }, 800);
 
-status(
-"loginStatus",
-"Entre un numéro guinéen valide.",
-false
-);
+  }
 
-return;
 
-}
+  /* =====================================================
+     DECONNEXION
+  ===================================================== */
 
+  async function deconnexion() {
 
-const numero=
-nettoyerTelephone(phone);
+    await supabaseClient.auth.signOut();
 
+    fermerTousLesModals();
 
-/*
- Création du même e-mail technique
-*/
+    alert("Vous êtes déconnecté.");
 
-const emailTechnique=
-emailTechniqueDepuisTelephone(numero);
+  }
 
 
-/*
- Connexion Supabase
-*/
+  /* =====================================================
+     PUBLICATION
+  ===================================================== */
 
-const {data,error}=
-await supabaseClient.auth.signInWithPassword({
+  async function ouvrirPublication() {
 
-email:emailTechnique,
+    const {
+      data: {
+        user
+      }
+    } = await supabaseClient.auth.getUser();
 
-password:password
 
-});
+    if (!user) {
 
+      fermerTousLesModals();
 
-if(error){
+      ouvrirCompte();
 
-console.error(
-"Erreur connexion :",
-error
-);
+      alert(
+        "Vous devez créer un compte ou vous connecter avant de publier une annonce."
+      );
 
-status(
-"loginStatus",
-"Connexion impossible : numéro ou mot de passe incorrect.",
-false
-);
+      return;
+    }
 
-return;
 
-}
+    fermerTousLesModals();
 
+    document.getElementById("publicationModal").style.display = "block";
 
-/*
- Succès
-*/
+  }
 
-status(
-"loginStatus",
-"Connexion réussie ! 🇬🇳",
-true
-);
 
+  function aperçuPhoto(event) {
 
-setTimeout(async()=>{
+    const fichier =
+      event.target.files[0];
 
-closeModal("loginModal");
+    const preview =
+      document.getElementById("photoPreview");
 
-await mettreAJourInterfaceCompte();
 
-openModal("accountModal");
+    if (!fichier) {
 
-},500);
+      preview.style.display = "none";
 
-}
+      return;
+    }
 
 
-/* =========================
-   INTERFACE COMPTE
-========================= */
+    const lecteur =
+      new FileReader();
 
-async function mettreAJourInterfaceCompte(){
 
-const zone=
-document.getElementById("zoneCompte");
+    lecteur.onload = function(e) {
 
-if(!zone)return;
+      preview.src = e.target.result;
 
+      preview.style.display = "block";
 
-const {data:{session}}=
-await supabaseClient.auth.getSession();
+    };
 
 
-if(session&&session.user){
+    lecteur.readAsDataURL(fichier);
 
-let nom=
-session.user.user_metadata?.full_name||
-"Utilisateur";
+  }
 
 
-let telephone=
-session.user.user_metadata?.phone||
-"";
+  async function publierProduit() {
 
+    const {
+      data: {
+        user
+      }
+    } = await supabaseClient.auth.getUser();
 
-try{
 
-const {data:profil}=
-await supabaseClient
-.from("Users")
-.select('"Full name",Phone')
-.eq("id",session.user.id)
-.maybeSingle();
+    if (!user) {
 
+      afficherMessage(
+        "publicationMessage",
+        "Vous devez être connecté.",
+        "red"
+      );
 
-if(profil){
+      return;
+    }
 
-if(profil["Full name"]){
 
-nom=
-profil["Full name"];
+    const nom =
+      document.getElementById("productName").value.trim();
 
-}
+    const description =
+      document.getElementById("productDescription").value.trim();
 
-if(profil.Phone){
+    const prix =
+      document.getElementById("productPrice").value;
 
-telephone=
-profil.Phone;
+    const etat =
+      document.getElementById("productCondition").value;
 
-}
+    const ville =
+      document.getElementById("productCity").value.trim();
 
-}
+    const quartier =
+      document.getElementById("productNeighborhood").value.trim();
 
-}catch(e){
 
-console.log(e);
+    if (!nom || !description || !prix || !etat || !ville) {
 
-}
+      afficherMessage(
+        "publicationMessage",
+        "Veuillez remplir les informations obligatoires.",
+        "red"
+      );
 
+      return;
+    }
 
-zone.innerHTML=`
 
-<div class="connected">
+    /*
+      Recherche automatique d'une catégorie.
+      On ne demande pas à l'utilisateur de copier un UUID.
+    */
 
-<div class="avatar">👤</div>
+    let categoryId = null;
 
-<h2>Connecté ✅</h2>
 
-<p>
-<strong>${echapper(nom)}</strong>
-</p>
+    const recherches = [
+      "Catégorie",
+      "categories",
+      "categorie",
+      "category"
+    ];
 
-<p>
-📱 ${echapper(telephone)}
-</p>
 
-<p>
-Ton compte Marché Guinée est connecté.
-</p>
+    for (const table of recherches) {
 
-<button
-class="primary"
-onclick="afficherProfil()">
-Mon profil
-</button>
+      try {
 
-<button
-class="danger"
-onclick="seDeconnecter()">
-Se déconnecter
-</button>
+        const {
+          data: categorie
+        } = await supabaseClient
+          .from(table)
+          .select("id")
+          .limit(1)
+          .maybeSingle();
 
-</div>
 
-`;
+        if (categorie?.id) {
 
-}else{
+          categoryId = categorie.id;
 
-zone.innerHTML=`
+          break;
 
-<div style="text-align:center">
+        }
 
-<div style="font-size:50px">👤</div>
+      } catch (e) {
 
-<h2>Mon compte</h2>
+        console.log(
+          "Table catégorie non utilisée :",
+          table
+        );
 
-<button
-class="primary"
-onclick="closeModal('accountModal');openModal('signupModal')">
-Inscris-toi gratuitement
-</button>
+      }
 
-<button
-class="secondary"
-onclick="closeModal('accountModal');openModal('loginModal')">
-J'ai déjà un compte
-</button>
+    }
 
-</div>
 
-`;
+    if (!categoryId) {
 
-}
+      afficherMessage(
+        "publicationMessage",
+        "Aucune catégorie disponible pour le moment.",
+        "red"
+      );
 
-}
+      return;
+    }
 
 
-/* =========================
-   PROTECTION HTML
-========================= */
+    const prixNombre =
+      Number(prix);
 
-function echapper(t){
 
-return String(t)
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
+    const {
+      data,
+      error
+    } = await supabaseClient
+      .from("listings")
+      .insert({
 
-}
+        Seller_id: user.id,
 
+        Category_id: categoryId,
 
-/* =========================
-   DECONNEXION
-========================= */
+        title: nom,
 
-async function seDeconnecter(){
+        description: description,
 
-const {error}=
-await supabaseClient.auth.signOut();
+        price_gnf: prixNombre,
 
+        Condition: etat,
 
-if(error){
+        city: ville,
 
-alert(
-"Erreur : "+error.message
-);
+        neighborhood: quartier,
 
-return;
+        status: "Active",
 
-}
+        views: 0
 
+      })
+      .select()
+      .single();
 
-alert(
-"Tu es maintenant déconnecté."
-);
 
+    if (error) {
 
-await mettreAJourInterfaceCompte();
+      console.error(error);
 
-}
+      afficherMessage(
+        "publicationMessage",
+        "Impossible de publier l'annonce : " + error.message,
+        "red"
+      );
 
+      return;
+    }
 
-/* =========================
-   PROFIL
-========================= */
 
-async function afficherProfil(){
+    console.log(
+      "Annonce créée :",
+      data
+    );
 
-const {data:{session}}=
-await supabaseClient.auth.getSession();
 
+    afficherMessage(
+      "publicationMessage",
+      "Annonce publiée avec succès ! 🇬🇳",
+      "green"
+    );
 
-if(!session){
 
-alert(
-"Tu dois être connecté."
-);
+    document.getElementById("productName").value = "";
+    document.getElementById("productDescription").value = "";
+    document.getElementById("productPrice").value = "";
+    document.getElementById("productCondition").value = "";
+    document.getElementById("productNeighborhood").value = "";
+    document.getElementById("productPhoto").value = "";
 
-return;
+    document.getElementById("photoPreview").style.display = "none";
 
-}
+  }
 
 
-let texte=
-"👤 Mon profil\n\n";
+  /* =====================================================
+     MESSAGES
+  ===================================================== */
 
+  function ouvrirMessages() {
 
-try{
+    document.getElementById("messageModal").style.display = "block";
 
-const {data:profil}=
-await supabaseClient
-.from("Users")
-.select('"Full name",Phone')
-.eq("id",session.user.id)
-.maybeSingle();
+  }
 
 
-if(profil){
+  async function envoyerMessage() {
 
-if(profil["Full name"]){
+    const texte =
+      document.getElementById("messageText").value.trim();
 
-texte+=
-"Nom : "+
-profil["Full name"]+
-"\n";
 
-}
+    if (!texte) {
 
-if(profil.Phone){
+      afficherMessage(
+        "messageResult",
+        "Écrivez un message.",
+        "red"
+      );
 
-texte+=
-"📱 Téléphone : "+
-profil.Phone+
-"\n";
+      return;
+    }
 
-}
 
-}
+    afficherMessage(
+      "messageResult",
+      "Message vérifié et prêt à être envoyé. 💬",
+      "green"
+    );
 
-}catch(e){}
+  }
 
 
-alert(texte);
+  /* =====================================================
+     PAIEMENT
+  ===================================================== */
 
-}
+  function ouvrirPaiement() {
 
+    document.getElementById("paymentModal").style.display = "block";
 
-/* =========================
-   RECHERCHE DE CATEGORIE
-========================= */
+  }
 
-async function trouverCategorieId(nomCategorie){
 
-let resultat=
-await supabaseClient
-.from("Catégorie")
-.select("id")
-.eq("Name",nomCategorie)
-.maybeSingle();
+  function preparerPaiement() {
 
+    const methode =
+      document.getElementById("paymentMethod").value;
 
-if(
-!resultat.error&&
-resultat.data
-){
+    const montant =
+      Number(
+        document.getElementById("paymentAmount").value
+      );
 
-return resultat.data.id;
 
-}
+    if (!methode || !montant || montant <= 0) {
 
+      afficherMessage(
+        "paymentResult",
+        "Choisissez un moyen de paiement et indiquez un montant.",
+        "red"
+      );
 
-const variantes=[
-"categories",
-"categorie",
-"category"
-];
+      return;
+    }
 
 
-for(const table of variantes){
+    const commission =
+      Math.round(montant * 0.02);
 
-const r=
-await supabaseClient
-.from(table)
-.select("id")
-.eq("Name",nomCategorie)
-.maybeSingle();
 
+    afficherMessage(
+      "paymentResult",
+      "Paiement " + methode +
+      " préparé. Commission de démonstration : " +
+      commission.toLocaleString("fr-FR") +
+      " GNF (2%).",
+      "green"
+    );
 
-if(
-!r.error&&
-r.data
-){
+  }
 
-return r.data.id;
 
-}
+  /* =====================================================
+     RECHERCHE
+  ===================================================== */
 
-}
+  document
+    .getElementById("searchInput")
+    .addEventListener("input", function() {
 
+      console.log(
+        "Recherche :",
+        this.value
+      );
 
-return null;
+    });
 
-}
 
+  /* =====================================================
+     AUTHENTIFICATION
+  ===================================================== */
 
-/* =========================
-   PUBLICATION REELLE
-========================= */
+  supabaseClient.auth.onAuthStateChange(
+    function(event, session) {
 
-async function enregistrerAnnonce(){
+      console.log(
+        "Auth :",
+        event
+      );
 
-const nom=
-document.getElementById("productName")
-.value.trim();
+      actualiserCompte();
 
-const categorie=
-document.getElementById("productCategory")
-.value.trim();
+    }
+  );
 
-const prix=
-document.getElementById("productPrice")
-.value.trim();
 
-const etat=
-document.getElementById("productCondition")
-.value.trim();
+  /* =====================================================
+     DEMARRAGE
+  ===================================================== */
 
-const ville=
-document.getElementById("productCity")
-.value.trim();
-
-const quartier=
-document.getElementById("productNeighborhood")
-.value.trim();
-
-const description=
-document.getElementById("productDescription")
-.value.trim();
-
-
-if(
-!nom||
-!categorie||
-!prix||
-!etat||
-!ville||
-!quartier||
-!description
-){
-
-status(
-"publishStatus",
-"Veuillez remplir toutes les informations principales de l'annonce.",
-false
-);
-
-return;
-
-}
-
-
-const prixNombre=
-Number(prix);
-
-
-if(
-!Number.isFinite(prixNombre)||
-prixNombre<=0
-){
-
-status(
-"publishStatus",
-"Veuillez entrer un prix valide.",
-false
-);
-
-return;
-
-}
-
-
-if(contientNumeroTelephone(description)){
-
-status(
-"publishStatus",
-"Les numéros de téléphone ne sont pas autorisés dans la description.",
-false
-);
-
-return;
-
-}
-
-
-const {
-data:sessionData,
-error:sessionError
-}=
-await supabaseClient.auth.getSession();
-
-
-if(sessionError){
-
-console.error(sessionError);
-
-status(
-"publishStatus",
-"Impossible de vérifier la connexion.",
-false
-);
-
-return;
-
-}
-
-
-if(!sessionData.session){
-
-status(
-"publishStatus",
-"Tu dois être connecté pour publier une annonce.",
-false
-);
-
-return;
-
-}
-
-
-const sellerId=
-sessionData.session.user.id;
-
-
-status(
-"publishStatus",
-"Recherche de la catégorie...",
-true
-);
-
-
-const categoryId=
-await trouverCategorieId(categorie);
-
-
-if(!categoryId){
-
-status(
-"publishStatus",
-"La catégorie « "+
-categorie+
-" » n'a pas été trouvée dans Supabase.",
-false
-);
-
-return;
-
-}
-
-
-const photos=
-document.getElementById("productPhotos")
-.files;
-
-
-console.log(
-"Photos sélectionnées :",
-photos.length
-);
-
-
-status(
-"publishStatus",
-"Publication de ton annonce...",
-true
-);
-
-
-const {
-data:annonce,
-error:annonceError
-}=
-await supabaseClient
-.from("listings")
-.insert({
-
-Seller_id:sellerId,
-
-Category_id:categoryId,
-
-title:nom,
-
-description:description,
-
-price_gnf:prixNombre,
-
-Condition:etat,
-
-city:ville,
-
-neighborhood:quartier,
-
-status:"active",
-
-views:0
-
-})
-.select()
-.single();
-
-
-if(annonceError){
-
-console.error(
-"Erreur publication :",
-annonceError
-);
-
-status(
-"publishStatus",
-"Erreur lors de la publication : "+
-annonceError.message,
-false
-);
-
-return;
-
-}
-
-
-console.log(
-"Annonce créée :",
-annonce
-);
-
-
-status(
-"publishStatus",
-"Annonce publiée avec succès ! 🇬🇳",
-true
-);
-
-
-alert(
-"🎉 Annonce publiée avec succès ! 🇬🇳\n\n"+
-"Ton annonce est maintenant enregistrée dans Marché Guinée."
-);
-
-
-document.getElementById("productName").value="";
-document.getElementById("productCategory").value="";
-document.getElementById("productPrice").value="";
-document.getElementById("productCondition").value="";
-document.getElementById("productCity").value="";
-document.getElementById("productNeighborhood").value="";
-document.getElementById("productDescription").value="";
-document.getElementById("productPhotos").value="";
-document.getElementById("photoPreview").innerHTML="";
-
-
-setTimeout(()=>{
-
-closeModal("publishModal");
-
-},1000);
-
-}
-
-
-/* =========================
-   MESSAGES
-========================= */
-
-async function envoyerMessage(){
-
-const message=
-document.getElementById("messageInput")
-.value.trim();
-
-
-if(!message){
-
-status(
-"messageStatus",
-"Écris un message.",
-false
-);
-
-return;
-
-}
-
-
-if(contientNumeroTelephone(message)){
-
-status(
-"messageStatus",
-"Les numéros de téléphone ne sont pas autorisés dans les conversations.",
-false
-);
-
-return;
-
-}
-
-
-const {data:{session}}=
-await supabaseClient.auth.getSession();
-
-
-if(!session){
-
-status(
-"messageStatus",
-"Connecte-toi pour envoyer un message.",
-false
-);
-
-return;
-
-}
-
-
-status(
-"messageStatus",
-"Message vérifié et prêt à être envoyé. 💬",
-true
-);
-
-
-document.getElementById("messageInput").value="";
-
-}
-
-
-/* =========================
-   PAIEMENT
-========================= */
-
-let produitPaiement=null;
-
-let prixPaiement=0;
-
-const COMMISSION_DEMO=0.02;
-
-
-function ouvrirPaiement(produit,prix){
-
-produitPaiement=produit;
-
-prixPaiement=
-Number(prix)||0;
-
-
-document.getElementById("paymentProduct")
-.innerHTML=
-"<strong>Produit :</strong> "+
-echapper(produit);
-
-
-document.getElementById("paymentPrice")
-.innerHTML=
-"<strong>Prix :</strong> "+
-prixPaiement.toLocaleString("fr-FR")+
-" GNF";
-
-
-const commission=
-prixPaiement*
-COMMISSION_DEMO;
-
-
-document.getElementById("paymentCommission")
-.innerHTML=
-"<p><strong>Commission de démonstration :</strong> "+
-commission.toLocaleString("fr-FR")+
-" GNF</p>";
-
-
-openModal("paymentModal");
-
-}
-
-
-function preparerPaiement(){
-
-const moyen=
-document.querySelector(
-'input[name="paymentMethod"]:checked'
-);
-
-
-if(!moyen){
-
-alert(
-"Choisis un moyen de paiement."
-);
-
-return;
-
-}
-
-
-alert(
-"Moyen choisi : "+
-moyen.value+
-"\n\nL'intégration réelle sera connectée avec l'API officielle."
-);
-
-}
-
-
-/* =========================
-   SESSION AUTOMATIQUE
-========================= */
-
-document.addEventListener(
-"DOMContentLoaded",
-async()=>{
-
-await mettreAJourInterfaceCompte();
-
-
-supabaseClient.auth.onAuthStateChange(
-async()=>{
-
-await mettreAJourInterfaceCompte();
-
-});
-
-}
-);
-
-
-/* =========================
-   FERMER LES MODALES
-========================= */
-
-window.addEventListener(
-"click",
-event=>{
-
-if(
-event.target.classList.contains("modal")
-){
-
-event.target.style.display="none";
-
-}
-
-});
+  actualiserCompte();
 
 </script>
 

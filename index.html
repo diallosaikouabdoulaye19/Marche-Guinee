@@ -5,1075 +5,326 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Marché Guinée 🇬🇳</title>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
-*{
-box-sizing:border-box;
-margin:0;
-padding:0;
-}
-
-body{
-font-family:Arial,sans-serif;
-background:#f5f7f6;
-color:#17221c;
-}
-
-header{
-background:#0b8f4d;
-color:white;
-padding:20px 16px;
-border-radius:0 0 25px 25px;
-}
-
-.top{
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-
-.logo{
-font-size:25px;
-font-weight:bold;
-}
-
-.logo span{
-color:#ffd43b;
-}
-
-.subtitle{
-font-size:13px;
-margin-top:5px;
-}
-
-.account{
-background:rgba(255,255,255,.2);
-border:none;
-color:white;
-font-size:22px;
-padding:10px;
-border-radius:12px;
-}
-
-.search{
-margin-top:18px;
-background:white;
-display:flex;
-border-radius:14px;
-overflow:hidden;
-}
-
-.search input{
-flex:1;
-border:none;
-outline:none;
-padding:14px;
-font-size:15px;
-}
-
-.search button{
-border:none;
-background:#ffd43b;
-padding:0 17px;
-font-size:18px;
-}
-
-main{
-padding:18px 16px 110px;
-}
-
-h2{
-font-size:19px;
-margin:20px 0 12px;
-}
-
-.categories{
-display:flex;
-gap:10px;
-overflow-x:auto;
-}
-
-.category{
-min-width:82px;
-background:white;
-border:1px solid #e3e9e5;
-border-radius:15px;
-padding:12px 7px;
-text-align:center;
-}
-
-.category div{
-font-size:26px;
-margin-bottom:6px;
-}
-
-.category small{
-font-size:12px;
-}
-
-.banner{
-margin-top:18px;
-background:linear-gradient(135deg,#08763f,#0b9b55);
-color:white;
-padding:20px;
-border-radius:20px;
-}
-
-.banner h3{
-font-size:20px;
-margin-bottom:7px;
-}
-
-.banner p{
-font-size:13px;
-line-height:1.4;
-}
-
-.banner button{
-margin-top:13px;
-background:#ffd43b;
-border:none;
-border-radius:12px;
-padding:11px 15px;
-font-weight:bold;
-}
-
-.products{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:12px;
-}
-
-.card{
-background:white;
-border-radius:17px;
-overflow:hidden;
-border:1px solid #e4e9e6;
-}
-
-.photo{
-height:140px;
-background:#e8eee9;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:55px;
-}
-
-.info{
-padding:11px;
-}
-
-.info h3{
-font-size:15px;
-margin-bottom:6px;
-}
-
-.price{
-color:#0b8f4d;
-font-weight:bold;
-}
-
-.place{
-color:#758179;
-font-size:11px;
-margin-top:6px;
-}
-
-.sell{
-position:fixed;
-right:18px;
-bottom:75px;
-background:#0b8f4d;
-color:white;
-border:none;
-border-radius:30px;
-padding:14px 18px;
-font-weight:bold;
-box-shadow:0 5px 18px rgba(0,0,0,.2);
-z-index:6;
-}
-
-nav{
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-background:white;
-border-top:1px solid #ddd;
-display:flex;
-justify-content:space-around;
-padding:9px 5px;
-z-index:5;
-}
-
-nav button{
-border:none;
-background:none;
-color:#65716a;
-font-size:11px;
-}
-
-nav span{
-display:block;
-font-size:21px;
-margin-bottom:3px;
-}
-
-nav .active{
-color:#0b8f4d;
-font-weight:bold;
-}
-
-.modal{
-display:none;
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.45);
-align-items:flex-end;
-z-index:10;
-}
-
-.modal-box{
-background:white;
-width:100%;
-padding:22px;
-border-radius:25px 25px 0 0;
-max-height:92vh;
-overflow-y:auto;
-}
-
-.close{
-float:right;
-border:none;
-background:#eee;
-border-radius:50%;
-width:32px;
-height:32px;
-}
-
-.modal-box input,
-.modal-box textarea,
-.modal-box select{
-width:100%;
-padding:13px;
-margin:7px 0;
-border:1px solid #ddd;
-border-radius:12px;
-}
-
-.primary{
-width:100%;
-padding:14px;
-background:#0b8f4d;
-color:white;
-border:none;
-border-radius:13px;
-font-weight:bold;
-margin-top:8px;
-}
-
-.secondary{
-width:100%;
-padding:14px;
-background:#eee;
-color:#17221c;
-border:none;
-border-radius:13px;
-font-weight:bold;
-margin-top:8px;
-}
-
-.status{
-margin-top:10px;
-font-size:13px;
-line-height:1.4;
-}
-
-.security-notice{
-background:#fff8df;
-border:1px solid #f0d76a;
-color:#6d5900;
-padding:11px;
-border-radius:12px;
-font-size:12px;
-line-height:1.4;
-margin-top:10px;
-}
-
-.photo-upload{
-margin-top:10px;
-padding:15px;
-border:2px dashed #0b8f4d;
-border-radius:15px;
-text-align:center;
-background:#f8fffb;
-}
-
-.photo-upload label{
-display:block;
-color:#0b8f4d;
-font-weight:bold;
-cursor:pointer;
-}
-
-.photo-upload input{
-display:none;
-}
-
-.photo-preview{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:8px;
-margin-top:12px;
-}
-
-.photo-preview img{
-width:100%;
-height:90px;
-object-fit:cover;
-border-radius:10px;
-}
-
-.payment-option{
-border:1px solid #ddd;
-border-radius:14px;
-padding:14px;
-margin:8px 0;
-background:#fff;
-}
-
-.payment-option label{
-display:flex;
-align-items:center;
-gap:10px;
-font-weight:bold;
-cursor:pointer;
-}
-
-.payment-option input{
-width:auto;
-margin:0;
-}
-
-.payment-icon{
-font-size:25px;
-}
-
-.order-box{
-background:#f5f7f6;
-padding:15px;
-border-radius:15px;
-margin-top:12px;
-line-height:1.7;
-}
-
-.menu-button{
-width:100%;
-padding:13px;
-margin-top:8px;
-border:none;
-background:#f1f4f2;
-border-radius:12px;
-text-align:left;
-font-weight:bold;
-}
-
-.empty{
-text-align:center;
-padding:25px;
-color:#758179;
-}
-
-@media(min-width:700px){
-.products{
-grid-template-columns:repeat(4,1fr);
-}
-}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial;background:#f5f5f5;color:#222}
+header{background:#00843D;color:white;padding:15px;position:sticky;top:0;z-index:10}
+.top{display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:22px;font-weight:bold}
+.account{border:0;border-radius:50%;width:44px;height:44px;font-size:22px}
+.search{width:100%;margin-top:12px;padding:13px;border:0;border-radius:10px}
+main{max-width:800px;margin:auto;padding:15px}
+.box{background:white;padding:18px;border-radius:15px;margin-bottom:15px}
+h1,h2{color:#00843D}
+button{border:0;border-radius:9px;padding:12px 16px;margin:5px;cursor:pointer;font-size:15px}
+.primary{background:#00843D;color:white}
+.secondary{background:#eee}
+.danger{background:#d93025;color:white}
+.categories{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.category{background:#fff;border:1px solid #ddd;border-radius:10px;padding:15px;text-align:center}
+.modal{display:none;position:fixed;inset:0;background:#0008;z-index:100;padding:15px;overflow:auto}
+.modalbox{background:white;max-width:500px;margin:40px auto;padding:20px;border-radius:15px}
+.close{float:right;font-size:28px;cursor:pointer}
+input,textarea,select{width:100%;padding:12px;margin:6px 0 13px;border:1px solid #ccc;border-radius:9px}
+textarea{min-height:100px}
+.status{padding:10px;border-radius:8px;margin:10px 0}
+.ok{background:#d9f7e5;color:#086b32}
+.err{background:#ffe0e0;color:#a40000}
+.photos{display:flex;flex-wrap:wrap;gap:8px}
+.photos img{width:80px;height:80px;object-fit:cover;border-radius:8px}
+.connected{text-align:center}
+.avatar{font-size:55px}
+footer{text-align:center;padding:30px;color:#777}
 </style>
 </head>
 
 <body>
 
 <header>
-
 <div class="top">
-
-<div>
-<div class="logo">
-Marché <span>Guinée</span> 🇬🇳
+<div class="logo">Marché Guinée 🇬🇳</div>
+<button class="account" onclick="ouvrirCompte()">👤</button>
 </div>
-
-<div class="subtitle">
-Achetez et vendez facilement en Guinée
-</div>
-</div>
-
-<button
-type="button"
-class="account"
-onclick="openModal('account')">
-👤
-</button>
-
-</div>
-
-<div class="search">
 
 <input
+class="search"
 id="searchInput"
+type="search"
 placeholder="Rechercher un produit..."
 oninput="searchProducts()">
-
-<button type="button">🔎</button>
-
-</div>
-
 </header>
-
 
 <main>
 
+<div class="box" style="text-align:center">
+<h1>Bienvenue sur Marché Guinée 🇬🇳</h1>
+<p>Achète, vends et échange facilement en Guinée.</p>
+<button class="primary" onclick="ouvrirPublication()">➕ Publier une annonce</button>
+</div>
+
+<div class="box">
 <h2>Catégories</h2>
 
 <div class="categories">
 
-<div class="category" onclick="filterCategory('Tous')">
-<div>🛍️</div>
-<small>Tous</small>
-</div>
-
-<div class="category" onclick="filterCategory('Téléphone')">
-<div>📱</div>
-<small>Téléphone</small>
-</div>
-
-<div class="category" onclick="filterCategory('Beauté')">
-<div>💄</div>
-<small>Beauté</small>
-</div>
-
-<div class="category" onclick="filterCategory('Maison')">
-<div>🏠</div>
-<small>Maison</small>
-</div>
-
-<div class="category" onclick="filterCategory('Mode')">
-<div>👕</div>
-<small>Mode</small>
-</div>
-
-<div class="category" onclick="filterCategory('Informatique')">
-<div>💻</div>
-<small>Informatique</small>
-</div>
-
-<div class="category" onclick="filterCategory('Alimentation')">
-<div>🍎</div>
-<small>Alimentation</small>
-</div>
-
-<div class="category" onclick="filterCategory('Électronique')">
-<div>🔌</div>
-<small>Électronique</small>
-</div>
-
-<div class="category" onclick="filterCategory('Sport')">
-<div>⚽</div>
-<small>Sport</small>
-</div>
-
-<div class="category" onclick="filterCategory('Véhicule')">
-<div>🚗</div>
-<small>Véhicule</small>
-</div>
-
-<div class="category" onclick="filterCategory('Autre')">
-<div>📦</div>
-<small>Autre</small>
-</div>
+<div class="category" onclick="filterCategory('Téléphone')">📱 Téléphone</div>
+<div class="category" onclick="filterCategory('Mode')">👕 Mode</div>
+<div class="category" onclick="filterCategory('Beauté')">💄 Beauté</div>
+<div class="category" onclick="filterCategory('Maison')">🏠 Maison</div>
+<div class="category" onclick="filterCategory('Informatique')">💻 Informatique</div>
+<div class="category" onclick="filterCategory('Électronique')">🔌 Électronique</div>
+<div class="category" onclick="filterCategory('Sport')">⚽ Sport</div>
+<div class="category" onclick="filterCategory('Véhicule')">🚗 Véhicule</div>
+<div class="category" onclick="filterCategory('Alimentation')">🍎 Alimentation</div>
+<div class="category" onclick="filterCategory('Autre')">📦 Autre</div>
 
 </div>
-
-
-<div class="banner">
-
-<h3>Vendez facilement 🇬🇳</h3>
-
-<p>
-Publiez vos produits et échangez directement avec les clients.
-</p>
-
-<button
-type="button"
-onclick="openModal('sell')">
-＋ Publier une annonce
-</button>
-
 </div>
 
-
-<h2>Annonces récentes</h2>
-
-<div class="products" id="products">
-
-<div
-class="card"
-data-name="iPhone 13"
-data-category="Téléphone">
-
-<div class="photo">📱</div>
-
-<div class="info">
-<h3>iPhone 13</h3>
-<div class="price">7 500 000 GNF</div>
-<div class="place">📍 Conakry</div>
-</div>
-
-</div>
-
-
-<div
-class="card"
-data-name="Canapé moderne"
-data-category="Maison">
-
-<div class="photo">🛋️</div>
-
-<div class="info">
-<h3>Canapé moderne</h3>
-<div class="price">4 200 000 GNF</div>
-<div class="place">📍 Ratoma</div>
-</div>
-
-</div>
-
-
-<div
-class="card"
-data-name="Boubou homme"
-data-category="Mode">
-
-<div class="photo">👕</div>
-
-<div class="info">
-<h3>Boubou homme</h3>
-<div class="price">450 000 GNF</div>
-<div class="place">📍 Matoto</div>
-</div>
-
-</div>
-
-
-<div
-class="card"
-data-name="Toyota Corolla"
-data-category="Véhicule">
-
-<div class="photo">🚗</div>
-
-<div class="info">
-<h3>Toyota Corolla</h3>
-<div class="price">120 000 000 GNF</div>
-<div class="place">📍 Conakry</div>
-</div>
-
-</div>
-
+<div class="box">
+<h2>Marché Guinée</h2>
+<p>Publie gratuitement tes produits et échange avec les acheteurs.</p>
+<button class="primary" onclick="ouvrirPublication()">Vendre un produit</button>
+<button class="secondary" onclick="ouvrirCompte()">👤 Mon compte</button>
 </div>
 
 </main>
 
-
-<button
-type="button"
-class="sell"
-onclick="openModal('sell')">
-＋ Vendre
-</button>
+<footer>
+Marché Guinée 🇬🇳 — Marketplace guinéenne
+</footer>
 
 
-<nav>
+<!-- COMPTE -->
 
-<button type="button" class="active">
-<span>🏠</span>
-Accueil
-</button>
+<div class="modal" id="accountModal">
+<div class="modalbox">
 
-<button
-type="button"
-onclick="document.getElementById('searchInput').focus()">
-<span>🔎</span>
-Recherche
-</button>
+<span class="close" onclick="closeModal('accountModal')">×</span>
 
-<button
-type="button"
-onclick="openModal('sell')">
-<span>➕</span>
-Vendre
-</button>
+<div id="zoneCompte"></div>
 
-<button
-type="button"
-onclick="openModal('account')">
-<span>👤</span>
-Compte
-</button>
-
-</nav>
-
-
-<!-- =========================
-PUBLICATION
-========================= -->
-
-<div class="modal" id="sell">
-
-<div class="modal-box">
-
-<button
-type="button"
-class="close"
-onclick="closeModal('sell')">
-✕
-</button>
-
-<h2>Publier une annonce</h2>
-
-<input
-id="productName"
-placeholder="Nom du produit">
-
-<select id="productCategory">
-
-<option value="">Choisir une catégorie</option>
-
-<option value="Téléphone">Téléphone</option>
-<option value="Beauté">Beauté</option>
-<option value="Maison">Maison</option>
-<option value="Autre">Autre</option>
-<option value="Mode">Mode</option>
-<option value="Informatique">Informatique</option>
-<option value="Alimentation">Alimentation</option>
-<option value="Électronique">Électronique</option>
-<option value="Sport">Sport</option>
-<option value="Véhicule">Véhicule</option>
-
-</select>
-
-<input
-id="productPrice"
-placeholder="Prix en GNF"
-type="number">
-
-<select id="productCondition">
-
-<option value="">État du produit</option>
-<option value="Neuf">Neuf</option>
-<option value="Très bon état">Très bon état</option>
-<option value="Bon état">Bon état</option>
-<option value="Occasion">Occasion</option>
-
-</select>
-
-<input
-id="productCity"
-placeholder="Ville">
-
-<input
-id="productNeighborhood"
-placeholder="Quartier">
-
-<textarea
-id="productDescription"
-rows="4"
-placeholder="Description du produit"></textarea>
-
-<div class="security-notice">
-🔒 Le partage de numéros de téléphone est interdit
-dans les annonces et les conversations.
+</div>
 </div>
 
 
-<div class="photo-upload">
+<!-- INSCRIPTION -->
 
-<label for="productPhotos">
-📷 Ajouter des photos du produit
-</label>
+<div class="modal" id="signupModal">
+<div class="modalbox">
 
-<input
-id="productPhotos"
-type="file"
-accept="image/*"
-multiple
-onchange="previewPhotos(event)">
+<span class="close" onclick="closeModal('signupModal')">×</span>
 
-<div
-id="photoPreview"
-class="photo-preview">
-</div>
+<h2>Créer mon compte gratuitement 🇬🇳</h2>
 
-</div>
+<label>Nom complet</label>
+<input id="fullName" type="text" placeholder="Ton nom complet">
 
+<label>Numéro</label>
+<input id="phone" type="tel" placeholder="Ex : 622 00 00 00">
 
-<button
-type="button"
-class="primary"
-onclick="enregistrerAnnonce()">
-Publier l'annonce
-</button>
+<label>Adresse e-mail</label>
+<input id="email" type="email" placeholder="Ton adresse e-mail">
+
+<label>Mot de passe</label>
+<input id="password" type="password" placeholder="Mot de passe">
+
+<button class="primary" onclick="creerCompte()">Créer mon compte</button>
+
+<div id="signupStatus"></div>
 
 </div>
-
 </div>
 
 
-<!-- =========================
-COMPTE
-========================= -->
+<!-- CONNEXION -->
 
-<div class="modal" id="account">
+<div class="modal" id="loginModal">
+<div class="modalbox">
 
-<div class="modal-box">
+<span class="close" onclick="closeModal('loginModal')">×</span>
 
-<button
-type="button"
-class="close"
-onclick="closeModal('account')">
-✕
+<h2>J'ai déjà un compte</h2>
+
+<label>Adresse e-mail</label>
+<input id="loginEmail" type="email" placeholder="Ton adresse e-mail">
+
+<label>Mot de passe</label>
+<input id="loginPassword" type="password" placeholder="Mot de passe">
+
+<button class="primary" onclick="seConnecter()">Se connecter</button>
+
+<button class="secondary"
+onclick="closeModal('loginModal');openModal('resetModal')">
+Mot de passe oublié ?
 </button>
 
-<h2>👤 Mon compte</h2>
-
-<input
-id="fullName"
-placeholder="Nom complet">
-
-<input
-id="phone"
-placeholder="Numéro de téléphone"
-type="tel">
-
-<input
-id="email"
-placeholder="Adresse e-mail"
-type="email">
-
-<input
-id="password"
-placeholder="Mot de passe"
-type="password">
-
-<button
-type="button"
-class="primary"
-onclick="creerCompte()">
-Créer mon compte gratuitement
-</button>
-
-<button
-type="button"
-class="secondary"
-onclick="seConnecter()">
-J'ai déjà un compte
-</button>
-
-<button
-type="button"
-class="menu-button"
-onclick="motDePasseOublie()">
-🔑 Mot de passe oublié ?
-</button>
-
-<button
-type="button"
-class="menu-button"
-onclick="openModal('profile')">
-👤 Mon profil
-</button>
-
-<button
-type="button"
-class="menu-button"
-onclick="openModal('notifications')">
-🔔 Notifications
-</button>
-
-<div
-id="accountStatus"
-class="status">
-</div>
+<div id="loginStatus"></div>
 
 </div>
-
 </div>
 
 
-<!-- =========================
-RÉINITIALISATION
-========================= -->
+<!-- MOT DE PASSE -->
 
-<div class="modal" id="reset">
+<div class="modal" id="resetModal">
+<div class="modalbox">
 
-<div class="modal-box">
+<span class="close" onclick="closeModal('resetModal')">×</span>
 
-<button
-type="button"
-class="close"
-onclick="closeModal('reset')">
-✕
-</button>
+<h2>Mot de passe oublié ?</h2>
 
-<h2>🔑 Mot de passe oublié</h2>
-
-<p style="font-size:13px;line-height:1.5;margin-bottom:10px;">
+<p>
 Entre l'adresse e-mail utilisée pour ton compte.
 Supabase t'enverra le lien de récupération.
 </p>
 
-<input
-id="resetEmail"
-type="email"
-placeholder="Adresse e-mail">
+<input id="resetEmail" type="email" placeholder="Ton adresse e-mail">
 
-<button
-type="button"
-class="primary"
-onclick="envoyerLienRecuperation()">
+<button class="primary" onclick="envoyerLienRecuperation()">
 Envoyer le lien
 </button>
 
-<div
-id="resetStatus"
-class="status">
-</div>
+<div id="resetStatus"></div>
 
 </div>
-
 </div>
 
 
-<!-- =========================
-PROFIL
-========================= -->
+<!-- PUBLICATION -->
 
-<div class="modal" id="profile">
+<div class="modal" id="publishModal">
+<div class="modalbox">
 
-<div class="modal-box">
+<span class="close" onclick="closeModal('publishModal')">×</span>
 
-<button
-type="button"
-class="close"
-onclick="closeModal('profile')">
-✕
+<h2>Publier une annonce 🇬🇳</h2>
+
+<label>Nom du produit</label>
+<input id="productName" placeholder="Ex : iPhone 12">
+
+<label>Catégorie</label>
+<select id="productCategory">
+<option value="">Choisir une catégorie</option>
+<option>Téléphone</option>
+<option>Beauté</option>
+<option>Maison</option>
+<option>Autre</option>
+<option>Mode</option>
+<option>Informatique</option>
+<option>Alimentation</option>
+<option>Électronique</option>
+<option>Sport</option>
+<option>Véhicule</option>
+</select>
+
+<label>Prix en GNF</label>
+<input id="productPrice" type="number" placeholder="500000">
+
+<label>État</label>
+<select id="productCondition">
+<option value="">Choisir l'état</option>
+<option>Neuf</option>
+<option>Très bon état</option>
+<option>Bon état</option>
+<option>État moyen</option>
+<option>À réparer</option>
+</select>
+
+<label>Ville</label>
+<input id="productCity" placeholder="Conakry">
+
+<label>Quartier</label>
+<input id="productNeighborhood" placeholder="Ratoma">
+
+<label>Description</label>
+<textarea id="productDescription"
+placeholder="Décris ton produit..."></textarea>
+
+<label>Photos</label>
+<input id="productPhotos"
+type="file"
+accept="image/*"
+multiple
+onchange="previewPhotos()">
+
+<div id="photoPreview" class="photos"></div>
+
+<button class="primary" onclick="enregistrerAnnonce()">
+Publier l'annonce
 </button>
 
-<h2>👤 Mon profil</h2>
-
-<div class="order-box">
-
-<div><strong>Nom :</strong> <span id="profileName">Utilisateur</span></div>
-
-<div><strong>E-mail :</strong> <span id="profileEmail">-</span></div>
-
-<div><strong>Statut :</strong> Membre Marché Guinée</div>
+<div id="publishStatus"></div>
 
 </div>
+</div>
 
-<button
-type="button"
-class="secondary"
-onclick="seDeconnecter()">
-Se déconnecter
+
+<!-- CONVERSATION -->
+
+<div class="modal" id="conversationModal">
+<div class="modalbox">
+
+<span class="close" onclick="closeModal('conversationModal')">×</span>
+
+<h2>Conversation 💬</h2>
+
+<textarea id="messageInput"
+placeholder="Écris ton message..."></textarea>
+
+<button class="primary" onclick="envoyerMessage()">
+Envoyer
 </button>
 
-</div>
+<div id="messageStatus"></div>
 
 </div>
-
-
-<!-- =========================
-NOTIFICATIONS
-========================= -->
-
-<div class="modal" id="notifications">
-
-<div class="modal-box">
-
-<button
-type="button"
-class="close"
-onclick="closeModal('notifications')">
-✕
-</button>
-
-<h2>🔔 Notifications</h2>
-
-<div class="empty">
-Aucune nouvelle notification.
-</div>
-
-</div>
-
 </div>
 
 
-<!-- =========================
-CONVERSATION
-========================= -->
+<!-- PAIEMENT -->
 
-<div class="modal" id="conversation">
+<div class="modal" id="paymentModal">
+<div class="modalbox">
 
-<div class="modal-box">
+<span class="close" onclick="closeModal('paymentModal')">×</span>
 
-<button
-type="button"
-class="close"
-onclick="closeModal('conversation')">
-✕
-</button>
+<h2>Paiement 🇬🇳</h2>
 
-<h2>💬 Conversation</h2>
+<div id="paymentProduct"></div>
+<div id="paymentPrice"></div>
 
-<div class="security-notice">
-🔒 Les numéros de téléphone ne peuvent pas être partagés
-dans les conversations.
-</div>
-
-<textarea
-id="messageInput"
-rows="4"
-placeholder="Écrire votre message..."></textarea>
-
-<button
-type="button"
-class="primary"
-onclick="envoyerMessage()">
-Envoyer le message
-</button>
-
-<div
-id="messageStatus"
-class="status">
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =========================
-COMMANDE / PAIEMENT
-========================= -->
-
-<div class="modal" id="payment">
-
-<div class="modal-box">
-
-<button
-type="button"
-class="close"
-onclick="closeModal('payment')">
-✕
-</button>
-
-<h2>🛒 Finaliser la commande</h2>
-
-<div class="order-box">
-
-<div>
-<strong>Produit :</strong>
-<span id="orderProduct">Produit</span>
-</div>
-
-<div>
-<strong>Prix :</strong>
-<span id="orderPrice">0 GNF</span>
-</div>
-
-<div>
-<strong>Commission :</strong>
-<span id="orderCommission">0 GNF</span>
-</div>
-
-<div>
-<strong>Total :</strong>
-<span id="orderTotal">0 GNF</span>
-</div>
-
-</div>
-
-<h3 style="margin-top:18px;">
-Choisir le paiement
-</h3>
-
-
-<div class="payment-option">
+<hr>
 
 <label>
-
-<input
-type="radio"
-name="paymentMethod"
-value="Orange Money">
-
-<span class="payment-icon">🟠</span>
-
-Orange Money
-
+<input type="radio" name="paymentMethod" value="Orange Money" checked>
+🟠 Orange Money
 </label>
 
-</div>
-
-
-<div class="payment-option">
+<br>
 
 <label>
-
-<input
-type="radio"
-name="paymentMethod"
-value="Mobile Money">
-
-<span class="payment-icon">🟡</span>
-
-Mobile Money
-
+<input type="radio" name="paymentMethod" value="Mobile Money">
+🔵 Mobile Money
 </label>
 
-</div>
+<br><br>
 
+<div id="paymentCommission"></div>
 
-<div class="security-notice">
-🔐 Le paiement réel sera connecté aux services
-officiels de paiement lors de l'intégration finale.
-</div>
-
-
-<button
-type="button"
-class="primary"
-onclick="preparerPaiement()">
-Continuer vers le paiement
+<button class="primary" onclick="preparerPaiement()">
+Continuer le paiement
 </button>
 
-<div
-id="paymentStatus"
-class="status">
+</div>
 </div>
 
-</div>
-
-</div>
-
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
-/* =========================
-SUPABASE
-========================= */
+/* SUPABASE */
 
 const SUPABASE_URL =
 "https://meernnpwtcgqjppyccqk.supabase.co";
@@ -1088,169 +339,94 @@ SUPABASE_KEY
 );
 
 
-/* =========================
-MODALS
-========================= */
+/* MODALES */
 
 function openModal(id){
-
-const modal =
-document.getElementById(id);
-
-if(modal){
-modal.style.display="flex";
+const e=document.getElementById(id);
+if(e)e.style.display="block";
 }
-
-}
-
 
 function closeModal(id){
-
-const modal =
-document.getElementById(id);
-
-if(modal){
-modal.style.display="none";
+const e=document.getElementById(id);
+if(e)e.style.display="none";
 }
 
+function ouvrirCompte(){
+mettreAJourInterfaceCompte();
+openModal("accountModal");
+}
+
+function ouvrirPublication(){
+openModal("publishModal");
 }
 
 
-/* =========================
-RECHERCHE
-========================= */
+/* STATUS */
+
+function status(id,message,ok=true){
+
+const e=document.getElementById(id);
+
+if(!e)return;
+
+e.textContent=message;
+e.className="status "+(ok?"ok":"err");
+}
+
+
+/* RECHERCHE */
 
 function searchProducts(){
-
-const search =
-document.getElementById("searchInput")
-.value
-.toLowerCase()
-.trim();
-
-const cards =
-document.querySelectorAll(".card");
-
-cards.forEach(function(card){
-
-const name =
-(card.dataset.name || "")
-.toLowerCase();
-
-card.style.display =
-name.includes(search)
-? "block"
-: "none";
-
-});
-
+console.log(
+"Recherche :",
+document.getElementById("searchInput").value
+);
 }
-
-
-/* =========================
-CATÉGORIES
-========================= */
 
 function filterCategory(category){
+document.getElementById("searchInput").value=category;
 
-const cards =
-document.querySelectorAll(".card");
-
-cards.forEach(function(card){
-
-if(
-category==="Tous" ||
-card.dataset.category===category
-){
-
-card.style.display="block";
-
-}else{
-
-card.style.display="none";
-
-}
-
-});
-
+alert(
+"Catégorie sélectionnée : "+category+
+"\n\nLa recherche des annonces sera connectée à Supabase."
+);
 }
 
 
-/* =========================
-DÉTECTION NUMÉRO
-========================= */
+/* TELEPHONE */
 
 function contientNumeroTelephone(texte){
 
-if(!texte){
-return false;
-}
+if(!texte)return false;
 
-const normalise =
-String(texte)
-.toLowerCase()
-.replace(/[()\-./]/g," ")
-.replace(/\s+/g," ")
-.trim();
+let t=String(texte).replace(
+/[\s().\-_/]/g,
+""
+);
 
-
-const indicatifGuinee =
-/(?:\+224|00224)\s*(?:6\s*)\d(?:\s*\d){7,8}/;
-
-if(indicatifGuinee.test(normalise)){
-return true;
+return /(?:\+224|00224)?6\d{8}/.test(t);
 }
 
 
-const chiffres =
-normalise.replace(/\D/g,"");
+/* PHOTOS */
 
-if(/6\d{8}/.test(chiffres)){
-return true;
-}
+function previewPhotos(){
 
-
-if(/\b\d{8,15}\b/.test(normalise)){
-return true;
-}
-
-
-return false;
-
-}
-
-
-/* =========================
-PHOTOS
-========================= */
-
-function previewPhotos(event){
-
-const preview =
-document.getElementById("photoPreview");
+const input=document.getElementById("productPhotos");
+const preview=document.getElementById("photoPreview");
 
 preview.innerHTML="";
 
-const files =
-Array.from(event.target.files);
+Array.from(input.files||[]).forEach(file=>{
 
-files.forEach(function(file){
+const reader=new FileReader();
 
-if(!file.type.startsWith("image/")){
-return;
-}
+reader.onload=e=>{
 
-const reader =
-new FileReader();
+const img=document.createElement("img");
+img.src=e.target.result;
 
-reader.onload=function(e){
-
-const image =
-document.createElement("img");
-
-image.src=e.target.result;
-
-preview.appendChild(image);
+preview.appendChild(img);
 
 };
 
@@ -1261,214 +437,379 @@ reader.readAsDataURL(file);
 }
 
 
-/* =========================
-CRÉER COMPTE
-========================= */
+/* INSCRIPTION */
 
 async function creerCompte(){
 
-const nom =
-document.getElementById("fullName")
-.value
-.trim();
+const fullName=
+document.getElementById("fullName").value.trim();
 
-const telephone =
-document.getElementById("phone")
-.value
-.trim();
+const phone=
+document.getElementById("phone").value.trim();
 
-const email =
-document.getElementById("email")
-.value
-.trim();
+const email=
+document.getElementById("email").value.trim();
 
-const motDePasse =
-document.getElementById("password")
-.value;
+const password=
+document.getElementById("password").value;
 
-const status =
-document.getElementById("accountStatus");
+if(!fullName||!phone||!email||!password){
 
-
-if(!nom || !telephone || !email || !motDePasse){
-
-status.innerText =
-"Veuillez remplir tous les champs.";
+status(
+"signupStatus",
+"Veuillez remplir toutes les informations.",
+false
+);
 
 return;
+}
 
+if(password.length<6){
+
+status(
+"signupStatus",
+"Le mot de passe doit contenir au moins 6 caractères.",
+false
+);
+
+return;
 }
 
 
-if(motDePasse.length<6){
-
-status.innerText =
-"Le mot de passe doit contenir au moins 6 caractères.";
-
-return;
-
-}
-
-
-status.innerText =
-"Création du compte en cours...";
-
-
-const result =
+const {data,error}=
 await supabaseClient.auth.signUp({
 
 email:email,
 
-password:motDePasse,
+password:password,
 
 options:{
 data:{
-full_name:nom,
-phone:telephone
+full_name:fullName,
+phone:phone
 }
 }
 
 });
 
 
-if(result.error){
+if(error){
 
-status.innerText =
-"Erreur : "+result.error.message;
-
-return;
-
-}
-
-
-status.innerText =
-"Compte créé avec succès !";
-
-alert(
-"Compte créé avec succès ! 🇬🇳"
+status(
+"signupStatus",
+"Erreur : "+error.message,
+false
 );
 
+return;
 }
 
 
-/* =========================
-CONNEXION
-========================= */
+status(
+"signupStatus",
+"Compte créé avec succès ! 🇬🇳",
+true
+);
+
+
+if(data&&data.user){
+
+const {error:profileError}=
+await supabaseClient
+.from("Users")
+.upsert({
+
+id:data.user.id,
+
+"Full name":fullName,
+
+Phone:phone
+
+},{
+onConflict:"id"
+});
+
+if(profileError){
+
+console.log(profileError.message);
+
+}
+
+}
+
+}
+
+
+/* CONNEXION */
 
 async function seConnecter(){
 
-const email =
-document.getElementById("email")
-.value
-.trim();
+const email=
+document.getElementById("loginEmail").value.trim();
 
-const motDePasse =
-document.getElementById("password")
-.value;
-
-const status =
-document.getElementById("accountStatus");
+const password=
+document.getElementById("loginPassword").value;
 
 
-if(!email || !motDePasse){
+if(!email||!password){
 
-status.innerText =
-"Entre ton e-mail et ton mot de passe.";
+status(
+"loginStatus",
+"Veuillez remplir votre e-mail et votre mot de passe.",
+false
+);
 
 return;
-
 }
 
 
-status.innerText =
-"Connexion en cours...";
-
-
-const result =
+const {data,error}=
 await supabaseClient.auth.signInWithPassword({
 
 email:email,
 
-password:motDePasse
+password:password
 
 });
 
 
-if(result.error){
+if(error){
 
-status.innerText =
-"Erreur : "+result.error.message;
-
-return;
-
-}
-
-
-status.innerText =
-"Connexion réussie !";
-
-alert(
-"Tu es maintenant connecté ! 🇬🇳"
+status(
+"loginStatus",
+"Connexion impossible : "+error.message,
+false
 );
 
-await afficherProfil();
+return;
+}
 
-closeModal("account");
+
+status(
+"loginStatus",
+"Connexion réussie ! 🇬🇳",
+true
+);
+
+
+setTimeout(async()=>{
+
+closeModal("loginModal");
+
+await mettreAJourInterfaceCompte();
+
+openModal("accountModal");
+
+},500);
 
 }
 
 
-/* =========================
-MOT DE PASSE OUBLIÉ
-========================= */
+/* INTERFACE COMPTE */
 
-function motDePasseOublie(){
+async function mettreAJourInterfaceCompte(){
 
-const email =
-document.getElementById("email")
-.value
-.trim();
+const zone=
+document.getElementById("zoneCompte");
 
-if(email){
+if(!zone)return;
 
-document.getElementById("resetEmail")
-.value=email;
+
+const {data:{session}}=
+await supabaseClient.auth.getSession();
+
+
+if(session&&session.user){
+
+let nom=
+session.user.email||"Utilisateur";
+
+
+try{
+
+const {data:profil}=
+await supabaseClient
+.from("Users")
+.select('"Full name"')
+.eq("id",session.user.id)
+.maybeSingle();
+
+
+if(profil&&profil["Full name"]){
+
+nom=profil["Full name"];
 
 }
 
-closeModal("account");
+}catch(e){
 
-openModal("reset");
+console.log(e);
 
 }
 
+
+zone.innerHTML=`
+
+<div class="connected">
+
+<div class="avatar">👤</div>
+
+<h2>Connecté ✅</h2>
+
+<p><strong>${echapper(nom)}</strong></p>
+
+<p>Ton compte Marché Guinée est connecté.</p>
+
+<button class="primary"
+onclick="afficherProfil()">
+Mon profil
+</button>
+
+<button class="danger"
+onclick="seDeconnecter()">
+Se déconnecter
+</button>
+
+</div>
+
+`;
+
+}else{
+
+zone.innerHTML=`
+
+<div style="text-align:center">
+
+<div style="font-size:50px">👤</div>
+
+<h2>Mon compte</h2>
+
+<button class="primary"
+onclick="closeModal('accountModal');openModal('signupModal')">
+Inscris-toi gratuitement
+</button>
+
+<button class="secondary"
+onclick="closeModal('accountModal');openModal('loginModal')">
+J'ai déjà un compte
+</button>
+
+</div>
+
+`;
+
+}
+
+}
+
+
+/* PROTECTION HTML */
+
+function echapper(t){
+
+return String(t)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+/* DECONNEXION */
+
+async function seDeconnecter(){
+
+const {error}=
+await supabaseClient.auth.signOut();
+
+if(error){
+
+alert(
+"Erreur : "+error.message
+);
+
+return;
+}
+
+alert(
+"Tu es maintenant déconnecté."
+);
+
+await mettreAJourInterfaceCompte();
+
+}
+
+
+/* PROFIL */
+
+async function afficherProfil(){
+
+const {data:{session}}=
+await supabaseClient.auth.getSession();
+
+if(!session){
+
+alert("Tu dois être connecté.");
+
+return;
+}
+
+let texte=
+"👤 Mon profil\n\n"+
+"E-mail : "+session.user.email;
+
+
+try{
+
+const {data:profil}=
+await supabaseClient
+.from("Users")
+.select('"Full name",Phone')
+.eq("id",session.user.id)
+.maybeSingle();
+
+
+if(profil){
+
+if(profil["Full name"])
+texte+="\nNom : "+profil["Full name"];
+
+if(profil.Phone)
+texte+="\nTéléphone : "+profil.Phone;
+
+}
+
+}catch(e){}
+
+
+alert(texte);
+
+}
+
+
+/* MOT DE PASSE */
 
 async function envoyerLienRecuperation(){
 
-const email =
-document.getElementById("resetEmail")
-.value
-.trim();
-
-const status =
-document.getElementById("resetStatus");
+const email=
+document.getElementById("resetEmail").value.trim();
 
 
 if(!email){
 
-status.innerText =
-"Entre ton adresse e-mail.";
+status(
+"resetStatus",
+"Entre ton adresse e-mail.",
+false
+);
 
 return;
-
 }
 
 
-status.innerText =
-"Envoi du lien en cours...";
-
-
-const result =
+const {error}=
 await supabaseClient.auth.resetPasswordForEmail(
 email,
 {
@@ -1477,203 +818,96 @@ redirectTo:window.location.origin
 );
 
 
-if(result.error){
+if(error){
 
-status.innerText =
-"Erreur : "+result.error.message;
-
-return;
-
-}
-
-
-status.innerText =
-"✅ Le lien de récupération a été envoyé à ton adresse e-mail.";
-
-}
-
-
-/* =========================
-PROFIL
-========================= */
-
-async function afficherProfil(){
-
-const {
-data,
-error
-} =
-await supabaseClient.auth.getUser();
-
-if(error || !data.user){
-return;
-}
-
-
-document.getElementById("profileEmail")
-.innerText =
-data.user.email || "-";
-
-
-document.getElementById("profileName")
-.innerText =
-data.user.user_metadata?.full_name ||
-"Utilisateur";
-
-}
-
-
-async function seDeconnecter(){
-
-await supabaseClient.auth.signOut();
-
-alert(
-"Tu es déconnecté."
+status(
+"resetStatus",
+"Erreur : "+error.message,
+false
 );
 
-closeModal("profile");
+return;
+}
+
+
+status(
+"resetStatus",
+"Le lien de récupération a été envoyé à ton adresse e-mail.",
+true
+);
 
 }
 
 
-/* =========================
-PUBLICATION
-========================= */
+/* PUBLICATION */
 
 async function enregistrerAnnonce(){
 
-const nom =
-document.getElementById("productName")
-.value
-.trim();
+const nom=
+document.getElementById("productName").value.trim();
 
-const categorie =
-document.getElementById("productCategory")
-.value;
+const categorie=
+document.getElementById("productCategory").value.trim();
 
-const prix =
-document.getElementById("productPrice")
-.value
-.trim();
+const prix=
+document.getElementById("productPrice").value.trim();
 
-const condition =
-document.getElementById("productCondition")
-.value;
+const etat=
+document.getElementById("productCondition").value.trim();
 
-const ville =
-document.getElementById("productCity")
-.value
-.trim();
+const ville=
+document.getElementById("productCity").value.trim();
 
-const quartier =
-document.getElementById("productNeighborhood")
-.value
-.trim();
+const quartier=
+document.getElementById("productNeighborhood").value.trim();
 
-const description =
-document.getElementById("productDescription")
-.value
-.trim();
+const description=
+document.getElementById("productDescription").value.trim();
 
 
-if(!nom){
+if(!nom||!categorie||!prix||!etat||
+!ville||!quartier||!description){
 
-alert("Le nom du produit est vide.");
+status(
+"publishStatus",
+"Veuillez remplir toutes les informations principales de l'annonce.",
+false
+);
 
 return;
-
 }
 
-
-if(!categorie){
-
-alert("La catégorie est vide.");
-
-return;
-
-}
-
-
-if(!prix){
-
-alert("Le prix est vide.");
-
-return;
-
-}
-
-
-if(!condition){
-
-alert("L'état du produit est vide.");
-
-return;
-
-}
-
-
-if(!ville){
-
-alert("La ville est vide.");
-
-return;
-
-}
-
-
-/* PROTECTION NUMÉRO */
 
 if(contientNumeroTelephone(description)){
 
-alert(
-"🚫 Numéro de téléphone interdit\n\n"+
-"Les numéros de téléphone ne peuvent pas être "+
-"publiés dans la description."
+status(
+"publishStatus",
+"Les numéros de téléphone ne sont pas autorisés dans la description.",
+false
 );
 
 return;
-
 }
 
 
-const {
-data:sessionData,
-error:sessionError
-} =
+const {data:{session}}=
 await supabaseClient.auth.getSession();
 
 
-if(sessionError){
+if(!session){
 
-alert(
-"Impossible de vérifier le compte."
+status(
+"publishStatus",
+"Tu dois être connecté pour publier une annonce.",
+false
 );
 
 return;
-
 }
 
 
-const utilisateur =
-sessionData.session?.user;
-
-
-if(!utilisateur){
-
-alert(
-"Connecte-toi à ton compte avant de publier."
-);
-
-openModal("account");
-
-return;
-
-}
-
-
-const photos =
-document.getElementById("productPhotos")
-.files;
+const photos=
+document.getElementById("productPhotos").files;
 
 
 console.log(
@@ -1682,180 +916,174 @@ photos.length
 );
 
 
+status(
+"publishStatus",
+"Annonce vérifiée avec succès ! 🇬🇳",
+true
+);
+
+
 alert(
 "Annonce vérifiée avec succès ! 🇬🇳\n\n"+
-"Prochaine étape : enregistrement réel dans Supabase."
+"La prochaine étape sera son enregistrement réel dans Supabase."
 );
 
 }
 
 
-/* =========================
-MESSAGE
-========================= */
+/* MESSAGES */
 
 async function envoyerMessage(){
 
-const champ =
-document.getElementById("messageInput");
-
-const status =
-document.getElementById("messageStatus");
-
-const message =
-champ.value.trim();
+const message=
+document.getElementById("messageInput")
+.value.trim();
 
 
 if(!message){
 
-status.innerText =
-"Écris un message avant de l'envoyer.";
+status(
+"messageStatus",
+"Écris un message.",
+false
+);
 
 return;
-
 }
 
 
 if(contientNumeroTelephone(message)){
 
-status.innerText =
-"🚫 Message non envoyé : numéro de téléphone interdit.";
-
-alert(
-"🚫 Numéro de téléphone détecté.\n\n"+
-"Le partage de numéros est interdit dans Marché Guinée."
+status(
+"messageStatus",
+"Les numéros de téléphone ne sont pas autorisés dans les conversations.",
+false
 );
 
 return;
+}
+
+
+const {data:{session}}=
+await supabaseClient.auth.getSession();
+
+
+if(!session){
+
+status(
+"messageStatus",
+"Connecte-toi pour envoyer un message.",
+false
+);
+
+return;
+}
+
+
+status(
+"messageStatus",
+"Message vérifié et prêt à être envoyé. 💬",
+true
+);
+
+
+document.getElementById("messageInput").value="";
 
 }
 
 
-status.innerText =
-"Message accepté. 🇬🇳";
+/* PAIEMENT */
+
+let produitPaiement=null;
+let prixPaiement=0;
+
+const COMMISSION_DEMO=0.02;
 
 
-champ.value="";
+function ouvrirPaiement(produit,prix){
 
-}
-
-
-/* =========================
-PAIEMENT
-========================= */
-
-function ouvrirPaiement(
-produit,
-prix
-){
-
-document.getElementById("orderProduct")
-.innerText=produit;
-
-const montant =
-Number(prix) || 0;
+produitPaiement=produit;
+prixPaiement=Number(prix)||0;
 
 
-/*
-   Exemple de commission provisoire.
-   Elle sera remplacée par le taux
-   définitif choisi pour Marché Guinée.
-*/
-
-const commission =
-Math.round(montant * 0.02);
-
-const total =
-montant + commission;
+document.getElementById("paymentProduct").innerHTML=
+"<strong>Produit :</strong> "+
+echapper(produit);
 
 
-document.getElementById("orderPrice")
-.innerText =
-montant.toLocaleString("fr-FR")+" GNF";
+document.getElementById("paymentPrice").innerHTML=
+"<strong>Prix :</strong> "+
+prixPaiement.toLocaleString("fr-FR")+
+" GNF";
 
 
-document.getElementById("orderCommission")
-.innerText =
-commission.toLocaleString("fr-FR")+" GNF";
+const commission=
+prixPaiement*COMMISSION_DEMO;
 
 
-document.getElementById("orderTotal")
-.innerText =
-total.toLocaleString("fr-FR")+" GNF";
+document.getElementById("paymentCommission").innerHTML=
+"<p><strong>Commission de démonstration :</strong> "+
+commission.toLocaleString("fr-FR")+
+" GNF</p>";
 
 
-openModal("payment");
+openModal("paymentModal");
 
 }
 
 
 function preparerPaiement(){
 
-const methode =
+const moyen=
 document.querySelector(
 'input[name="paymentMethod"]:checked'
 );
 
 
-const status =
-document.getElementById("paymentStatus");
+if(!moyen){
 
-
-if(!methode){
-
-status.innerText =
-"Choisis Orange Money ou Mobile Money.";
+alert("Choisis un moyen de paiement.");
 
 return;
-
 }
 
 
-status.innerText =
-"Paiement "+methode.value+
-" sélectionné. 🇬🇳\n\n"+
-"La connexion au service de paiement réel sera effectuée lors de l'intégration officielle.";
-
-}
-
-
-/* =========================
-FERMETURE MODALS
-========================= */
-
-document
-.querySelectorAll(".modal")
-.forEach(function(modal){
-
-modal.addEventListener(
-"click",
-function(event){
-
-if(event.target===modal){
-
-modal.style.display="none";
-
-}
-
-}
+alert(
+"Moyen choisi : "+moyen.value+
+"\n\nL'intégration réelle sera connectée avec l'API officielle."
 );
+
+}
+
+
+/* SESSION AUTOMATIQUE */
+
+document.addEventListener(
+"DOMContentLoaded",
+async()=>{
+
+await mettreAJourInterfaceCompte();
+
+supabaseClient.auth.onAuthStateChange(
+async()=>{
+
+await mettreAJourInterfaceCompte();
 
 });
 
-
-/* =========================
-SESSION
-========================= */
-
-supabaseClient.auth.onAuthStateChange(
-function(event,session){
-
-if(session){
-
-console.log(
-"Utilisateur connecté :",
-session.user.id
+}
 );
+
+
+/* FERMER MODALES */
+
+window.addEventListener(
+"click",
+event=>{
+
+if(event.target.classList.contains("modal")){
+
+event.target.style.display="none";
 
 }
 

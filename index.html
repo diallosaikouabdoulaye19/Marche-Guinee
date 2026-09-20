@@ -244,7 +244,8 @@ Envoyer le lien
 placeholder="Décris ton produit..."></textarea>
 
 <label>Photos</label>
-<input id="productPhotos"
+<input
+id="productPhotos"
 type="file"
 accept="image/*"
 multiple
@@ -324,7 +325,9 @@ Continuer le paiement
 
 <script>
 
-/* SUPABASE */
+/* =========================
+   SUPABASE
+========================= */
 
 const SUPABASE_URL =
 "https://meernnpwtcgqjppyccqk.supabase.co";
@@ -339,7 +342,9 @@ SUPABASE_KEY
 );
 
 
-/* MODALES */
+/* =========================
+   MODALES
+========================= */
 
 function openModal(id){
 const e=document.getElementById(id);
@@ -361,7 +366,9 @@ openModal("publishModal");
 }
 
 
-/* STATUS */
+/* =========================
+   STATUS
+========================= */
 
 function status(id,message,ok=true){
 
@@ -374,26 +381,34 @@ e.className="status "+(ok?"ok":"err");
 }
 
 
-/* RECHERCHE */
+/* =========================
+   RECHERCHE
+========================= */
 
 function searchProducts(){
+
 console.log(
 "Recherche :",
 document.getElementById("searchInput").value
 );
+
 }
 
 function filterCategory(category){
+
 document.getElementById("searchInput").value=category;
 
 alert(
 "Catégorie sélectionnée : "+category+
 "\n\nLa recherche des annonces sera connectée à Supabase."
 );
+
 }
 
 
-/* TELEPHONE */
+/* =========================
+   TELEPHONE
+========================= */
 
 function contientNumeroTelephone(texte){
 
@@ -405,15 +420,21 @@ let t=String(texte).replace(
 );
 
 return /(?:\+224|00224)?6\d{8}/.test(t);
+
 }
 
 
-/* PHOTOS */
+/* =========================
+   PHOTOS
+========================= */
 
 function previewPhotos(){
 
-const input=document.getElementById("productPhotos");
-const preview=document.getElementById("photoPreview");
+const input=
+document.getElementById("productPhotos");
+
+const preview=
+document.getElementById("photoPreview");
 
 preview.innerHTML="";
 
@@ -423,7 +444,9 @@ const reader=new FileReader();
 
 reader.onload=e=>{
 
-const img=document.createElement("img");
+const img=
+document.createElement("img");
+
 img.src=e.target.result;
 
 preview.appendChild(img);
@@ -437,21 +460,28 @@ reader.readAsDataURL(file);
 }
 
 
-/* INSCRIPTION */
+/* =========================
+   INSCRIPTION
+========================= */
 
 async function creerCompte(){
 
 const fullName=
-document.getElementById("fullName").value.trim();
+document.getElementById("fullName")
+.value.trim();
 
 const phone=
-document.getElementById("phone").value.trim();
+document.getElementById("phone")
+.value.trim();
 
 const email=
-document.getElementById("email").value.trim();
+document.getElementById("email")
+.value.trim();
 
 const password=
-document.getElementById("password").value;
+document.getElementById("password")
+.value;
+
 
 if(!fullName||!phone||!email||!password){
 
@@ -462,7 +492,9 @@ false
 );
 
 return;
+
 }
+
 
 if(password.length<6){
 
@@ -473,6 +505,7 @@ false
 );
 
 return;
+
 }
 
 
@@ -502,6 +535,7 @@ false
 );
 
 return;
+
 }
 
 
@@ -529,9 +563,13 @@ Phone:phone
 onConflict:"id"
 });
 
+
 if(profileError){
 
-console.log(profileError.message);
+console.log(
+"Erreur profil :",
+profileError.message
+);
 
 }
 
@@ -540,15 +578,19 @@ console.log(profileError.message);
 }
 
 
-/* CONNEXION */
+/* =========================
+   CONNEXION
+========================= */
 
 async function seConnecter(){
 
 const email=
-document.getElementById("loginEmail").value.trim();
+document.getElementById("loginEmail")
+.value.trim();
 
 const password=
-document.getElementById("loginPassword").value;
+document.getElementById("loginPassword")
+.value;
 
 
 if(!email||!password){
@@ -560,6 +602,7 @@ false
 );
 
 return;
+
 }
 
 
@@ -582,6 +625,7 @@ false
 );
 
 return;
+
 }
 
 
@@ -605,7 +649,9 @@ openModal("accountModal");
 }
 
 
-/* INTERFACE COMPTE */
+/* =========================
+   INTERFACE COMPTE
+========================= */
 
 async function mettreAJourInterfaceCompte(){
 
@@ -703,7 +749,9 @@ J'ai déjà un compte
 }
 
 
-/* PROTECTION HTML */
+/* =========================
+   PROTECTION HTML
+========================= */
 
 function echapper(t){
 
@@ -717,12 +765,15 @@ return String(t)
 }
 
 
-/* DECONNEXION */
+/* =========================
+   DECONNEXION
+========================= */
 
 async function seDeconnecter(){
 
 const {error}=
 await supabaseClient.auth.signOut();
+
 
 if(error){
 
@@ -731,7 +782,9 @@ alert(
 );
 
 return;
+
 }
+
 
 alert(
 "Tu es maintenant déconnecté."
@@ -742,19 +795,24 @@ await mettreAJourInterfaceCompte();
 }
 
 
-/* PROFIL */
+/* =========================
+   PROFIL
+========================= */
 
 async function afficherProfil(){
 
 const {data:{session}}=
 await supabaseClient.auth.getSession();
 
+
 if(!session){
 
 alert("Tu dois être connecté.");
 
 return;
+
 }
+
 
 let texte=
 "👤 Mon profil\n\n"+
@@ -789,12 +847,15 @@ alert(texte);
 }
 
 
-/* MOT DE PASSE */
+/* =========================
+   MOT DE PASSE
+========================= */
 
 async function envoyerLienRecuperation(){
 
 const email=
-document.getElementById("resetEmail").value.trim();
+document.getElementById("resetEmail")
+.value.trim();
 
 
 if(!email){
@@ -806,11 +867,13 @@ false
 );
 
 return;
+
 }
 
 
 const {error}=
-await supabaseClient.auth.resetPasswordForEmail(
+await supabaseClient.auth
+.resetPasswordForEmail(
 email,
 {
 redirectTo:window.location.origin
@@ -827,6 +890,7 @@ false
 );
 
 return;
+
 }
 
 
@@ -839,34 +903,115 @@ true
 }
 
 
-/* PUBLICATION */
+/* =========================
+   RECHERCHE DE CATEGORIE
+========================= */
+
+async function trouverCategorieId(nomCategorie){
+
+/*
+ On essaie d'abord le nom de table utilisé
+ dans le projet Marché Guinée.
+*/
+
+let resultat=
+await supabaseClient
+.from("Catégorie")
+.select("id")
+.eq("Name",nomCategorie)
+.maybeSingle();
+
+
+if(!resultat.error&&resultat.data){
+
+return resultat.data.id;
+
+}
+
+
+/*
+ Si le nom technique de la table est différent,
+ on essaie les variantes courantes.
+*/
+
+const variantes=[
+"categories",
+"categorie",
+"category"
+];
+
+
+for(const table of variantes){
+
+const r=
+await supabaseClient
+.from(table)
+.select("id")
+.eq("Name",nomCategorie)
+.maybeSingle();
+
+if(!r.error&&r.data){
+
+return r.data.id;
+
+}
+
+}
+
+
+return null;
+
+}
+
+
+/* =========================
+   PUBLICATION REELLE
+========================= */
 
 async function enregistrerAnnonce(){
 
 const nom=
-document.getElementById("productName").value.trim();
+document.getElementById("productName")
+.value.trim();
 
 const categorie=
-document.getElementById("productCategory").value.trim();
+document.getElementById("productCategory")
+.value.trim();
 
 const prix=
-document.getElementById("productPrice").value.trim();
+document.getElementById("productPrice")
+.value.trim();
 
 const etat=
-document.getElementById("productCondition").value.trim();
+document.getElementById("productCondition")
+.value.trim();
 
 const ville=
-document.getElementById("productCity").value.trim();
+document.getElementById("productCity")
+.value.trim();
 
 const quartier=
-document.getElementById("productNeighborhood").value.trim();
+document.getElementById("productNeighborhood")
+.value.trim();
 
 const description=
-document.getElementById("productDescription").value.trim();
+document.getElementById("productDescription")
+.value.trim();
 
 
-if(!nom||!categorie||!prix||!etat||
-!ville||!quartier||!description){
+/*
+ Vérification des champs
+*/
+
+if(
+!nom||
+!categorie||
+!prix||
+!etat||
+!ville||
+!quartier||
+!description
+){
 
 status(
 "publishStatus",
@@ -875,8 +1020,34 @@ false
 );
 
 return;
+
 }
 
+
+/*
+ Vérification du prix
+*/
+
+const prixNombre=
+Number(prix);
+
+
+if(!Number.isFinite(prixNombre)||prixNombre<=0){
+
+status(
+"publishStatus",
+"Veuillez entrer un prix valide.",
+false
+);
+
+return;
+
+}
+
+
+/*
+ Protection contre les numéros
+*/
 
 if(contientNumeroTelephone(description)){
 
@@ -887,14 +1058,34 @@ false
 );
 
 return;
+
 }
 
 
-const {data:{session}}=
+/*
+ Vérification de la connexion
+*/
+
+const {data:sessionData,error:sessionError}=
 await supabaseClient.auth.getSession();
 
 
-if(!session){
+if(sessionError){
+
+console.error(sessionError);
+
+status(
+"publishStatus",
+"Impossible de vérifier la connexion.",
+false
+);
+
+return;
+
+}
+
+
+if(!sessionData.session){
 
 status(
 "publishStatus",
@@ -903,11 +1094,50 @@ false
 );
 
 return;
+
 }
 
 
+const sellerId=
+sessionData.session.user.id;
+
+
+/*
+ Recherche de la catégorie
+*/
+
+status(
+"publishStatus",
+"Recherche de la catégorie...",
+true
+);
+
+
+const categoryId=
+await trouverCategorieId(categorie);
+
+
+if(!categoryId){
+
+status(
+"publishStatus",
+"La catégorie « "+categorie+" » n'a pas été trouvée dans Supabase.",
+false
+);
+
+return;
+
+}
+
+
+/*
+ Vérification des photos sélectionnées.
+ Elles ne sont pas encore envoyées dans Storage.
+*/
+
 const photos=
-document.getElementById("productPhotos").files;
+document.getElementById("productPhotos")
+.files;
 
 
 console.log(
@@ -916,22 +1146,124 @@ photos.length
 );
 
 
+/*
+ ENREGISTREMENT REEL
+*/
+
 status(
 "publishStatus",
-"Annonce vérifiée avec succès ! 🇬🇳",
+"Publication de ton annonce...",
+true
+);
+
+
+const {data:annonce,error:annonceError}=
+await supabaseClient
+.from("listings")
+.insert({
+
+Seller_id:sellerId,
+
+Category_id:categoryId,
+
+title:nom,
+
+description:description,
+
+price_gnf:prixNombre,
+
+Condition:etat,
+
+city:ville,
+
+neighborhood:quartier,
+
+status:"active",
+
+views:0
+
+})
+.select()
+.single();
+
+
+/*
+ Gestion de l'erreur
+*/
+
+if(annonceError){
+
+console.error(
+"Erreur publication :",
+annonceError
+);
+
+status(
+"publishStatus",
+"Erreur lors de la publication : "+
+annonceError.message,
+false
+);
+
+return;
+
+}
+
+
+/*
+ SUCCES
+*/
+
+console.log(
+"Annonce créée :",
+annonce
+);
+
+
+status(
+"publishStatus",
+"Annonce publiée avec succès ! 🇬🇳",
 true
 );
 
 
 alert(
-"Annonce vérifiée avec succès ! 🇬🇳\n\n"+
-"La prochaine étape sera son enregistrement réel dans Supabase."
+"🎉 Annonce publiée avec succès ! 🇬🇳\n\n"+
+"Ton annonce est maintenant enregistrée dans Marché Guinée."
 );
+
+
+/*
+ Nettoyage du formulaire
+*/
+
+document.getElementById("productName").value="";
+document.getElementById("productCategory").value="";
+document.getElementById("productPrice").value="";
+document.getElementById("productCondition").value="";
+document.getElementById("productCity").value="";
+document.getElementById("productNeighborhood").value="";
+document.getElementById("productDescription").value="";
+document.getElementById("productPhotos").value="";
+document.getElementById("photoPreview").innerHTML="";
+
+
+/*
+ Fermer la fenêtre après publication
+*/
+
+setTimeout(()=>{
+
+closeModal("publishModal");
+
+},1000);
 
 }
 
 
-/* MESSAGES */
+/* =========================
+   MESSAGES
+========================= */
 
 async function envoyerMessage(){
 
@@ -949,6 +1281,7 @@ false
 );
 
 return;
+
 }
 
 
@@ -961,6 +1294,7 @@ false
 );
 
 return;
+
 }
 
 
@@ -977,6 +1311,7 @@ false
 );
 
 return;
+
 }
 
 
@@ -992,7 +1327,9 @@ document.getElementById("messageInput").value="";
 }
 
 
-/* PAIEMENT */
+/* =========================
+   PAIEMENT
+========================= */
 
 let produitPaiement=null;
 let prixPaiement=0;
@@ -1006,12 +1343,14 @@ produitPaiement=produit;
 prixPaiement=Number(prix)||0;
 
 
-document.getElementById("paymentProduct").innerHTML=
+document.getElementById("paymentProduct")
+.innerHTML=
 "<strong>Produit :</strong> "+
 echapper(produit);
 
 
-document.getElementById("paymentPrice").innerHTML=
+document.getElementById("paymentPrice")
+.innerHTML=
 "<strong>Prix :</strong> "+
 prixPaiement.toLocaleString("fr-FR")+
 " GNF";
@@ -1021,7 +1360,8 @@ const commission=
 prixPaiement*COMMISSION_DEMO;
 
 
-document.getElementById("paymentCommission").innerHTML=
+document.getElementById("paymentCommission")
+.innerHTML=
 "<p><strong>Commission de démonstration :</strong> "+
 commission.toLocaleString("fr-FR")+
 " GNF</p>";
@@ -1042,9 +1382,12 @@ document.querySelector(
 
 if(!moyen){
 
-alert("Choisis un moyen de paiement.");
+alert(
+"Choisis un moyen de paiement."
+);
 
 return;
+
 }
 
 
@@ -1056,13 +1399,16 @@ alert(
 }
 
 
-/* SESSION AUTOMATIQUE */
+/* =========================
+   SESSION AUTOMATIQUE
+========================= */
 
 document.addEventListener(
 "DOMContentLoaded",
 async()=>{
 
 await mettreAJourInterfaceCompte();
+
 
 supabaseClient.auth.onAuthStateChange(
 async()=>{
@@ -1075,7 +1421,9 @@ await mettreAJourInterfaceCompte();
 );
 
 
-/* FERMER MODALES */
+/* =========================
+   FERMER LES MODALES
+========================= */
 
 window.addEventListener(
 "click",

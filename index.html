@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Marché Guinée 🇬🇳</title>
 
 <style>
@@ -202,6 +203,7 @@ nav {
   display: flex;
   justify-content: space-around;
   padding: 9px 5px;
+  z-index: 5;
 }
 
 nav button {
@@ -267,6 +269,24 @@ nav .active {
   border: none;
   border-radius: 13px;
   font-weight: bold;
+  margin-top: 8px;
+}
+
+.secondary {
+  width: 100%;
+  padding: 14px;
+  background: #eeeeee;
+  color: #17221c;
+  border: none;
+  border-radius: 13px;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.status {
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 1.4;
 }
 
 @media (min-width:700px) {
@@ -293,7 +313,10 @@ Achetez et vendez facilement en Guinée
 </div>
 </div>
 
-<button class="account" onclick="openModal('account')">
+<button
+type="button"
+class="account"
+onclick="openModal('account')">
 👤
 </button>
 
@@ -325,14 +348,14 @@ oninput="searchProducts()">
 <small>Tous</small>
 </div>
 
-<div class="category" onclick="filterCategory('Téléphones')">
+<div class="category" onclick="filterCategory('Téléphone')">
 <div>📱</div>
-<small>Téléphones</small>
+<small>Téléphone</small>
 </div>
 
-<div class="category" onclick="filterCategory('Mode')">
-<div>👕</div>
-<small>Mode</small>
+<div class="category" onclick="filterCategory('Beauté')">
+<div>💄</div>
+<small>Beauté</small>
 </div>
 
 <div class="category" onclick="filterCategory('Maison')">
@@ -340,14 +363,39 @@ oninput="searchProducts()">
 <small>Maison</small>
 </div>
 
-<div class="category" onclick="filterCategory('Véhicules')">
-<div>🚗</div>
-<small>Véhicules</small>
+<div class="category" onclick="filterCategory('Mode')">
+<div>👕</div>
+<small>Mode</small>
 </div>
 
-<div class="category" onclick="filterCategory('Autres')">
+<div class="category" onclick="filterCategory('Informatique')">
+<div>💻</div>
+<small>Informatique</small>
+</div>
+
+<div class="category" onclick="filterCategory('Alimentation')">
+<div>🍎</div>
+<small>Alimentation</small>
+</div>
+
+<div class="category" onclick="filterCategory('Électronique')">
+<div>🔌</div>
+<small>Électronique</small>
+</div>
+
+<div class="category" onclick="filterCategory('Sport')">
+<div>⚽</div>
+<small>Sport</small>
+</div>
+
+<div class="category" onclick="filterCategory('Véhicule')">
+<div>🚗</div>
+<small>Véhicule</small>
+</div>
+
+<div class="category" onclick="filterCategory('Autre')">
 <div>📦</div>
-<small>Autres</small>
+<small>Autre</small>
 </div>
 
 </div>
@@ -357,10 +405,12 @@ oninput="searchProducts()">
 <h3>Vendez facilement 🇬🇳</h3>
 
 <p>
-Publiez vos produits gratuitement et échangez avec les clients.
+Publiez vos produits et échangez directement avec les clients.
 </p>
 
-<button type="button" onclick="openModal('sell')">
+<button
+type="button"
+onclick="openModal('sell')">
 ＋ Publier une annonce
 </button>
 
@@ -370,9 +420,10 @@ Publiez vos produits gratuitement et échangez avec les clients.
 
 <div class="products" id="products">
 
-<div class="card"
+<div
+class="card"
 data-name="iPhone 13"
-data-category="Téléphones">
+data-category="Téléphone">
 
 <div class="photo">
 📱
@@ -394,7 +445,8 @@ data-category="Téléphones">
 
 </div>
 
-<div class="card"
+<div
+class="card"
 data-name="Canapé moderne"
 data-category="Maison">
 
@@ -418,7 +470,8 @@ data-category="Maison">
 
 </div>
 
-<div class="card"
+<div
+class="card"
 data-name="Boubou homme"
 data-category="Mode">
 
@@ -442,9 +495,10 @@ data-category="Mode">
 
 </div>
 
-<div class="card"
+<div
+class="card"
 data-name="Toyota Corolla"
-data-category="Véhicules">
+data-category="Véhicule">
 
 <div class="photo">
 🚗
@@ -470,39 +524,60 @@ data-category="Véhicules">
 
 </main>
 
-<button type="button" class="sell" onclick="openModal('sell')">
+<button
+type="button"
+class="sell"
+onclick="openModal('sell')">
 ＋ Vendre
 </button>
 
 <nav>
 
-<button type="button" class="active">
+<button
+type="button"
+class="active">
 <span>🏠</span>
 Accueil
 </button>
 
-<button type="button" onclick="document.getElementById('searchInput').focus()">
+<button
+type="button"
+onclick="document.getElementById('searchInput').focus()">
 <span>🔎</span>
 Recherche
 </button>
 
-<button type="button" onclick="openModal('sell')">
+<button
+type="button"
+onclick="openModal('sell')">
 <span>➕</span>
 Vendre
 </button>
 
-<button type="button" onclick="openModal('account')">
+<button
+type="button"
+onclick="openModal('account')">
 <span>👤</span>
 Compte
 </button>
 
 </nav>
 
-<div class="modal" id="sell">
+
+<!-- ========================= -->
+<!-- MODAL PUBLICATION -->
+<!-- ========================= -->
+
+<div
+class="modal"
+id="sell">
 
 <div class="modal-box">
 
-<button type="button" class="close" onclick="closeModal('sell')">
+<button
+type="button"
+class="close"
+onclick="closeModal('sell')">
 ✕
 </button>
 
@@ -515,11 +590,17 @@ placeholder="Nom du produit">
 <select id="productCategory">
 
 <option value="">Choisir une catégorie</option>
-<option>Téléphones</option>
-<option>Mode</option>
-<option>Maison</option>
-<option>Véhicules</option>
-<option>Autres</option>
+
+<option value="Téléphone">Téléphone</option>
+<option value="Beauté">Beauté</option>
+<option value="Maison">Maison</option>
+<option value="Autre">Autre</option>
+<option value="Mode">Mode</option>
+<option value="Informatique">Informatique</option>
+<option value="Alimentation">Alimentation</option>
+<option value="Électronique">Électronique</option>
+<option value="Sport">Sport</option>
+<option value="Véhicule">Véhicule</option>
 
 </select>
 
@@ -528,9 +609,23 @@ id="productPrice"
 placeholder="Prix en GNF"
 type="number">
 
+<select id="productCondition">
+
+<option value="">État du produit</option>
+<option value="Neuf">Neuf</option>
+<option value="Très bon état">Très bon état</option>
+<option value="Bon état">Bon état</option>
+<option value="Occasion">Occasion</option>
+
+</select>
+
 <input
-id="productLocation"
-placeholder="Ville / quartier">
+id="productCity"
+placeholder="Ville">
+
+<input
+id="productNeighborhood"
+placeholder="Quartier">
 
 <textarea
 id="productDescription"
@@ -548,15 +643,27 @@ Publier l'annonce
 
 </div>
 
-<div class="modal" id="account">
+
+<!-- ========================= -->
+<!-- MODAL COMPTE -->
+<!-- ========================= -->
+
+<div
+class="modal"
+id="account">
 
 <div class="modal-box">
 
-<button type="button" class="close" onclick="closeModal('account')">
+<button
+type="button"
+class="close"
+onclick="closeModal('account')">
 ✕
 </button>
 
-<h2>Créer mon compte</h2>
+<h2 id="accountTitle">
+Créer mon compte
+</h2>
 
 <input
 id="fullName"
@@ -564,7 +671,13 @@ placeholder="Nom complet">
 
 <input
 id="phone"
-placeholder="Numéro de téléphone">
+placeholder="Numéro de téléphone"
+type="tel">
+
+<input
+id="email"
+placeholder="Adresse e-mail"
+type="email">
 
 <input
 id="password"
@@ -578,11 +691,26 @@ onclick="creerCompte()">
 Créer mon compte gratuitement
 </button>
 
+<button
+type="button"
+class="secondary"
+onclick="seConnecter()">
+J'ai déjà un compte
+</button>
+
+<div
+id="accountStatus"
+class="status">
 </div>
 
 </div>
 
-<!-- Supabase -->
+</div>
+
+
+<!-- ========================= -->
+<!-- SUPABASE -->
+<!-- ========================= -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -600,21 +728,38 @@ SUPABASE_URL,
 SUPABASE_KEY
 );
 
+
+/* ========================= */
+/* OUVRIR / FERMER LES MODALS */
+/* ========================= */
+
 function openModal(id) {
-  const modal = document.getElementById(id);
+
+  const modal =
+  document.getElementById(id);
 
   if (modal) {
     modal.style.display = "flex";
   }
+
 }
 
+
 function closeModal(id) {
-  const modal = document.getElementById(id);
+
+  const modal =
+  document.getElementById(id);
 
   if (modal) {
     modal.style.display = "none";
   }
+
 }
+
+
+/* ========================= */
+/* RECHERCHE */
+/* ========================= */
 
 function searchProducts() {
 
@@ -630,7 +775,8 @@ function searchProducts() {
   cards.forEach(function(card) {
 
     const name =
-    (card.dataset.name || "").toLowerCase();
+    (card.dataset.name || "")
+    .toLowerCase();
 
     card.style.display =
     name.includes(search)
@@ -640,6 +786,11 @@ function searchProducts() {
   });
 
 }
+
+
+/* ========================= */
+/* FILTRE CATÉGORIE */
+/* ========================= */
 
 function filterCategory(category) {
 
@@ -665,65 +816,443 @@ function filterCategory(category) {
 
 }
 
-function enregistrerAnnonce() {
+
+/* ========================= */
+/* CRÉATION DU COMPTE */
+/* ========================= */
+
+async function creerCompte() {
 
   const nom =
-  document.getElementById("productName").value.trim();
-
-  const categorie =
-  document.getElementById("productCategory").value;
-
-  const prix =
-  document.getElementById("productPrice").value.trim();
-
-  const localisation =
-  document.getElementById("productLocation").value.trim();
-
-  if (!nom || !categorie || !prix || !localisation) {
-
-    alert("Veuillez remplir les informations principales de l'annonce.");
-
-    return;
-  }
-
-  alert("ÇA FONCTIONNE !");
-
-}
-
-function creerCompte() {
-
-  const nom =
-  document.getElementById("fullName").value.trim();
+  document.getElementById("fullName")
+  .value
+  .trim();
 
   const telephone =
-  document.getElementById("phone").value.trim();
+  document.getElementById("phone")
+  .value
+  .trim();
+
+  const email =
+  document.getElementById("email")
+  .value
+  .trim();
 
   const motDePasse =
-  document.getElementById("password").value;
+  document.getElementById("password")
+  .value;
 
-  if (!nom || !telephone || !motDePasse) {
+  const status =
+  document.getElementById("accountStatus");
 
-    alert("Veuillez remplir tous les champs.");
+
+  if (!nom || !telephone || !email || !motDePasse) {
+
+    status.innerText =
+    "Veuillez remplir tous les champs.";
 
     return;
   }
 
-  alert("Compte créé pour la démonstration.");
+
+  if (motDePasse.length < 6) {
+
+    status.innerText =
+    "Le mot de passe doit contenir au moins 6 caractères.";
+
+    return;
+  }
+
+
+  status.innerText =
+  "Création du compte en cours...";
+
+
+  try {
+
+    const result =
+    await supabaseClient.auth.signUp({
+
+      email: email,
+
+      password: motDePasse,
+
+      options: {
+
+        data: {
+
+          full_name: nom,
+
+          phone: telephone
+
+        }
+
+      }
+
+    });
+
+
+    if (result.error) {
+
+      status.innerText =
+      "Erreur : " + result.error.message;
+
+      return;
+    }
+
+
+    status.innerText =
+    "Compte créé avec succès ! Vérifie ton e-mail si Supabase demande une confirmation.";
+
+    alert(
+      "Compte créé avec succès !"
+    );
+
+
+  } catch (error) {
+
+    status.innerText =
+    "Une erreur est survenue.";
+
+    console.error(error);
+
+  }
 
 }
 
-document.querySelectorAll(".modal")
-.forEach(function(modal) {
 
-  modal.addEventListener("click", function(event) {
+/* ========================= */
+/* CONNEXION */
+/* ========================= */
 
-    if (event.target === modal) {
-      modal.style.display = "none";
+async function seConnecter() {
+
+  const email =
+  document.getElementById("email")
+  .value
+  .trim();
+
+  const motDePasse =
+  document.getElementById("password")
+  .value;
+
+  const status =
+  document.getElementById("accountStatus");
+
+
+  if (!email || !motDePasse) {
+
+    status.innerText =
+    "Entre ton e-mail et ton mot de passe.";
+
+    return;
+  }
+
+
+  status.innerText =
+  "Connexion en cours...";
+
+
+  try {
+
+    const result =
+    await supabaseClient.auth.signInWithPassword({
+
+      email: email,
+
+      password: motDePasse
+
+    });
+
+
+    if (result.error) {
+
+      status.innerText =
+      "Erreur : " + result.error.message;
+
+      return;
     }
 
-  });
+
+    status.innerText =
+    "Connexion réussie !";
+
+    alert(
+      "Tu es maintenant connecté !"
+    );
+
+    closeModal("account");
+
+
+  } catch (error) {
+
+    status.innerText =
+    "Une erreur est survenue.";
+
+    console.error(error);
+
+  }
+
+}
+
+
+/* ========================= */
+/* PUBLICATION D'ANNONCE */
+/* ========================= */
+
+async function enregistrerAnnonce() {
+
+  const nom =
+  document.getElementById("productName")
+  .value
+  .trim();
+
+  const categorie =
+  document.getElementById("productCategory")
+  .value;
+
+  const prix =
+  document.getElementById("productPrice")
+  .value;
+
+  const condition =
+  document.getElementById("productCondition")
+  .value;
+
+  const ville =
+  document.getElementById("productCity")
+  .value
+  .trim();
+
+  const quartier =
+  document.getElementById("productNeighborhood")
+  .value
+  .trim();
+
+  const description =
+  document.getElementById("productDescription")
+  .value
+  .trim();
+
+
+  if (
+    !nom ||
+    !categorie ||
+    !prix ||
+    !condition ||
+    !ville
+  ) {
+
+    alert(
+      "Veuillez remplir les informations principales de l'annonce."
+    );
+
+    return;
+  }
+
+
+  const {
+    data: sessionData,
+    error: sessionError
+  } =
+  await supabaseClient.auth.getSession();
+
+
+  if (sessionError) {
+
+    alert(
+      "Impossible de vérifier le compte."
+    );
+
+    return;
+  }
+
+
+  const utilisateur =
+  sessionData.session?.user;
+
+
+  if (!utilisateur) {
+
+    alert(
+      "Connecte-toi à ton compte avant de publier une annonce."
+    );
+
+    openModal("account");
+
+    return;
+  }
+
+
+  /* Recherche de la catégorie */
+
+  const {
+    data: categorieData,
+    error: categorieError
+  } =
+  await supabaseClient
+  .from("Catégorie")
+  .select("id")
+  .eq("Name", categorie)
+  .single();
+
+
+  if (categorieError) {
+
+    alert(
+      "Impossible de trouver cette catégorie."
+    );
+
+    console.error(categorieError);
+
+    return;
+  }
+
+
+  /* Création de l'annonce */
+
+  const {
+    data: annonce,
+    error: annonceError
+  } =
+  await supabaseClient
+  .from("Listing")
+  .insert({
+
+    "Seller id":
+    utilisateur.id,
+
+    "Catégorie id":
+    categorieData.id,
+
+    "Title":
+    nom,
+
+    "description":
+    description,
+
+    "Price gnf":
+    Number(prix),
+
+    "Condition":
+    condition,
+
+    "City":
+    ville,
+
+    "Neighborhood":
+    quartier,
+
+    "Status":
+    "active",
+
+    "Views":
+    0
+
+  })
+  .select()
+  .single();
+
+
+  if (annonceError) {
+
+    alert(
+      "Erreur lors de la publication : " +
+      annonceError.message
+    );
+
+    console.error(annonceError);
+
+    return;
+  }
+
+
+  alert(
+    "Annonce publiée avec succès ! 🇬🇳"
+  );
+
+
+  closeModal("sell");
+
+
+  /* Nettoyage du formulaire */
+
+  document.getElementById("productName").value = "";
+
+  document.getElementById("productCategory").value = "";
+
+  document.getElementById("productPrice").value = "";
+
+  document.getElementById("productCondition").value = "";
+
+  document.getElementById("productCity").value = "";
+
+  document.getElementById("productNeighborhood").value = "";
+
+  document.getElementById("productDescription").value = "";
+
+
+  console.log(
+    "Annonce enregistrée :",
+    annonce
+  );
+
+}
+
+
+/* ========================= */
+/* FERMER EN CLIQUANT DEHORS */
+/* ========================= */
+
+document
+.querySelectorAll(".modal")
+.forEach(function(modal) {
+
+  modal.addEventListener(
+    "click",
+    function(event) {
+
+      if (event.target === modal) {
+
+        modal.style.display = "none";
+
+      }
+
+    }
+  );
 
 });
+
+
+/* ========================= */
+/* VÉRIFICATION DU COMPTE */
+/* ========================= */
+
+async function verifierConnexion() {
+
+  const {
+    data
+  } =
+  await supabaseClient.auth.getSession();
+
+  if (data.session) {
+
+    console.log(
+      "Utilisateur connecté :",
+      data.session.user.id
+    );
+
+  } else {
+
+    console.log(
+      "Aucun utilisateur connecté."
+    );
+
+  }
+
+}
+
+verifierConnexion();
 
 </script>
 

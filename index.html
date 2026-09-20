@@ -37,6 +37,7 @@ textarea{min-height:100px}
 .connected{text-align:center}
 .avatar{font-size:55px}
 footer{text-align:center;padding:30px;color:#777}
+.info{background:#f0f7f3;padding:10px;border-radius:9px;font-size:14px;margin-bottom:12px}
 </style>
 </head>
 
@@ -119,19 +120,37 @@ Marché Guinée 🇬🇳 — Marketplace guinéenne
 
 <h2>Créer mon compte gratuitement 🇬🇳</h2>
 
+<div class="info">
+📱 Ton numéro sera utilisé pour te connecter à ton compte.
+</div>
+
 <label>Nom complet</label>
-<input id="fullName" type="text" placeholder="Ton nom complet">
+<input
+id="fullName"
+type="text"
+placeholder="Ton nom complet">
 
-<label>Numéro</label>
-<input id="phone" type="tel" placeholder="Ex : 622 00 00 00">
-
-<label>Adresse e-mail</label>
-<input id="email" type="email" placeholder="Ton adresse e-mail">
+<label>Numéro de téléphone</label>
+<input
+id="phone"
+type="tel"
+placeholder="Ex : 622 00 00 00">
 
 <label>Mot de passe</label>
-<input id="password" type="password" placeholder="Mot de passe">
+<input
+id="password"
+type="password"
+placeholder="Minimum 6 caractères">
 
-<button class="primary" onclick="creerCompte()">Créer mon compte</button>
+<label>Confirmer le mot de passe</label>
+<input
+id="passwordConfirm"
+type="password"
+placeholder="Retape ton mot de passe">
+
+<button class="primary" onclick="creerCompte()">
+Créer mon compte
+</button>
 
 <div id="signupStatus"></div>
 
@@ -146,48 +165,34 @@ Marché Guinée 🇬🇳 — Marketplace guinéenne
 
 <span class="close" onclick="closeModal('loginModal')">×</span>
 
-<h2>J'ai déjà un compte</h2>
+<h2>Se connecter 🇬🇳</h2>
 
-<label>Adresse e-mail</label>
-<input id="loginEmail" type="email" placeholder="Ton adresse e-mail">
+<div class="info">
+📱 Connecte-toi avec ton numéro de téléphone et ton mot de passe.
+</div>
+
+<label>Numéro de téléphone</label>
+<input
+id="loginPhone"
+type="tel"
+placeholder="Ex : 622 00 00 00">
 
 <label>Mot de passe</label>
-<input id="loginPassword" type="password" placeholder="Mot de passe">
+<input
+id="loginPassword"
+type="password"
+placeholder="Ton mot de passe">
 
-<button class="primary" onclick="seConnecter()">Se connecter</button>
+<button class="primary" onclick="seConnecter()">
+Se connecter
+</button>
 
 <button class="secondary"
-onclick="closeModal('loginModal');openModal('resetModal')">
-Mot de passe oublié ?
+onclick="closeModal('loginModal');openModal('signupModal')">
+Créer un nouveau compte
 </button>
 
 <div id="loginStatus"></div>
-
-</div>
-</div>
-
-
-<!-- MOT DE PASSE -->
-
-<div class="modal" id="resetModal">
-<div class="modalbox">
-
-<span class="close" onclick="closeModal('resetModal')">×</span>
-
-<h2>Mot de passe oublié ?</h2>
-
-<p>
-Entre l'adresse e-mail utilisée pour ton compte.
-Supabase t'enverra le lien de récupération.
-</p>
-
-<input id="resetEmail" type="email" placeholder="Ton adresse e-mail">
-
-<button class="primary" onclick="envoyerLienRecuperation()">
-Envoyer le lien
-</button>
-
-<div id="resetStatus"></div>
 
 </div>
 </div>
@@ -240,7 +245,8 @@ Envoyer le lien
 <input id="productNeighborhood" placeholder="Ratoma">
 
 <label>Description</label>
-<textarea id="productDescription"
+<textarea
+id="productDescription"
 placeholder="Décris ton produit..."></textarea>
 
 <label>Photos</label>
@@ -272,7 +278,8 @@ Publier l'annonce
 
 <h2>Conversation 💬</h2>
 
-<textarea id="messageInput"
+<textarea
+id="messageInput"
 placeholder="Écris ton message..."></textarea>
 
 <button class="primary" onclick="envoyerMessage()">
@@ -347,22 +354,33 @@ SUPABASE_KEY
 ========================= */
 
 function openModal(id){
+
 const e=document.getElementById(id);
+
 if(e)e.style.display="block";
+
 }
 
 function closeModal(id){
+
 const e=document.getElementById(id);
+
 if(e)e.style.display="none";
+
 }
 
 function ouvrirCompte(){
+
 mettreAJourInterfaceCompte();
+
 openModal("accountModal");
+
 }
 
 function ouvrirPublication(){
+
 openModal("publishModal");
+
 }
 
 
@@ -377,7 +395,10 @@ const e=document.getElementById(id);
 if(!e)return;
 
 e.textContent=message;
-e.className="status "+(ok?"ok":"err");
+
+e.className=
+"status "+(ok?"ok":"err");
+
 }
 
 
@@ -410,6 +431,24 @@ alert(
    TELEPHONE
 ========================= */
 
+function nettoyerTelephone(phone){
+
+return String(phone||"")
+.replace(/\D/g,"");
+
+}
+
+
+function telephoneValide(phone){
+
+const p=
+nettoyerTelephone(phone);
+
+return /^6\d{8}$/.test(p);
+
+}
+
+
 function contientNumeroTelephone(texte){
 
 if(!texte)return false;
@@ -420,6 +459,25 @@ let t=String(texte).replace(
 );
 
 return /(?:\+224|00224)?6\d{8}/.test(t);
+
+}
+
+
+/*
+ Génère un e-mail technique
+ à partir du numéro.
+
+ L'utilisateur ne voit jamais
+ cet e-mail.
+*/
+
+function emailTechniqueDepuisTelephone(phone){
+
+const numero=
+nettoyerTelephone(phone);
+
+return numero+
+"@marche-guinee.local";
 
 }
 
@@ -474,16 +532,23 @@ const phone=
 document.getElementById("phone")
 .value.trim();
 
-const email=
-document.getElementById("email")
-.value.trim();
-
 const password=
 document.getElementById("password")
 .value;
 
+const passwordConfirm=
+document.getElementById("passwordConfirm")
+.value;
 
-if(!fullName||!phone||!email||!password){
+
+/* Vérification */
+
+if(
+!fullName||
+!phone||
+!password||
+!passwordConfirm
+){
 
 status(
 "signupStatus",
@@ -495,6 +560,23 @@ return;
 
 }
 
+
+/* Vérification téléphone */
+
+if(!telephoneValide(phone)){
+
+status(
+"signupStatus",
+"Entre un numéro guinéen valide à 9 chiffres, par exemple 622000000.",
+false
+);
+
+return;
+
+}
+
+
+/* Vérification mot de passe */
 
 if(password.length<6){
 
@@ -509,28 +591,13 @@ return;
 }
 
 
-const {data,error}=
-await supabaseClient.auth.signUp({
+/* Confirmation mot de passe */
 
-email:email,
-
-password:password,
-
-options:{
-data:{
-full_name:fullName,
-phone:phone
-}
-}
-
-});
-
-
-if(error){
+if(password!==passwordConfirm){
 
 status(
 "signupStatus",
-"Erreur : "+error.message,
+"Les deux mots de passe ne correspondent pas.",
 false
 );
 
@@ -539,12 +606,96 @@ return;
 }
 
 
+/*
+ Numéro normalisé
+*/
+
+const numero=
+nettoyerTelephone(phone);
+
+
+/*
+ Vérification si le numéro existe
+ déjà dans la table Users.
+*/
+
+const {data:ancienUtilisateur,error:rechercheErreur}=
+await supabaseClient
+.from("Users")
+.select("id")
+.eq("Phone",numero)
+.maybeSingle();
+
+
+if(
+!rechercheErreur&&
+ancienUtilisateur
+){
+
 status(
 "signupStatus",
-"Compte créé avec succès ! 🇬🇳",
-true
+"Ce numéro est déjà utilisé. Connecte-toi avec ce numéro.",
+false
 );
 
+return;
+
+}
+
+
+/*
+ Création de l'identifiant technique
+*/
+
+const emailTechnique=
+emailTechniqueDepuisTelephone(numero);
+
+
+/*
+ Création Auth Supabase
+*/
+
+const {data,error}=
+await supabaseClient.auth.signUp({
+
+email:emailTechnique,
+
+password:password,
+
+options:{
+
+data:{
+full_name:fullName,
+phone:numero
+}
+
+}
+
+});
+
+
+if(error){
+
+console.error(
+"Erreur création compte :",
+error
+);
+
+status(
+"signupStatus",
+"Impossible de créer le compte : "+
+error.message,
+false
+);
+
+return;
+
+}
+
+
+/*
+ Création / mise à jour du profil
+*/
 
 if(data&&data.user){
 
@@ -557,7 +708,7 @@ id:data.user.id,
 
 "Full name":fullName,
 
-Phone:phone
+Phone:numero
 
 },{
 onConflict:"id"
@@ -566,26 +717,64 @@ onConflict:"id"
 
 if(profileError){
 
-console.log(
+console.error(
 "Erreur profil :",
-profileError.message
+profileError
 );
 
+status(
+"signupStatus",
+"Compte créé, mais le profil n'a pas pu être enregistré.",
+false
+);
+
+return;
+
 }
 
 }
+
+
+/*
+ Succès
+*/
+
+status(
+"signupStatus",
+"Compte créé avec succès ! 🇬🇳",
+true
+);
+
+
+/*
+ Nettoyage
+*/
+
+document.getElementById("fullName").value="";
+document.getElementById("phone").value="";
+document.getElementById("password").value="";
+document.getElementById("passwordConfirm").value="";
+
+
+setTimeout(()=>{
+
+closeModal("signupModal");
+
+ouvrirCompte();
+
+},1000);
 
 }
 
 
 /* =========================
-   CONNEXION
+   CONNEXION PAR NUMERO
 ========================= */
 
 async function seConnecter(){
 
-const email=
-document.getElementById("loginEmail")
+const phone=
+document.getElementById("loginPhone")
 .value.trim();
 
 const password=
@@ -593,11 +782,13 @@ document.getElementById("loginPassword")
 .value;
 
 
-if(!email||!password){
+/* Vérification */
+
+if(!phone||!password){
 
 status(
 "loginStatus",
-"Veuillez remplir votre e-mail et votre mot de passe.",
+"Entre ton numéro et ton mot de passe.",
 false
 );
 
@@ -606,10 +797,41 @@ return;
 }
 
 
+/* Vérification téléphone */
+
+if(!telephoneValide(phone)){
+
+status(
+"loginStatus",
+"Entre un numéro guinéen valide.",
+false
+);
+
+return;
+
+}
+
+
+const numero=
+nettoyerTelephone(phone);
+
+
+/*
+ Création du même e-mail technique
+*/
+
+const emailTechnique=
+emailTechniqueDepuisTelephone(numero);
+
+
+/*
+ Connexion Supabase
+*/
+
 const {data,error}=
 await supabaseClient.auth.signInWithPassword({
 
-email:email,
+email:emailTechnique,
 
 password:password
 
@@ -618,9 +840,14 @@ password:password
 
 if(error){
 
+console.error(
+"Erreur connexion :",
+error
+);
+
 status(
 "loginStatus",
-"Connexion impossible : "+error.message,
+"Connexion impossible : numéro ou mot de passe incorrect.",
 false
 );
 
@@ -628,6 +855,10 @@ return;
 
 }
 
+
+/*
+ Succès
+*/
 
 status(
 "loginStatus",
@@ -668,7 +899,13 @@ await supabaseClient.auth.getSession();
 if(session&&session.user){
 
 let nom=
-session.user.email||"Utilisateur";
+session.user.user_metadata?.full_name||
+"Utilisateur";
+
+
+let telephone=
+session.user.user_metadata?.phone||
+"";
 
 
 try{
@@ -676,14 +913,26 @@ try{
 const {data:profil}=
 await supabaseClient
 .from("Users")
-.select('"Full name"')
+.select('"Full name",Phone')
 .eq("id",session.user.id)
 .maybeSingle();
 
 
-if(profil&&profil["Full name"]){
+if(profil){
 
-nom=profil["Full name"];
+if(profil["Full name"]){
+
+nom=
+profil["Full name"];
+
+}
+
+if(profil.Phone){
+
+telephone=
+profil.Phone;
+
+}
 
 }
 
@@ -702,16 +951,26 @@ zone.innerHTML=`
 
 <h2>Connecté ✅</h2>
 
-<p><strong>${echapper(nom)}</strong></p>
+<p>
+<strong>${echapper(nom)}</strong>
+</p>
 
-<p>Ton compte Marché Guinée est connecté.</p>
+<p>
+📱 ${echapper(telephone)}
+</p>
 
-<button class="primary"
+<p>
+Ton compte Marché Guinée est connecté.
+</p>
+
+<button
+class="primary"
 onclick="afficherProfil()">
 Mon profil
 </button>
 
-<button class="danger"
+<button
+class="danger"
 onclick="seDeconnecter()">
 Se déconnecter
 </button>
@@ -730,12 +989,14 @@ zone.innerHTML=`
 
 <h2>Mon compte</h2>
 
-<button class="primary"
+<button
+class="primary"
 onclick="closeModal('accountModal');openModal('signupModal')">
 Inscris-toi gratuitement
 </button>
 
-<button class="secondary"
+<button
+class="secondary"
 onclick="closeModal('accountModal');openModal('loginModal')">
 J'ai déjà un compte
 </button>
@@ -790,6 +1051,7 @@ alert(
 "Tu es maintenant déconnecté."
 );
 
+
 await mettreAJourInterfaceCompte();
 
 }
@@ -807,7 +1069,9 @@ await supabaseClient.auth.getSession();
 
 if(!session){
 
-alert("Tu dois être connecté.");
+alert(
+"Tu dois être connecté."
+);
 
 return;
 
@@ -815,8 +1079,7 @@ return;
 
 
 let texte=
-"👤 Mon profil\n\n"+
-"E-mail : "+session.user.email;
+"👤 Mon profil\n\n";
 
 
 try{
@@ -831,11 +1094,23 @@ await supabaseClient
 
 if(profil){
 
-if(profil["Full name"])
-texte+="\nNom : "+profil["Full name"];
+if(profil["Full name"]){
 
-if(profil.Phone)
-texte+="\nTéléphone : "+profil.Phone;
+texte+=
+"Nom : "+
+profil["Full name"]+
+"\n";
+
+}
+
+if(profil.Phone){
+
+texte+=
+"📱 Téléphone : "+
+profil.Phone+
+"\n";
+
+}
 
 }
 
@@ -848,71 +1123,10 @@ alert(texte);
 
 
 /* =========================
-   MOT DE PASSE
-========================= */
-
-async function envoyerLienRecuperation(){
-
-const email=
-document.getElementById("resetEmail")
-.value.trim();
-
-
-if(!email){
-
-status(
-"resetStatus",
-"Entre ton adresse e-mail.",
-false
-);
-
-return;
-
-}
-
-
-const {error}=
-await supabaseClient.auth
-.resetPasswordForEmail(
-email,
-{
-redirectTo:window.location.origin
-}
-);
-
-
-if(error){
-
-status(
-"resetStatus",
-"Erreur : "+error.message,
-false
-);
-
-return;
-
-}
-
-
-status(
-"resetStatus",
-"Le lien de récupération a été envoyé à ton adresse e-mail.",
-true
-);
-
-}
-
-
-/* =========================
    RECHERCHE DE CATEGORIE
 ========================= */
 
 async function trouverCategorieId(nomCategorie){
-
-/*
- On essaie d'abord le nom de table utilisé
- dans le projet Marché Guinée.
-*/
 
 let resultat=
 await supabaseClient
@@ -922,17 +1136,15 @@ await supabaseClient
 .maybeSingle();
 
 
-if(!resultat.error&&resultat.data){
+if(
+!resultat.error&&
+resultat.data
+){
 
 return resultat.data.id;
 
 }
 
-
-/*
- Si le nom technique de la table est différent,
- on essaie les variantes courantes.
-*/
 
 const variantes=[
 "categories",
@@ -950,7 +1162,11 @@ await supabaseClient
 .eq("Name",nomCategorie)
 .maybeSingle();
 
-if(!r.error&&r.data){
+
+if(
+!r.error&&
+r.data
+){
 
 return r.data.id;
 
@@ -999,10 +1215,6 @@ document.getElementById("productDescription")
 .value.trim();
 
 
-/*
- Vérification des champs
-*/
-
 if(
 !nom||
 !categorie||
@@ -1024,15 +1236,14 @@ return;
 }
 
 
-/*
- Vérification du prix
-*/
-
 const prixNombre=
 Number(prix);
 
 
-if(!Number.isFinite(prixNombre)||prixNombre<=0){
+if(
+!Number.isFinite(prixNombre)||
+prixNombre<=0
+){
 
 status(
 "publishStatus",
@@ -1044,10 +1255,6 @@ return;
 
 }
 
-
-/*
- Protection contre les numéros
-*/
 
 if(contientNumeroTelephone(description)){
 
@@ -1062,11 +1269,10 @@ return;
 }
 
 
-/*
- Vérification de la connexion
-*/
-
-const {data:sessionData,error:sessionError}=
+const {
+data:sessionData,
+error:sessionError
+}=
 await supabaseClient.auth.getSession();
 
 
@@ -1102,10 +1308,6 @@ const sellerId=
 sessionData.session.user.id;
 
 
-/*
- Recherche de la catégorie
-*/
-
 status(
 "publishStatus",
 "Recherche de la catégorie...",
@@ -1121,7 +1323,9 @@ if(!categoryId){
 
 status(
 "publishStatus",
-"La catégorie « "+categorie+" » n'a pas été trouvée dans Supabase.",
+"La catégorie « "+
+categorie+
+" » n'a pas été trouvée dans Supabase.",
 false
 );
 
@@ -1129,11 +1333,6 @@ return;
 
 }
 
-
-/*
- Vérification des photos sélectionnées.
- Elles ne sont pas encore envoyées dans Storage.
-*/
 
 const photos=
 document.getElementById("productPhotos")
@@ -1146,10 +1345,6 @@ photos.length
 );
 
 
-/*
- ENREGISTREMENT REEL
-*/
-
 status(
 "publishStatus",
 "Publication de ton annonce...",
@@ -1157,7 +1352,10 @@ true
 );
 
 
-const {data:annonce,error:annonceError}=
+const {
+data:annonce,
+error:annonceError
+}=
 await supabaseClient
 .from("listings")
 .insert({
@@ -1187,10 +1385,6 @@ views:0
 .single();
 
 
-/*
- Gestion de l'erreur
-*/
-
 if(annonceError){
 
 console.error(
@@ -1209,10 +1403,6 @@ return;
 
 }
 
-
-/*
- SUCCES
-*/
 
 console.log(
 "Annonce créée :",
@@ -1233,10 +1423,6 @@ alert(
 );
 
 
-/*
- Nettoyage du formulaire
-*/
-
 document.getElementById("productName").value="";
 document.getElementById("productCategory").value="";
 document.getElementById("productPrice").value="";
@@ -1247,10 +1433,6 @@ document.getElementById("productDescription").value="";
 document.getElementById("productPhotos").value="";
 document.getElementById("photoPreview").innerHTML="";
 
-
-/*
- Fermer la fenêtre après publication
-*/
 
 setTimeout(()=>{
 
@@ -1332,6 +1514,7 @@ document.getElementById("messageInput").value="";
 ========================= */
 
 let produitPaiement=null;
+
 let prixPaiement=0;
 
 const COMMISSION_DEMO=0.02;
@@ -1340,7 +1523,9 @@ const COMMISSION_DEMO=0.02;
 function ouvrirPaiement(produit,prix){
 
 produitPaiement=produit;
-prixPaiement=Number(prix)||0;
+
+prixPaiement=
+Number(prix)||0;
 
 
 document.getElementById("paymentProduct")
@@ -1357,7 +1542,8 @@ prixPaiement.toLocaleString("fr-FR")+
 
 
 const commission=
-prixPaiement*COMMISSION_DEMO;
+prixPaiement*
+COMMISSION_DEMO;
 
 
 document.getElementById("paymentCommission")
@@ -1392,7 +1578,8 @@ return;
 
 
 alert(
-"Moyen choisi : "+moyen.value+
+"Moyen choisi : "+
+moyen.value+
 "\n\nL'intégration réelle sera connectée avec l'API officielle."
 );
 
@@ -1429,7 +1616,9 @@ window.addEventListener(
 "click",
 event=>{
 
-if(event.target.classList.contains("modal")){
+if(
+event.target.classList.contains("modal")
+){
 
 event.target.style.display="none";
 

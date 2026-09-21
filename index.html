@@ -3,332 +3,329 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Marché Guinée 🇬🇳</title>
 
   <style>
-    * {
-      box-sizing: border-box;
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:Arial,sans-serif;
+      background:#f5f5f5;
+      color:#222
     }
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      color: #222;
+    header{
+      background:#00843d;
+      color:white;
+      padding:14px 15px;
+      position:sticky;
+      top:0;
+      z-index:1000;
+      box-shadow:0 2px 8px rgba(0,0,0,.15)
     }
 
-    header {
-      background: #00843d;
-      color: white;
-      padding: 14px 15px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    .header-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px
     }
 
-    .header-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
+    .logo{
+      font-size:21px;
+      font-weight:bold;
+      white-space:nowrap
     }
 
-    .logo {
-      font-size: 21px;
-      font-weight: bold;
-      white-space: nowrap;
+    .account-button{
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      border:none;
+      background:white;
+      cursor:pointer;
+      font-size:21px
     }
 
-    .account-button {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      border: none;
-      background: white;
-      cursor: pointer;
-      font-size: 21px;
+    .search-box{margin-top:12px}
+
+    .search-box input{
+      width:100%;
+      padding:13px 15px;
+      border-radius:25px;
+      border:none;
+      outline:none;
+      font-size:15px
     }
 
-    .search-box {
-      margin-top: 12px;
+    .categories{
+      display:flex;
+      gap:8px;
+      overflow-x:auto;
+      padding:12px 0 2px
     }
 
-    .search-box input {
-      width: 100%;
-      padding: 13px 15px;
-      border-radius: 25px;
-      border: none;
-      outline: none;
-      font-size: 15px;
+    .categories button{
+      flex:0 0 auto;
+      border:none;
+      background:white;
+      color:#00843d;
+      padding:9px 14px;
+      border-radius:20px;
+      cursor:pointer;
+      font-weight:bold
     }
 
-    .categories {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding: 12px 0 2px;
+    .categories button.active{
+      background:#ffcc00;
+      color:#111
     }
 
-    .categories button {
-      flex: 0 0 auto;
-      border: none;
-      background: white;
-      color: #00843d;
-      padding: 9px 14px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: bold;
+    main{
+      max-width:1000px;
+      margin:auto;
+      padding:18px
     }
 
-    .categories button.active {
-      background: #ffcc00;
-      color: #111;
+    .welcome{
+      background:white;
+      border-radius:15px;
+      padding:22px;
+      text-align:center;
+      box-shadow:0 2px 8px rgba(0,0,0,.08)
     }
 
-    main {
-      max-width: 1000px;
-      margin: auto;
-      padding: 18px;
+    .welcome h1{
+      color:#00843d;
+      margin-top:0
     }
 
-    .welcome {
-      background: white;
-      border-radius: 15px;
-      padding: 22px;
-      text-align: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    .welcome p{
+      color:#555;
+      line-height:1.5
     }
 
-    .welcome h1 {
-      color: #00843d;
-      margin-top: 0;
+    .buttons{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:center;
+      margin-top:18px
     }
 
-    .welcome p {
-      color: #555;
-      line-height: 1.5;
+    .main-button{
+      border:none;
+      padding:13px 18px;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:bold;
+      background:#00843d;
+      color:white
     }
 
-    .buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-      margin-top: 18px;
+    .main-button.secondary{
+      background:#ffcc00;
+      color:#111
     }
 
-    .main-button {
-      border: none;
-      padding: 13px 18px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: bold;
-      background: #00843d;
-      color: white;
+    .section-title{
+      margin-top:28px;
+      color:#00843d
     }
 
-    .main-button.secondary {
-      background: #ffcc00;
-      color: #111;
+    #listeAnnonces{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+      gap:15px
     }
 
-    .section-title {
-      margin-top: 28px;
-      color: #00843d;
+    .annonce-card{
+      background:white;
+      border-radius:14px;
+      overflow:hidden;
+      box-shadow:0 2px 8px rgba(0,0,0,.09)
     }
 
-    #listeAnnonces {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 15px;
+    .annonce-image{
+      width:100%;
+      height:200px;
+      background:#eee;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden
     }
 
-    .annonce-card {
-      background: white;
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+    .annonce-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover
     }
 
-    .annonce-image {
-      width: 100%;
-      height: 180px;
-      background: #eeeeee;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 55px;
+    .annonce-image .placeholder{
+      font-size:55px
     }
 
-    .annonce-content {
-      padding: 14px;
+    .annonce-content{
+      padding:14px
     }
 
-    .annonce-title {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 8px;
+    .annonce-title{
+      font-size:18px;
+      font-weight:bold;
+      margin-bottom:8px
     }
 
-    .annonce-price {
-      color: #00843d;
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 8px;
+    .annonce-price{
+      color:#00843d;
+      font-size:18px;
+      font-weight:bold;
+      margin-bottom:8px
     }
 
-    .annonce-info {
-      font-size: 13px;
-      color: #666;
-      margin: 4px 0;
+    .annonce-info{
+      font-size:13px;
+      color:#666;
+      margin:4px 0
     }
 
-    .empty {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      text-align: center;
-      color: #666;
+    .empty{
+      background:white;
+      padding:20px;
+      border-radius:12px;
+      text-align:center;
+      color:#666
     }
 
-    .modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.55);
-      z-index: 2000;
-      overflow-y: auto;
-      padding: 20px;
+    .modal{
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.55);
+      z-index:2000;
+      overflow-y:auto;
+      padding:20px
     }
 
-    .modal-content {
-      background: white;
-      width: 100%;
-      max-width: 500px;
-      margin: 30px auto;
-      padding: 22px;
-      border-radius: 15px;
-      position: relative;
+    .modal-content{
+      background:white;
+      width:100%;
+      max-width:500px;
+      margin:30px auto;
+      padding:22px;
+      border-radius:15px;
+      position:relative
     }
 
-    .close {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      border: none;
-      background: none;
-      font-size: 28px;
-      cursor: pointer;
-      color: #555;
+    .close{
+      position:absolute;
+      top:10px;
+      right:15px;
+      border:none;
+      background:none;
+      font-size:28px;
+      cursor:pointer;
+      color:#555
     }
 
-    .modal h2 {
-      color: #00843d;
-      margin-top: 5px;
+    .modal h2{
+      color:#00843d;
+      margin-top:5px
     }
 
-    .form-group {
-      margin-bottom: 14px;
+    .form-group{
+      margin-bottom:14px
     }
 
-    .form-group label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: bold;
+    .form-group label{
+      display:block;
+      margin-bottom:6px;
+      font-weight:bold
     }
 
     .form-group input,
     .form-group textarea,
-    .form-group select {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 15px;
-      outline: none;
+    .form-group select{
+      width:100%;
+      padding:12px;
+      border:1px solid #ccc;
+      border-radius:8px;
+      font-size:15px;
+      outline:none
     }
 
-    .form-group textarea {
-      min-height: 100px;
-      resize: vertical;
+    .form-group textarea{
+      min-height:100px;
+      resize:vertical
     }
 
-    .form-button {
-      width: 100%;
-      padding: 13px;
-      border: none;
-      border-radius: 9px;
-      background: #00843d;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 5px;
+    .form-button{
+      width:100%;
+      padding:13px;
+      border:none;
+      border-radius:9px;
+      background:#00843d;
+      color:white;
+      font-weight:bold;
+      cursor:pointer;
+      margin-top:5px
     }
 
-    .form-button.yellow {
-      background: #ffcc00;
-      color: #111;
+    .form-button.yellow{
+      background:#ffcc00;
+      color:#111
     }
 
-    .small-link {
-      display: block;
-      text-align: center;
-      margin-top: 12px;
-      color: #00843d;
-      cursor: pointer;
-      font-weight: bold;
+    .small-link{
+      display:block;
+      text-align:center;
+      margin-top:12px;
+      color:#00843d;
+      cursor:pointer;
+      font-weight:bold
     }
 
-    .message {
-      padding: 11px;
-      border-radius: 8px;
-      margin-top: 12px;
-      display: none;
-      font-size: 14px;
+    .message{
+      padding:11px;
+      border-radius:8px;
+      margin-top:12px;
+      display:none;
+      font-size:14px
     }
 
-    .message.green {
-      background: #dff5e8;
-      color: #126b39;
+    .message.green{
+      background:#dff5e8;
+      color:#126b39
     }
 
-    .message.red {
-      background: #ffe0e0;
-      color: #a00000;
+    .message.red{
+      background:#ffe0e0;
+      color:#a00000
     }
 
-    #photoPreview {
-      display: none;
-      width: 100%;
-      max-height: 250px;
-      object-fit: contain;
-      margin-top: 10px;
-      border-radius: 10px;
-      background: #eee;
+    #photoPreview{
+      display:none;
+      width:100%;
+      max-height:250px;
+      object-fit:contain;
+      margin-top:10px;
+      border-radius:10px;
+      background:#eee
     }
 
-    footer {
-      margin-top: 40px;
-      padding: 25px;
-      background: #00843d;
-      color: white;
-      text-align: center;
+    footer{
+      margin-top:40px;
+      padding:25px;
+      background:#00843d;
+      color:white;
+      text-align:center
     }
 
-    @media (max-width: 600px) {
-      main {
-        padding: 12px;
-      }
-
-      .logo {
-        font-size: 18px;
-      }
-
-      .welcome {
-        padding: 18px;
-      }
+    @media(max-width:600px){
+      main{padding:12px}
+      .logo{font-size:18px}
+      .welcome{padding:18px}
     }
   </style>
 </head>
@@ -338,15 +335,11 @@
 <header>
 
   <div class="header-top">
-
-    <div class="logo">
-      🇬🇳 Marché Guinée
-    </div>
+    <div class="logo">🇬🇳 Marché Guinée</div>
 
     <button class="account-button" onclick="ouvrirCompte()">
       👤
     </button>
-
   </div>
 
   <div class="search-box">
@@ -360,31 +353,31 @@
 
   <div class="categories">
 
-    <button class="active" onclick="choisirCategorie('Tous', this)">
+    <button class="active" onclick="choisirCategorie('Tous',this)">
       Tous
     </button>
 
-    <button onclick="choisirCategorie('Téléphones', this)">
+    <button onclick="choisirCategorie('Téléphones',this)">
       Téléphones
     </button>
 
-    <button onclick="choisirCategorie('Vêtements', this)">
+    <button onclick="choisirCategorie('Vêtements',this)">
       Vêtements
     </button>
 
-    <button onclick="choisirCategorie('Maison', this)">
+    <button onclick="choisirCategorie('Maison',this)">
       Maison
     </button>
 
-    <button onclick="choisirCategorie('Électronique', this)">
+    <button onclick="choisirCategorie('Électronique',this)">
       Électronique
     </button>
 
-    <button onclick="choisirCategorie('Véhicules', this)">
+    <button onclick="choisirCategorie('Véhicules',this)">
       Véhicules
     </button>
 
-    <button onclick="choisirCategorie('Autres', this)">
+    <button onclick="choisirCategorie('Autres',this)">
       Autres
     </button>
 
@@ -406,31 +399,19 @@
 
     <div class="buttons">
 
-      <button
-        class="main-button"
-        onclick="ouvrirPublication()"
-      >
+      <button class="main-button" onclick="ouvrirPublication()">
         📦 Vendre un produit
       </button>
 
-      <button
-        class="main-button secondary"
-        onclick="ouvrirCompte()"
-      >
+      <button class="main-button secondary" onclick="ouvrirCompte()">
         👤 Mon compte
       </button>
 
-      <button
-        class="main-button"
-        onclick="ouvrirMessages()"
-      >
+      <button class="main-button" onclick="ouvrirMessages()">
         💬 Messages
       </button>
 
-      <button
-        class="main-button secondary"
-        onclick="ouvrirPaiement()"
-      >
+      <button class="main-button secondary" onclick="ouvrirPaiement()">
         💳 Paiement
       </button>
 
@@ -459,9 +440,7 @@
 </footer>
 
 
-<!-- =========================
-     MODAL COMPTE
-========================= -->
+<!-- COMPTE -->
 
 <div class="modal" id="accountModal">
 
@@ -477,10 +456,7 @@
       Chargement...
     </div>
 
-    <button
-      class="form-button"
-      onclick="ouvrirInscription()"
-    >
+    <button class="form-button" onclick="ouvrirInscription()">
       Créer mon compte gratuitement
     </button>
 
@@ -497,9 +473,7 @@
 </div>
 
 
-<!-- =========================
-     MODAL INSCRIPTION
-========================= -->
+<!-- INSCRIPTION -->
 
 <div class="modal" id="signupModal">
 
@@ -513,9 +487,7 @@
 
     <div class="form-group">
 
-      <label>
-        Nom complet
-      </label>
+      <label>Nom complet</label>
 
       <input
         type="text"
@@ -527,9 +499,7 @@
 
     <div class="form-group">
 
-      <label>
-        Numéro
-      </label>
+      <label>Numéro</label>
 
       <input
         type="tel"
@@ -541,9 +511,7 @@
 
     <div class="form-group">
 
-      <label>
-        Mot de passe
-      </label>
+      <label>Mot de passe</label>
 
       <input
         type="password"
@@ -553,22 +521,13 @@
 
     </div>
 
-    <button
-      class="form-button"
-      onclick="creerCompte()"
-    >
+    <button class="form-button" onclick="creerCompte()">
       Créer mon compte
     </button>
 
-    <div
-      id="signupMessage"
-      class="message"
-    ></div>
+    <div id="signupMessage" class="message"></div>
 
-    <span
-      class="small-link"
-      onclick="ouvrirConnexion()"
-    >
+    <span class="small-link" onclick="ouvrirConnexion()">
       J'ai déjà un compte
     </span>
 
@@ -577,9 +536,7 @@
 </div>
 
 
-<!-- =========================
-     MODAL CONNEXION
-========================= -->
+<!-- CONNEXION -->
 
 <div class="modal" id="loginModal">
 
@@ -593,9 +550,7 @@
 
     <div class="form-group">
 
-      <label>
-        Numéro
-      </label>
+      <label>Numéro</label>
 
       <input
         type="tel"
@@ -607,9 +562,7 @@
 
     <div class="form-group">
 
-      <label>
-        Mot de passe
-      </label>
+      <label>Mot de passe</label>
 
       <input
         type="password"
@@ -619,26 +572,18 @@
 
     </div>
 
-    <button
-      class="form-button"
-      onclick="connecterCompte()"
-    >
+    <button class="form-button" onclick="connecterCompte()">
       Se connecter
     </button>
 
-    <div
-      id="loginMessage"
-      class="message"
-    ></div>
+    <div id="loginMessage" class="message"></div>
 
   </div>
 
 </div>
 
 
-<!-- =========================
-     MODAL PUBLICATION
-========================= -->
+<!-- PUBLICATION -->
 
 <div class="modal" id="publicationModal">
 
@@ -655,9 +600,7 @@
 
     <div class="form-group">
 
-      <label>
-        Nom du produit
-      </label>
+      <label>Nom du produit</label>
 
       <input
         type="text"
@@ -669,9 +612,7 @@
 
     <div class="form-group">
 
-      <label>
-        Description
-      </label>
+      <label>Description</label>
 
       <textarea
         id="productDescription"
@@ -682,9 +623,7 @@
 
     <div class="form-group">
 
-      <label>
-        Prix en GNF
-      </label>
+      <label>Prix en GNF</label>
 
       <input
         type="number"
@@ -696,9 +635,7 @@
 
     <div class="form-group">
 
-      <label>
-        État du produit
-      </label>
+      <label>État du produit</label>
 
       <select id="productCondition">
 
@@ -724,9 +661,7 @@
 
     <div class="form-group">
 
-      <label>
-        Ville
-      </label>
+      <label>Ville</label>
 
       <input
         type="text"
@@ -738,9 +673,7 @@
 
     <div class="form-group">
 
-      <label>
-        Quartier
-      </label>
+      <label>Quartier</label>
 
       <input
         type="text"
@@ -752,9 +685,7 @@
 
     <div class="form-group">
 
-      <label>
-        Photo du produit
-      </label>
+      <label>Photo du produit</label>
 
       <input
         type="file"
@@ -770,35 +701,24 @@
 
     </div>
 
-    <button
-      class="form-button"
-      onclick="publierAnnonce()"
-    >
+    <button class="form-button" onclick="publierAnnonce()">
       Publier l'annonce
     </button>
 
-    <div
-      id="publicationMessage"
-      class="message"
-    ></div>
+    <div id="publicationMessage" class="message"></div>
 
   </div>
 
 </div>
 
 
-<!-- =========================
-     MODAL MESSAGES
-========================= -->
+<!-- MESSAGES -->
 
 <div class="modal" id="messageModal">
 
   <div class="modal-content">
 
-    <button
-      class="close"
-      onclick="fermerModal('messageModal')"
-    >
+    <button class="close" onclick="fermerModal('messageModal')">
       ×
     </button>
 
@@ -806,9 +726,7 @@
 
     <div class="form-group">
 
-      <label>
-        Message
-      </label>
+      <label>Message</label>
 
       <textarea
         id="messageText"
@@ -817,35 +735,24 @@
 
     </div>
 
-    <button
-      class="form-button"
-      onclick="envoyerMessage()"
-    >
+    <button class="form-button" onclick="envoyerMessage()">
       Envoyer
     </button>
 
-    <div
-      id="messageResult"
-      class="message"
-    ></div>
+    <div id="messageResult" class="message"></div>
 
   </div>
 
 </div>
 
 
-<!-- =========================
-     MODAL PAIEMENT
-========================= -->
+<!-- PAIEMENT -->
 
 <div class="modal" id="paymentModal">
 
   <div class="modal-content">
 
-    <button
-      class="close"
-      onclick="fermerModal('paymentModal')"
-    >
+    <button class="close" onclick="fermerModal('paymentModal')">
       ×
     </button>
 
@@ -853,9 +760,7 @@
 
     <div class="form-group">
 
-      <label>
-        Montant en GNF
-      </label>
+      <label>Montant en GNF</label>
 
       <input
         type="number"
@@ -873,26 +778,16 @@
       La commission de démonstration est de 3%.
     </div>
 
-    <button
-      class="form-button"
-      onclick="effectuerPaiement()"
-    >
+    <button class="form-button" onclick="effectuerPaiement()">
       Continuer
     </button>
 
-    <div
-      id="paymentResult"
-      class="message"
-    ></div>
+    <div id="paymentResult" class="message"></div>
 
   </div>
 
 </div>
 
-
-<!-- =========================
-     SUPABASE
-========================= -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -911,29 +806,20 @@ const supabaseClient =
   );
 
 
-/* =========================
-   VARIABLES
-========================= */
-
 let toutesLesAnnonces = [];
-
 let categorieSelectionnee = "Tous";
 
 
-/* =========================
-   OUTILS
-========================= */
-
-function nettoyerTelephone(phone) {
+function nettoyerTelephone(phone){
 
   return String(phone || "")
-    .replace(/\D/g, "")
-    .replace(/^224/, "");
+    .replace(/\D/g,"")
+    .replace(/^224/,"");
 
 }
 
 
-function emailTechniqueDepuisTelephone(phone) {
+function emailTechniqueDepuisTelephone(phone){
 
   const numero =
     nettoyerTelephone(phone);
@@ -944,7 +830,7 @@ function emailTechniqueDepuisTelephone(phone) {
 }
 
 
-function validerTelephone(phone) {
+function validerTelephone(phone){
 
   const p =
     nettoyerTelephone(phone);
@@ -958,61 +844,58 @@ function afficherMessage(
   elementId,
   texte,
   type
-) {
+){
 
   const element =
     document.getElementById(elementId);
 
-  if (!element) return;
+  if(!element)return;
 
   element.textContent = texte;
-
   element.className =
     "message " + type;
-
   element.style.display = "block";
 
 }
 
 
-function formaterPrix(prix) {
+function formaterPrix(prix){
 
   return new Intl.NumberFormat(
     "fr-FR"
-  ).format(Number(prix || 0)) + " GNF";
+  ).format(Number(prix || 0)) +
+  " GNF";
 
 }
 
 
-function echapperHTML(texte) {
+function echapperHTML(texte){
 
   return String(texte ?? "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
 }
 
 
-/* =========================
-   MODALS
-========================= */
+/* MODALS */
 
-function fermerModal(id) {
+function fermerModal(id){
 
   const modal =
     document.getElementById(id);
 
-  if (modal) {
+  if(modal){
     modal.style.display = "none";
   }
 
 }
 
 
-function ouvrirCompte() {
+function ouvrirCompte(){
 
   document.getElementById(
     "accountModal"
@@ -1023,7 +906,7 @@ function ouvrirCompte() {
 }
 
 
-function ouvrirInscription() {
+function ouvrirInscription(){
 
   fermerModal("accountModal");
 
@@ -1034,7 +917,7 @@ function ouvrirInscription() {
 }
 
 
-function ouvrirConnexion() {
+function ouvrirConnexion(){
 
   fermerModal("accountModal");
 
@@ -1045,7 +928,7 @@ function ouvrirConnexion() {
 }
 
 
-function ouvrirPublication() {
+function ouvrirPublication(){
 
   document.getElementById(
     "publicationModal"
@@ -1054,7 +937,7 @@ function ouvrirPublication() {
 }
 
 
-function ouvrirMessages() {
+function ouvrirMessages(){
 
   document.getElementById(
     "messageModal"
@@ -1063,7 +946,7 @@ function ouvrirMessages() {
 }
 
 
-function ouvrirPaiement() {
+function ouvrirPaiement(){
 
   document.getElementById(
     "paymentModal"
@@ -1072,54 +955,51 @@ function ouvrirPaiement() {
 }
 
 
-/* Fermer en cliquant à l'extérieur */
-
 window.addEventListener(
   "click",
-  function(event) {
+  function(event){
 
     const modals =
       document.querySelectorAll(".modal");
 
-    modals.forEach(function(modal) {
+    modals.forEach(
+      function(modal){
 
-      if (event.target === modal) {
-
-        modal.style.display = "none";
+        if(event.target === modal){
+          modal.style.display = "none";
+        }
 
       }
-
-    });
+    );
 
   }
 );
 
 
-/* =========================
-   COMPTE
-========================= */
+/* COMPTE */
 
-async function chargerCompte() {
+async function chargerCompte(){
 
   const zone =
-    document.getElementById("accountInfo");
+    document.getElementById(
+      "accountInfo"
+    );
 
-  if (!zone) return;
+  if(!zone)return;
 
-  zone.innerHTML =
-    "Chargement...";
+  zone.innerHTML = "Chargement...";
 
-  try {
+  try{
 
     const {
-      data: sessionData
+      data:sessionData
     } =
       await supabaseClient.auth.getSession();
 
     const user =
       sessionData?.session?.user;
 
-    if (!user) {
+    if(!user){
 
       zone.innerHTML =
         "<p>Vous n'êtes pas encore connecté.</p>";
@@ -1135,10 +1015,10 @@ async function chargerCompte() {
       await supabaseClient
         .from("Users")
         .select('"Full name", Phone')
-        .eq("id", user.id)
+        .eq("id",user.id)
         .maybeSingle();
 
-    if (error) {
+    if(error){
 
       zone.innerHTML =
         "<p>Compte connecté.</p>";
@@ -1147,28 +1027,32 @@ async function chargerCompte() {
 
     }
 
-    if (data) {
+    if(data){
 
       zone.innerHTML = `
-        <p><strong>Nom :</strong>
-        ${echapperHTML(data["Full name"] || "")}</p>
+        <p>
+          <strong>Nom :</strong>
+          ${echapperHTML(data["Full name"] || "")}
+        </p>
 
-        <p><strong>Numéro :</strong>
-        ${echapperHTML(data.Phone || "")}</p>
+        <p>
+          <strong>Numéro :</strong>
+          ${echapperHTML(data.Phone || "")}
+        </p>
 
         <p style="color:#00843d;font-weight:bold;">
-        ✅ Compte connecté
+          ✅ Compte connecté
         </p>
       `;
 
-    } else {
+    }else{
 
       zone.innerHTML =
         "<p>Compte connecté.</p>";
 
     }
 
-  } catch (error) {
+  }catch(error){
 
     zone.innerHTML =
       "<p>Impossible de charger le compte.</p>";
@@ -1178,31 +1062,29 @@ async function chargerCompte() {
 }
 
 
-/* =========================
-   INSCRIPTION
-========================= */
+/* INSCRIPTION */
 
-async function creerCompte() {
+async function creerCompte(){
 
   const nom =
-    document
-      .getElementById("signupName")
-      .value
-      .trim();
+    document.getElementById(
+      "signupName"
+    ).value.trim();
 
   const phone =
     nettoyerTelephone(
-      document
-        .getElementById("signupPhone")
-        .value
+      document.getElementById(
+        "signupPhone"
+      ).value
     );
 
   const password =
-    document
-      .getElementById("signupPassword")
-      .value;
+    document.getElementById(
+      "signupPassword"
+    ).value;
 
-  if (!nom) {
+
+  if(!nom){
 
     afficherMessage(
       "signupMessage",
@@ -1214,7 +1096,8 @@ async function creerCompte() {
 
   }
 
-  if (!validerTelephone(phone)) {
+
+  if(!validerTelephone(phone)){
 
     afficherMessage(
       "signupMessage",
@@ -1226,7 +1109,8 @@ async function creerCompte() {
 
   }
 
-  if (password.length < 6) {
+
+  if(password.length < 6){
 
     afficherMessage(
       "signupMessage",
@@ -1238,25 +1122,20 @@ async function creerCompte() {
 
   }
 
-  try {
+
+  try{
 
     const {
-      data: existingUser,
-      error: existingError
+      data:existingUser
     } =
       await supabaseClient
         .from("Users")
         .select("id")
-        .eq("Phone", phone)
+        .eq("Phone",phone)
         .maybeSingle();
 
-    if (existingError) {
 
-      console.log(existingError);
-
-    }
-
-    if (existingUser) {
+    if(existingUser){
 
       afficherMessage(
         "signupMessage",
@@ -1279,21 +1158,21 @@ async function creerCompte() {
     } =
       await supabaseClient.auth.signUp({
 
-        email: email,
+        email:email,
 
-        password: password,
+        password:password,
 
-        options: {
-          data: {
-            full_name: nom,
-            phone: phone
+        options:{
+          data:{
+            full_name:nom,
+            phone:phone
           }
         }
 
       });
 
 
-    if (error) {
+    if(error){
 
       afficherMessage(
         "signupMessage",
@@ -1306,7 +1185,7 @@ async function creerCompte() {
     }
 
 
-    if (!data.user) {
+    if(!data.user){
 
       afficherMessage(
         "signupMessage",
@@ -1319,30 +1198,17 @@ async function creerCompte() {
     }
 
 
-    const {
-      error: userError
-    } =
-      await supabaseClient
-        .from("Users")
-        .upsert({
+    await supabaseClient
+      .from("Users")
+      .upsert({
 
-          id: data.user.id,
+        id:data.user.id,
 
-          "Full name": nom,
+        "Full name":nom,
 
-          Phone: phone
+        Phone:phone
 
-        });
-
-
-    if (userError) {
-
-      console.log(
-        "Erreur Users :",
-        userError
-      );
-
-    }
+      });
 
 
     afficherMessage(
@@ -1353,10 +1219,9 @@ async function creerCompte() {
 
 
     setTimeout(
-      function() {
+      function(){
 
         fermerModal("signupModal");
-
         ouvrirCompte();
 
       },
@@ -1364,7 +1229,7 @@ async function creerCompte() {
     );
 
 
-  } catch (error) {
+  }catch(error){
 
     afficherMessage(
       "signupMessage",
@@ -1378,26 +1243,24 @@ async function creerCompte() {
 }
 
 
-/* =========================
-   CONNEXION
-========================= */
+/* CONNEXION */
 
-async function connecterCompte() {
+async function connecterCompte(){
 
   const phone =
     nettoyerTelephone(
-      document
-        .getElementById("loginPhone")
-        .value
+      document.getElementById(
+        "loginPhone"
+      ).value
     );
 
   const password =
-    document
-      .getElementById("loginPassword")
-      .value;
+    document.getElementById(
+      "loginPassword"
+    ).value;
 
 
-  if (!validerTelephone(phone)) {
+  if(!validerTelephone(phone)){
 
     afficherMessage(
       "loginMessage",
@@ -1410,7 +1273,7 @@ async function connecterCompte() {
   }
 
 
-  if (!password) {
+  if(!password){
 
     afficherMessage(
       "loginMessage",
@@ -1423,26 +1286,25 @@ async function connecterCompte() {
   }
 
 
-  try {
+  try{
 
     const email =
       emailTechniqueDepuisTelephone(phone);
 
 
     const {
-      data,
       error
     } =
       await supabaseClient.auth.signInWithPassword({
 
-        email: email,
+        email:email,
 
-        password: password
+        password:password
 
       });
 
 
-    if (error) {
+    if(error){
 
       afficherMessage(
         "loginMessage",
@@ -1464,10 +1326,9 @@ async function connecterCompte() {
 
 
     setTimeout(
-      function() {
+      function(){
 
         fermerModal("loginModal");
-
         ouvrirCompte();
 
       },
@@ -1475,7 +1336,7 @@ async function connecterCompte() {
     );
 
 
-  } catch (error) {
+  }catch(error){
 
     afficherMessage(
       "loginMessage",
@@ -1488,48 +1349,247 @@ async function connecterCompte() {
 }
 
 
-/* =========================
-   PUBLICATION
-========================= */
+/* APERCU PHOTO */
 
-async function publierAnnonce() {
+function aperçuPhoto(event){
+
+  const fichier =
+    event.target.files[0];
+
+  const preview =
+    document.getElementById(
+      "photoPreview"
+    );
+
+
+  if(!fichier){
+
+    preview.style.display = "none";
+
+    return;
+
+  }
+
+
+  const lecteur =
+    new FileReader();
+
+
+  lecteur.onload =
+    function(e){
+
+      preview.src =
+        e.target.result;
+
+      preview.style.display =
+        "block";
+
+    };
+
+
+  lecteur.readAsDataURL(fichier);
+
+}
+
+
+/* UPLOAD PHOTO */
+
+async function envoyerPhotoVersStorage(
+  fichier,
+  listingId
+){
+
+  if(!fichier){
+    return null;
+  }
+
+
+  const extension =
+    fichier.name.includes(".")
+      ? fichier.name.split(".").pop().toLowerCase()
+      : "jpg";
+
+
+  const nomFichier =
+    listingId +
+    "-" +
+    Date.now() +
+    "." +
+    extension;
+
+
+  const chemin =
+    nomFichier;
+
+
+  const {
+    error:uploadError
+  } =
+    await supabaseClient
+      .storage
+      .from("Listing image")
+      .upload(
+        chemin,
+        fichier,
+        {
+          cacheControl:"3600",
+          upsert:false,
+          contentType:fichier.type
+        }
+      );
+
+
+  if(uploadError){
+
+    throw uploadError;
+
+  }
+
+
+  const {
+    data:publicData
+  } =
+    supabaseClient
+      .storage
+      .from("Listing image")
+      .getPublicUrl(chemin);
+
+
+  const imageUrl =
+    publicData?.publicUrl;
+
+
+  if(!imageUrl){
+
+    throw new Error(
+      "Impossible de récupérer l'adresse de la photo."
+    );
+
+  }
+
+
+  /*
+    On essaie d'enregistrer la relation
+    entre l'annonce et la photo.
+  */
+
+  let imageSaved = false;
+
+
+  try{
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .from("Listing images")
+        .insert({
+
+          listing_id:listingId,
+
+          image_url:imageUrl
+
+        });
+
+
+    if(!error){
+
+      imageSaved = true;
+
+    }
+
+  }catch(e){
+
+    console.log(
+      "Table Listing images non utilisée :",
+      e
+    );
+
+  }
+
+
+  if(!imageSaved){
+
+    try{
+
+      const {
+        error
+      } =
+        await supabaseClient
+          .from("listing_images")
+          .insert({
+
+            listing_id:listingId,
+
+            image_url:imageUrl
+
+          });
+
+
+      if(!error){
+
+        imageSaved = true;
+
+      }
+
+    }catch(e){
+
+      console.log(
+        "Deuxième tentative image :",
+        e
+      );
+
+    }
+
+  }
+
+
+  return imageUrl;
+
+}
+
+
+/* PUBLICATION */
+
+async function publierAnnonce(){
 
   const nom =
-    document
-      .getElementById("productName")
-      .value
-      .trim();
+    document.getElementById(
+      "productName"
+    ).value.trim();
 
   const description =
-    document
-      .getElementById("productDescription")
-      .value
-      .trim();
+    document.getElementById(
+      "productDescription"
+    ).value.trim();
 
   const prix =
-    document
-      .getElementById("productPrice")
-      .value;
+    document.getElementById(
+      "productPrice"
+    ).value;
 
   const etat =
-    document
-      .getElementById("productCondition")
-      .value;
+    document.getElementById(
+      "productCondition"
+    ).value;
 
   const ville =
-    document
-      .getElementById("productCity")
-      .value
-      .trim();
+    document.getElementById(
+      "productCity"
+    ).value.trim();
 
   const quartier =
-    document
-      .getElementById("productNeighborhood")
-      .value
-      .trim();
+    document.getElementById(
+      "productNeighborhood"
+    ).value.trim();
+
+  const fichier =
+    document.getElementById(
+      "productPhoto"
+    ).files[0];
 
 
-  if (!nom) {
+  if(!nom){
 
     afficherMessage(
       "publicationMessage",
@@ -1542,7 +1602,7 @@ async function publierAnnonce() {
   }
 
 
-  if (!prix || Number(prix) <= 0) {
+  if(!prix || Number(prix)<=0){
 
     afficherMessage(
       "publicationMessage",
@@ -1555,7 +1615,7 @@ async function publierAnnonce() {
   }
 
 
-  if (!etat) {
+  if(!etat){
 
     afficherMessage(
       "publicationMessage",
@@ -1568,7 +1628,7 @@ async function publierAnnonce() {
   }
 
 
-  if (!ville) {
+  if(!ville){
 
     afficherMessage(
       "publicationMessage",
@@ -1581,10 +1641,10 @@ async function publierAnnonce() {
   }
 
 
-  try {
+  try{
 
     const {
-      data: sessionData
+      data:sessionData
     } =
       await supabaseClient.auth.getSession();
 
@@ -1592,7 +1652,7 @@ async function publierAnnonce() {
       sessionData?.session?.user;
 
 
-    if (!user) {
+    if(!user){
 
       afficherMessage(
         "publicationMessage",
@@ -1609,8 +1669,6 @@ async function publierAnnonce() {
       Number(prix);
 
 
-    /* Recherche de la première catégorie disponible */
-
     const tablesCategories = [
       "Catégorie",
       "categories",
@@ -1618,18 +1676,19 @@ async function publierAnnonce() {
       "category"
     ];
 
+
     let categoryId = null;
 
 
-    for (
+    for(
       const table of tablesCategories
-    ) {
+    ){
 
-      try {
+      try{
 
         const {
-          data: categoryData,
-          error: categoryError
+          data:categoryData,
+          error:categoryError
         } =
           await supabaseClient
             .from(table)
@@ -1638,10 +1697,10 @@ async function publierAnnonce() {
             .maybeSingle();
 
 
-        if (
+        if(
           !categoryError &&
           categoryData?.id
-        ) {
+        ){
 
           categoryId =
             categoryData.id;
@@ -1650,7 +1709,7 @@ async function publierAnnonce() {
 
         }
 
-      } catch (e) {
+      }catch(e){
 
         console.log(
           "Catégorie non trouvée :",
@@ -1662,7 +1721,7 @@ async function publierAnnonce() {
     }
 
 
-    if (!categoryId) {
+    if(!categoryId){
 
       afficherMessage(
         "publicationMessage",
@@ -1675,6 +1734,10 @@ async function publierAnnonce() {
     }
 
 
+    /*
+      1. Création de l'annonce
+    */
+
     const {
       data,
       error
@@ -1683,32 +1746,32 @@ async function publierAnnonce() {
         .from("listings")
         .insert({
 
-          seller_id: user.id,
+          seller_id:user.id,
 
-          category_id: categoryId,
+          category_id:categoryId,
 
-          title: nom,
+          title:nom,
 
-          description: description,
+          description:description,
 
-          price_gnf: prixNombre,
+          price_gnf:prixNombre,
 
-          condition: etat,
+          condition:etat,
 
-          city: ville,
+          city:ville,
 
-          neighborhood: quartier,
+          neighborhood:quartier,
 
-          status: "active",
+          status:"active",
 
-          views: 0
+          views:0
 
         })
         .select()
         .single();
 
 
-    if (error) {
+    if(error){
 
       console.error(error);
 
@@ -1724,6 +1787,42 @@ async function publierAnnonce() {
     }
 
 
+    /*
+      2. Envoi de la photo dans Storage
+    */
+
+    if(fichier){
+
+      try{
+
+        await envoyerPhotoVersStorage(
+          fichier,
+          data.id
+        );
+
+      }catch(photoError){
+
+        console.error(
+          "Erreur photo :",
+          photoError
+        );
+
+        afficherMessage(
+          "publicationMessage",
+          "Annonce publiée, mais la photo n'a pas pu être enregistrée : " +
+          photoError.message,
+          "red"
+        );
+
+        await chargerAnnonces();
+
+        return;
+
+      }
+
+    }
+
+
     afficherMessage(
       "publicationMessage",
       "Annonce publiée avec succès ! 🎉",
@@ -1731,43 +1830,43 @@ async function publierAnnonce() {
     );
 
 
-    document
-      .getElementById("productName")
-      .value = "";
+    document.getElementById(
+      "productName"
+    ).value = "";
 
-    document
-      .getElementById("productDescription")
-      .value = "";
+    document.getElementById(
+      "productDescription"
+    ).value = "";
 
-    document
-      .getElementById("productPrice")
-      .value = "";
+    document.getElementById(
+      "productPrice"
+    ).value = "";
 
-    document
-      .getElementById("productCondition")
-      .value = "";
+    document.getElementById(
+      "productCondition"
+    ).value = "";
 
-    document
-      .getElementById("productCity")
-      .value = "";
+    document.getElementById(
+      "productCity"
+    ).value = "";
 
-    document
-      .getElementById("productNeighborhood")
-      .value = "";
+    document.getElementById(
+      "productNeighborhood"
+    ).value = "";
 
-    document
-      .getElementById("productPhoto")
-      .value = "";
+    document.getElementById(
+      "productPhoto"
+    ).value = "";
 
-    document
-      .getElementById("photoPreview")
-      .style.display = "none";
+    document.getElementById(
+      "photoPreview"
+    ).style.display = "none";
 
 
     await chargerAnnonces();
 
 
-  } catch (error) {
+  }catch(error){
 
     console.error(error);
 
@@ -1783,59 +1882,9 @@ async function publierAnnonce() {
 }
 
 
-/* =========================
-   PHOTO
-========================= */
+/* CHARGEMENT DES ANNONCES */
 
-function aperçuPhoto(event) {
-
-  const fichier =
-    event.target.files[0];
-
-  const preview =
-    document.getElementById(
-      "photoPreview"
-    );
-
-
-  if (!fichier) {
-
-    preview.style.display =
-      "none";
-
-    return;
-
-  }
-
-
-  const lecteur =
-    new FileReader();
-
-
-  lecteur.onload =
-    function(e) {
-
-      preview.src =
-        e.target.result;
-
-      preview.style.display =
-        "block";
-
-    };
-
-
-  lecteur.readAsDataURL(
-    fichier
-  );
-
-}
-
-
-/* =========================
-   ANNONCES
-========================= */
-
-async function chargerAnnonces() {
+async function chargerAnnonces(){
 
   const zone =
     document.getElementById(
@@ -1849,7 +1898,7 @@ async function chargerAnnonces() {
     </div>`;
 
 
-  try {
+  try{
 
     const {
       data,
@@ -1858,21 +1907,18 @@ async function chargerAnnonces() {
       await supabaseClient
         .from("listings")
         .select(
-          "id, title, description, price_gnf, condition, city, neighborhood, status, views, created_at"
+          "id,title,description,price_gnf,condition,city,neighborhood,status,views,created_at"
         )
-        .eq(
-          "status",
-          "active"
-        )
+        .eq("status","active")
         .order(
           "created_at",
           {
-            ascending: false
+            ascending:false
           }
         );
 
 
-    if (error) {
+    if(error){
 
       console.error(error);
 
@@ -1890,10 +1936,83 @@ async function chargerAnnonces() {
       data || [];
 
 
+    /*
+      Charger les images associées
+    */
+
+    for(
+      const annonce of toutesLesAnnonces
+    ){
+
+      annonce.image_url = null;
+
+
+      try{
+
+        const {
+          data:imageData
+        } =
+          await supabaseClient
+            .from("Listing images")
+            .select("image_url")
+            .eq(
+              "listing_id",
+              annonce.id
+            )
+            .limit(1)
+            .maybeSingle();
+
+
+        if(imageData?.image_url){
+
+          annonce.image_url =
+            imageData.image_url;
+
+        }
+
+      }catch(e){
+
+        try{
+
+          const {
+            data:imageData2
+          } =
+            await supabaseClient
+              .from("listing_images")
+              .select("image_url")
+              .eq(
+                "listing_id",
+                annonce.id
+              )
+              .limit(1)
+              .maybeSingle();
+
+
+          if(imageData2?.image_url){
+
+            annonce.image_url =
+              imageData2.image_url;
+
+          }
+
+        }catch(e2){
+
+          console.log(
+            "Image non trouvée pour l'annonce",
+            annonce.id
+          );
+
+        }
+
+      }
+
+    }
+
+
     afficherAnnonces();
 
 
-  } catch (error) {
+  }catch(error){
 
     console.error(error);
 
@@ -1907,11 +2026,9 @@ async function chargerAnnonces() {
 }
 
 
-/* =========================
-   AFFICHER ANNONCES
-========================= */
+/* AFFICHAGE */
 
-function afficherAnnonces() {
+function afficherAnnonces(){
 
   const zone =
     document.getElementById(
@@ -1920,16 +2037,14 @@ function afficherAnnonces() {
 
 
   const recherche =
-    document
-      .getElementById("searchInput")
-      .value
-      .trim()
-      .toLowerCase();
+    document.getElementById(
+      "searchInput"
+    ).value.trim().toLowerCase();
 
 
-  let annonces =
+  const annonces =
     toutesLesAnnonces.filter(
-      function(annonce) {
+      function(annonce){
 
         const texte = (
 
@@ -1953,10 +2068,9 @@ function afficherAnnonces() {
           true;
 
 
-        if (
-          categorieSelectionnee !==
-          "Tous"
-        ) {
+        if(
+          categorieSelectionnee !== "Tous"
+        ){
 
           correspondCategorie =
             texte.includes(
@@ -1966,7 +2080,7 @@ function afficherAnnonces() {
         }
 
 
-        return (
+        return(
           correspondRecherche &&
           correspondCategorie
         );
@@ -1975,9 +2089,7 @@ function afficherAnnonces() {
     );
 
 
-  if (
-    annonces.length === 0
-  ) {
+  if(annonces.length === 0){
 
     zone.innerHTML =
       `<div class="empty">
@@ -1991,15 +2103,33 @@ function afficherAnnonces() {
 
   zone.innerHTML =
     annonces.map(
-      function(annonce) {
+      function(annonce){
+
+        const imageHTML =
+          annonce.image_url
+            ? `
+              <div class="annonce-image">
+                <img
+                  src="${echapperHTML(annonce.image_url)}"
+                  alt="${echapperHTML(annonce.title)}"
+                  loading="lazy"
+                >
+              </div>
+            `
+            : `
+              <div class="annonce-image">
+                <div class="placeholder">
+                  📦
+                </div>
+              </div>
+            `;
+
 
         return `
 
           <div class="annonce-card">
 
-            <div class="annonce-image">
-              📦
-            </div>
+            ${imageHTML}
 
             <div class="annonce-content">
 
@@ -2019,6 +2149,7 @@ function afficherAnnonces() {
                 📍 ${echapperHTML(
                   annonce.city || ""
                 )}
+
                 ${
                   annonce.neighborhood
                     ? " - " +
@@ -2068,25 +2199,21 @@ function afficherAnnonces() {
 }
 
 
-/* =========================
-   RECHERCHE
-========================= */
+/* RECHERCHE */
 
-function filtrerAnnonces() {
+function filtrerAnnonces(){
 
   afficherAnnonces();
 
 }
 
 
-/* =========================
-   CATÉGORIES
-========================= */
+/* CATEGORIES */
 
 function choisirCategorie(
   categorie,
   bouton
-) {
+){
 
   categorieSelectionnee =
     categorie;
@@ -2097,7 +2224,7 @@ function choisirCategorie(
       ".categories button"
     )
     .forEach(
-      function(btn) {
+      function(btn){
 
         btn.classList.remove(
           "active"
@@ -2107,7 +2234,7 @@ function choisirCategorie(
     );
 
 
-  if (bouton) {
+  if(bouton){
 
     bouton.classList.add(
       "active"
@@ -2121,20 +2248,17 @@ function choisirCategorie(
 }
 
 
-/* =========================
-   MESSAGES
-========================= */
+/* MESSAGES */
 
-async function envoyerMessage() {
+async function envoyerMessage(){
 
   const message =
-    document
-      .getElementById("messageText")
-      .value
-      .trim();
+    document.getElementById(
+      "messageText"
+    ).value.trim();
 
 
-  if (!message) {
+  if(!message){
 
     afficherMessage(
       "messageResult",
@@ -2156,19 +2280,15 @@ async function envoyerMessage() {
 }
 
 
-/* =========================
-   PAIEMENT
-========================= */
+/* PAIEMENT */
 
-function calculerCommission() {
+function calculerCommission(){
 
   const montant =
     Number(
-      document
-        .getElementById(
-          "paymentAmount"
-        )
-        .value
+      document.getElementById(
+        "paymentAmount"
+      ).value
     );
 
 
@@ -2178,10 +2298,7 @@ function calculerCommission() {
     );
 
 
-  if (
-    !montant ||
-    montant <= 0
-  ) {
+  if(!montant || montant<=0){
 
     info.textContent =
       "La commission de démonstration est de 3%.";
@@ -2202,16 +2319,21 @@ function calculerCommission() {
 
 
   info.innerHTML = `
-    Montant : <strong>
+    Montant :
+    <strong>
       ${formaterPrix(montant)}
     </strong>
     <br>
-    Commission Marché Guinée : <strong>
+
+    Commission Marché Guinée :
+    <strong>
       ${formaterPrix(commission)}
     </strong>
     (3%)
     <br>
-    Total : <strong>
+
+    Total :
+    <strong>
       ${formaterPrix(total)}
     </strong>
   `;
@@ -2219,22 +2341,17 @@ function calculerCommission() {
 }
 
 
-function effectuerPaiement() {
+function effectuerPaiement(){
 
   const montant =
     Number(
-      document
-        .getElementById(
-          "paymentAmount"
-        )
-        .value
+      document.getElementById(
+        "paymentAmount"
+      ).value
     );
 
 
-  if (
-    !montant ||
-    montant <= 0
-  ) {
+  if(!montant || montant<=0){
 
     afficherMessage(
       "paymentResult",
@@ -2264,13 +2381,11 @@ function effectuerPaiement() {
 }
 
 
-/* =========================
-   CHARGEMENT INITIAL
-========================= */
+/* CHARGEMENT INITIAL */
 
 document.addEventListener(
   "DOMContentLoaded",
-  function() {
+  function(){
 
     chargerAnnonces();
 

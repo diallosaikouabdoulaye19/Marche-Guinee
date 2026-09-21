@@ -1267,36 +1267,25 @@
       Number(prix);
 
 
-    const {
-      data,
-      error
-    } = await supabaseClient
-      .from("listings")
-      .insert({
-
-        Seller_id: user.id,
-
-        Category_id: categoryId,
-
-        title: nom,
-
-        description: description,
-
-        price_gnf: prixNombre,
-
-        Condition: etat,
-
-        city: ville,
-
-        neighborhood: quartier,
-
-        status: "Active",
-
-        views: 0
-
-      })
-      .select()
-      .single();
+  const {
+  data,
+  error
+} = await supabaseClient
+  .from("listings")
+  .insert({
+    seller_id: user.id,
+    category_id: categoryId,
+    title: nom,
+    description: description,
+    price_gnf: prixNombre,
+    condition: etat,
+    city: ville,
+    neighborhood: quartier,
+    status: "Active",
+    views: 0
+  })
+  .select()
+  .single();
 
 
     if (error) {

@@ -3,329 +3,339 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Marché Guinée 🇬🇳</title>
 
   <style>
-    *{box-sizing:border-box}
-
-    body{
-      margin:0;
-      font-family:Arial,sans-serif;
-      background:#f5f5f5;
-      color:#222
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
     }
 
-    header{
-      background:#00843d;
-      color:white;
-      padding:14px 15px;
-      position:sticky;
-      top:0;
-      z-index:1000;
-      box-shadow:0 2px 8px rgba(0,0,0,.15)
+    body {
+      background: #f5f7f6;
+      color: #222;
     }
 
-    .header-top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px
+    header {
+      background: #00843d;
+      color: white;
+      padding: 14px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     }
 
-    .logo{
-      font-size:21px;
-      font-weight:bold;
-      white-space:nowrap
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
     }
 
-    .account-button{
-      width:42px;
-      height:42px;
-      border-radius:50%;
-      border:none;
-      background:white;
-      cursor:pointer;
-      font-size:21px
+    .logo {
+      font-size: 21px;
+      font-weight: bold;
     }
 
-    .search-box{margin-top:12px}
-
-    .search-box input{
-      width:100%;
-      padding:13px 15px;
-      border-radius:25px;
-      border:none;
-      outline:none;
-      font-size:15px
+    .account-button {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: none;
+      background: white;
+      font-size: 21px;
+      cursor: pointer;
     }
 
-    .categories{
-      display:flex;
-      gap:8px;
-      overflow-x:auto;
-      padding:12px 0 2px
+    .search-box {
+      margin-top: 12px;
     }
 
-    .categories button{
-      flex:0 0 auto;
-      border:none;
-      background:white;
-      color:#00843d;
-      padding:9px 14px;
-      border-radius:20px;
-      cursor:pointer;
-      font-weight:bold
+    .search-box input {
+      width: 100%;
+      padding: 13px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      font-size: 15px;
     }
 
-    .categories button.active{
-      background:#ffcc00;
-      color:#111
+    .categories {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 12px 0 2px;
     }
 
-    main{
-      max-width:1000px;
-      margin:auto;
-      padding:18px
+    .category-btn {
+      flex-shrink: 0;
+      border: none;
+      background: white;
+      color: #00843d;
+      padding: 9px 13px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
     }
 
-    .welcome{
-      background:white;
-      border-radius:15px;
-      padding:22px;
-      text-align:center;
-      box-shadow:0 2px 8px rgba(0,0,0,.08)
+    .category-btn.active {
+      background: #ffd100;
+      color: #222;
     }
 
-    .welcome h1{
-      color:#00843d;
-      margin-top:0
+    main {
+      padding: 18px 14px 40px;
+      max-width: 900px;
+      margin: auto;
     }
 
-    .welcome p{
-      color:#555;
-      line-height:1.5
+    .welcome {
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      margin-bottom: 20px;
     }
 
-    .buttons{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      justify-content:center;
-      margin-top:18px
+    .welcome h1 {
+      color: #00843d;
+      margin-bottom: 8px;
+      font-size: 25px;
     }
 
-    .main-button{
-      border:none;
-      padding:13px 18px;
-      border-radius:10px;
-      cursor:pointer;
-      font-weight:bold;
-      background:#00843d;
-      color:white
+    .welcome p {
+      color: #555;
+      margin-bottom: 15px;
+      line-height: 1.5;
     }
 
-    .main-button.secondary{
-      background:#ffcc00;
-      color:#111
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
     }
 
-    .section-title{
-      margin-top:28px;
-      color:#00843d
+    .main-btn {
+      padding: 13px 8px;
+      border: none;
+      border-radius: 10px;
+      background: #00843d;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
     }
 
-    #listeAnnonces{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-      gap:15px
+    .main-btn.secondary {
+      background: #ffd100;
+      color: #222;
     }
 
-    .annonce-card{
-      background:white;
-      border-radius:14px;
-      overflow:hidden;
-      box-shadow:0 2px 8px rgba(0,0,0,.09)
+    .section-title {
+      margin: 22px 0 12px;
+      color: #00843d;
+      font-size: 21px;
     }
 
-    .annonce-image{
-      width:100%;
-      height:200px;
-      background:#eee;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      overflow:hidden
+    #listeAnnonces {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
     }
 
-    .annonce-image img{
-      width:100%;
-      height:100%;
-      object-fit:cover
+    .annonce-card {
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
 
-    .annonce-image .placeholder{
-      font-size:55px
+    .annonce-image {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      background: #e8eeeb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
     }
 
-    .annonce-content{
-      padding:14px
+    .annonce-content {
+      padding: 12px;
     }
 
-    .annonce-title{
-      font-size:18px;
-      font-weight:bold;
-      margin-bottom:8px
+    .annonce-title {
+      font-weight: bold;
+      margin-bottom: 6px;
+      font-size: 16px;
     }
 
-    .annonce-price{
-      color:#00843d;
-      font-size:18px;
-      font-weight:bold;
-      margin-bottom:8px
+    .annonce-price {
+      color: #00843d;
+      font-weight: bold;
+      margin-bottom: 6px;
     }
 
-    .annonce-info{
-      font-size:13px;
-      color:#666;
-      margin:4px 0
+    .annonce-location {
+      color: #666;
+      font-size: 13px;
+      margin-bottom: 5px;
     }
 
-    .empty{
-      background:white;
-      padding:20px;
-      border-radius:12px;
-      text-align:center;
-      color:#666
+    .annonce-condition {
+      display: inline-block;
+      background: #edf7f1;
+      color: #00843d;
+      padding: 5px 8px;
+      border-radius: 8px;
+      font-size: 12px;
     }
 
-    .modal{
-      display:none;
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.55);
-      z-index:2000;
-      overflow-y:auto;
-      padding:20px
+    .no-annonces {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      text-align: center;
+      color: #666;
+      grid-column: 1 / -1;
     }
 
-    .modal-content{
-      background:white;
-      width:100%;
-      max-width:500px;
-      margin:30px auto;
-      padding:22px;
-      border-radius:15px;
-      position:relative
+    .loading {
+      text-align: center;
+      padding: 25px;
+      color: #00843d;
+      grid-column: 1 / -1;
     }
 
-    .close{
-      position:absolute;
-      top:10px;
-      right:15px;
-      border:none;
-      background:none;
-      font-size:28px;
-      cursor:pointer;
-      color:#555
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 200;
+      padding: 20px;
+      overflow-y: auto;
     }
 
-    .modal h2{
-      color:#00843d;
-      margin-top:5px
+    .modal-content {
+      background: white;
+      max-width: 500px;
+      margin: 40px auto;
+      border-radius: 15px;
+      padding: 20px;
+      position: relative;
     }
 
-    .form-group{
-      margin-bottom:14px
+    .close {
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      border: none;
+      background: none;
+      font-size: 28px;
+      cursor: pointer;
     }
 
-    .form-group label{
-      display:block;
-      margin-bottom:6px;
-      font-weight:bold
+    .modal h2 {
+      color: #00843d;
+      margin-bottom: 18px;
+    }
+
+    .form-group {
+      margin-bottom: 13px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
     }
 
     .form-group input,
     .form-group textarea,
-    .form-group select{
-      width:100%;
-      padding:12px;
-      border:1px solid #ccc;
-      border-radius:8px;
-      font-size:15px;
-      outline:none
+    .form-group select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 9px;
+      outline: none;
+      font-size: 15px;
     }
 
-    .form-group textarea{
-      min-height:100px;
-      resize:vertical
+    .form-group textarea {
+      min-height: 90px;
+      resize: vertical;
     }
 
-    .form-button{
-      width:100%;
-      padding:13px;
-      border:none;
-      border-radius:9px;
-      background:#00843d;
-      color:white;
-      font-weight:bold;
-      cursor:pointer;
-      margin-top:5px
+    .modal-btn {
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 9px;
+      background: #00843d;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 5px;
     }
 
-    .form-button.yellow{
-      background:#ffcc00;
-      color:#111
+    .modal-btn.yellow {
+      background: #ffd100;
+      color: #222;
     }
 
-    .small-link{
-      display:block;
-      text-align:center;
-      margin-top:12px;
-      color:#00843d;
-      cursor:pointer;
-      font-weight:bold
+    .message {
+      margin-top: 12px;
+      padding: 10px;
+      border-radius: 8px;
+      display: none;
+      line-height: 1.4;
     }
 
-    .message{
-      padding:11px;
-      border-radius:8px;
-      margin-top:12px;
-      display:none;
-      font-size:14px
+    .success {
+      display: block;
+      background: #e7f7ed;
+      color: #08752f;
     }
 
-    .message.green{
-      background:#dff5e8;
-      color:#126b39
+    .error {
+      display: block;
+      background: #fdeaea;
+      color: #b00020;
     }
 
-    .message.red{
-      background:#ffe0e0;
-      color:#a00000
+    .photo-preview {
+      width: 100%;
+      max-height: 220px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-top: 10px;
+      display: none;
     }
 
-    #photoPreview{
-      display:none;
-      width:100%;
-      max-height:250px;
-      object-fit:contain;
-      margin-top:10px;
-      border-radius:10px;
-      background:#eee
+    .small-text {
+      color: #777;
+      font-size: 12px;
+      margin-top: 5px;
+      line-height: 1.4;
     }
 
-    footer{
-      margin-top:40px;
-      padding:25px;
-      background:#00843d;
-      color:white;
-      text-align:center
-    }
+    @media (max-width: 600px) {
+      #listeAnnonces {
+        grid-template-columns: repeat(2, 1fr);
+      }
 
-    @media(max-width:600px){
-      main{padding:12px}
-      .logo{font-size:18px}
-      .welcome{padding:18px}
+      .annonce-image {
+        height: 140px;
+      }
+
+      .buttons {
+        grid-template-columns: 1fr 1fr;
+      }
     }
   </style>
 </head>
@@ -333,7 +343,6 @@
 <body>
 
 <header>
-
   <div class="header-top">
     <div class="logo">🇬🇳 Marché Guinée</div>
 
@@ -344,451 +353,342 @@
 
   <div class="search-box">
     <input
-      type="search"
+      type="text"
       id="searchInput"
-      placeholder="Rechercher un produit..."
+      placeholder="🔎 Rechercher un produit..."
       oninput="filtrerAnnonces()"
     >
   </div>
 
   <div class="categories">
-
-    <button class="active" onclick="choisirCategorie('Tous',this)">
+    <button class="category-btn active" onclick="choisirCategorie('Tous', this)">
       Tous
     </button>
 
-    <button onclick="choisirCategorie('Téléphones',this)">
+    <button class="category-btn" onclick="choisirCategorie('Téléphones', this)">
       Téléphones
     </button>
 
-    <button onclick="choisirCategorie('Vêtements',this)">
+    <button class="category-btn" onclick="choisirCategorie('Vêtements', this)">
       Vêtements
     </button>
 
-    <button onclick="choisirCategorie('Maison',this)">
+    <button class="category-btn" onclick="choisirCategorie('Maison', this)">
       Maison
     </button>
 
-    <button onclick="choisirCategorie('Électronique',this)">
+    <button class="category-btn" onclick="choisirCategorie('Électronique', this)">
       Électronique
     </button>
 
-    <button onclick="choisirCategorie('Véhicules',this)">
+    <button class="category-btn" onclick="choisirCategorie('Véhicules', this)">
       Véhicules
     </button>
 
-    <button onclick="choisirCategorie('Autres',this)">
+    <button class="category-btn" onclick="choisirCategorie('Autres', this)">
       Autres
     </button>
-
   </div>
-
 </header>
 
 
 <main>
 
   <section class="welcome">
-
     <h1>Bienvenue sur Marché Guinée 🇬🇳</h1>
 
     <p>
       Achetez et vendez facilement vos produits en Guinée.
-      L'inscription est gratuite et les échanges entre clients sont gratuits.
+      L'inscription est gratuite et les échanges entre utilisateurs sont gratuits.
     </p>
 
     <div class="buttons">
-
-      <button class="main-button" onclick="ouvrirPublication()">
-        📦 Vendre un produit
+      <button class="main-btn" onclick="ouvrirPublication()">
+        ➕ Vendre un produit
       </button>
 
-      <button class="main-button secondary" onclick="ouvrirCompte()">
+      <button class="main-btn secondary" onclick="ouvrirCompte()">
         👤 Mon compte
       </button>
 
-      <button class="main-button" onclick="ouvrirMessages()">
+      <button class="main-btn" onclick="ouvrirMessages()">
         💬 Messages
       </button>
 
-      <button class="main-button secondary" onclick="ouvrirPaiement()">
+      <button class="main-btn secondary" onclick="ouvrirPaiement()">
         💳 Paiement
       </button>
-
     </div>
-
   </section>
 
 
-  <h2 class="section-title">
-    Dernières annonces 📦
-  </h2>
+  <h2 class="section-title">Dernières annonces 📦</h2>
 
-  <div id="listeAnnonces">
-    <div class="empty">
+  <section id="listeAnnonces">
+    <div class="loading">
       Chargement des annonces...
     </div>
-  </div>
+  </section>
 
 </main>
 
 
-<footer>
-  <strong>Marché Guinée 🇬🇳</strong>
-  <br>
-  Acheter • Vendre • Échanger
-</footer>
-
-
 <!-- COMPTE -->
-
-<div class="modal" id="accountModal">
-
+<div class="modal" id="compteModal">
   <div class="modal-content">
 
-    <button class="close" onclick="fermerModal('accountModal')">
+    <button class="close" onclick="fermerModal('compteModal')">
       ×
     </button>
 
     <h2>👤 Mon compte</h2>
 
-    <div id="accountInfo">
-      Chargement...
-    </div>
-
-    <button class="form-button" onclick="ouvrirInscription()">
+    <button class="modal-btn" onclick="ouvrirInscription()">
       Créer mon compte gratuitement
     </button>
 
-    <button
-      class="form-button yellow"
-      onclick="ouvrirConnexion()"
-      style="margin-top:10px;"
-    >
+    <button class="modal-btn yellow" onclick="ouvrirConnexion()">
       Se connecter
     </button>
 
-  </div>
+    <div id="compteMessage" class="message"></div>
 
+  </div>
 </div>
 
 
 <!-- INSCRIPTION -->
-
-<div class="modal" id="signupModal">
-
+<div class="modal" id="inscriptionModal">
   <div class="modal-content">
 
-    <button class="close" onclick="fermerModal('signupModal')">
+    <button class="close" onclick="fermerModal('inscriptionModal')">
       ×
     </button>
 
     <h2>Créer mon compte</h2>
 
     <div class="form-group">
-
       <label>Nom complet</label>
-
       <input
         type="text"
         id="signupName"
-        placeholder="Ex : Saikou Abdoulaye Diallo"
+        placeholder="Votre nom complet"
       >
-
     </div>
 
     <div class="form-group">
-
       <label>Numéro</label>
-
       <input
         type="tel"
         id="signupPhone"
-        placeholder="Ex : 621234567"
+        placeholder="Exemple : 620000000"
       >
-
+      <div class="small-text">
+        Entrez votre numéro guinéen à 9 chiffres.
+      </div>
     </div>
 
     <div class="form-group">
-
       <label>Mot de passe</label>
-
       <input
         type="password"
         id="signupPassword"
         placeholder="Votre mot de passe"
       >
-
     </div>
 
-    <button class="form-button" onclick="creerCompte()">
+    <button class="modal-btn" onclick="creerCompte()">
       Créer mon compte
     </button>
 
     <div id="signupMessage" class="message"></div>
 
-    <span class="small-link" onclick="ouvrirConnexion()">
-      J'ai déjà un compte
-    </span>
-
   </div>
-
 </div>
 
 
 <!-- CONNEXION -->
-
-<div class="modal" id="loginModal">
-
+<div class="modal" id="connexionModal">
   <div class="modal-content">
 
-    <button class="close" onclick="fermerModal('loginModal')">
+    <button class="close" onclick="fermerModal('connexionModal')">
       ×
     </button>
 
     <h2>Se connecter</h2>
 
     <div class="form-group">
-
       <label>Numéro</label>
-
       <input
         type="tel"
         id="loginPhone"
-        placeholder="Ex : 621234567"
+        placeholder="Votre numéro"
       >
-
     </div>
 
     <div class="form-group">
-
       <label>Mot de passe</label>
-
       <input
         type="password"
         id="loginPassword"
         placeholder="Votre mot de passe"
       >
-
     </div>
 
-    <button class="form-button" onclick="connecterCompte()">
+    <button class="modal-btn" onclick="connecterCompte()">
       Se connecter
     </button>
 
     <div id="loginMessage" class="message"></div>
 
   </div>
-
 </div>
 
 
 <!-- PUBLICATION -->
-
 <div class="modal" id="publicationModal">
-
   <div class="modal-content">
 
-    <button
-      class="close"
-      onclick="fermerModal('publicationModal')"
-    >
+    <button class="close" onclick="fermerModal('publicationModal')">
       ×
     </button>
 
-    <h2>📦 Publier une annonce</h2>
+    <h2>➕ Publier une annonce</h2>
 
     <div class="form-group">
-
       <label>Nom du produit</label>
-
       <input
         type="text"
         id="productName"
-        placeholder="Ex : iPhone XR"
+        placeholder="Exemple : iPhone 13"
       >
-
     </div>
 
     <div class="form-group">
-
       <label>Description</label>
-
       <textarea
         id="productDescription"
         placeholder="Décrivez votre produit..."
       ></textarea>
-
     </div>
 
     <div class="form-group">
-
       <label>Prix en GNF</label>
-
       <input
         type="number"
         id="productPrice"
-        placeholder="Ex : 3500000"
+        placeholder="Exemple : 5000000"
       >
-
     </div>
 
     <div class="form-group">
-
       <label>État du produit</label>
 
       <select id="productCondition">
-
-        <option value="">
-          État du produit
-        </option>
-
-        <option value="Good">
-          Bon état
-        </option>
-
-        <option value="New">
-          Neuf
-        </option>
-
-        <option value="Used">
-          Occasion
-        </option>
-
+        <option value="">État du produit</option>
+        <option value="Good">Bon état</option>
+        <option value="New">Neuf</option>
+        <option value="Used">Occasion</option>
       </select>
-
     </div>
 
     <div class="form-group">
-
       <label>Ville</label>
-
       <input
         type="text"
         id="productCity"
-        placeholder="Ex : Conakry"
+        placeholder="Exemple : Conakry"
       >
-
     </div>
 
     <div class="form-group">
-
       <label>Quartier</label>
-
       <input
         type="text"
         id="productNeighborhood"
-        placeholder="Ex : Ratoma"
+        placeholder="Exemple : Bambeto"
       >
-
     </div>
 
     <div class="form-group">
-
       <label>Photo du produit</label>
 
       <input
         type="file"
         id="productPhoto"
         accept="image/*"
-        onchange="aperçuPhoto(event)"
+        onchange="previsualiserPhoto()"
       >
+
+      <div class="small-text">
+        Ajoutez une photo claire de votre produit.
+      </div>
 
       <img
         id="photoPreview"
-        alt="Aperçu de la photo"
+        class="photo-preview"
+        alt="Aperçu"
       >
-
     </div>
 
-    <button class="form-button" onclick="publierAnnonce()">
+    <button class="modal-btn" onclick="publierAnnonce()">
       Publier l'annonce
     </button>
 
     <div id="publicationMessage" class="message"></div>
 
   </div>
-
 </div>
 
 
 <!-- MESSAGES -->
-
-<div class="modal" id="messageModal">
-
+<div class="modal" id="messagesModal">
   <div class="modal-content">
 
-    <button class="close" onclick="fermerModal('messageModal')">
+    <button class="close" onclick="fermerModal('messagesModal')">
       ×
     </button>
 
     <h2>💬 Messages</h2>
 
-    <div class="form-group">
+    <p>
+      La messagerie entre acheteurs et vendeurs sera disponible ici.
+    </p>
 
-      <label>Message</label>
-
-      <textarea
-        id="messageText"
-        placeholder="Écrivez votre message..."
-      ></textarea>
-
+    <div class="message success">
+      Les échanges entre utilisateurs seront gratuits.
     </div>
 
-    <button class="form-button" onclick="envoyerMessage()">
-      Envoyer
-    </button>
-
-    <div id="messageResult" class="message"></div>
-
   </div>
-
 </div>
 
 
 <!-- PAIEMENT -->
-
-<div class="modal" id="paymentModal">
-
+<div class="modal" id="paiementModal">
   <div class="modal-content">
 
-    <button class="close" onclick="fermerModal('paymentModal')">
+    <button class="close" onclick="fermerModal('paiementModal')">
       ×
     </button>
 
     <h2>💳 Paiement</h2>
 
-    <div class="form-group">
+    <p>
+      Marché Guinée prélèvera une commission de
+      <strong>3 %</strong> sur les ventes.
+    </p>
 
-      <label>Montant en GNF</label>
+    <br>
 
-      <input
-        type="number"
-        id="paymentAmount"
-        placeholder="Ex : 500000"
-        oninput="calculerCommission()"
-      >
-
-    </div>
-
-    <div
-      id="paymentInfo"
-      style="margin:15px 0;color:#555;"
-    >
-      La commission de démonstration est de 3%.
-    </div>
-
-    <button class="form-button" onclick="effectuerPaiement()">
-      Continuer
-    </button>
-
-    <div id="paymentResult" class="message"></div>
+    <p>
+      Le système de paiement sera connecté dans une prochaine étape.
+    </p>
 
   </div>
-
 </div>
 
 
+<!-- SUPABASE -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -806,436 +706,304 @@ const supabaseClient =
   );
 
 
+/* =========================
+   VARIABLES
+========================= */
+
 let toutesLesAnnonces = [];
+
 let categorieSelectionnee = "Tous";
 
 
-function nettoyerTelephone(phone){
+/* =========================
+   OUTILS
+========================= */
+
+function nettoyerTelephone(phone) {
 
   return String(phone || "")
-    .replace(/\D/g,"")
-    .replace(/^224/,"");
+    .replace(/\D/g, "")
+    .replace(/^224/, "");
 
 }
 
 
-function emailTechniqueDepuisTelephone(phone){
+function emailTechniqueDepuisTelephone(phone) {
 
-  const numero =
-    nettoyerTelephone(phone);
+  const numero = nettoyerTelephone(phone);
 
-  return numero +
-    "@marche-guinee.netlify.app";
+  return numero + "@marche-guinee.netlify.app";
 
 }
 
 
-function validerTelephone(phone){
+function formaterPrix(prix) {
 
-  const p =
-    nettoyerTelephone(phone);
+  if (prix === null || prix === undefined) {
+    return "";
+  }
 
-  return /^6\d{8}$/.test(p);
+  return Number(prix).toLocaleString("fr-FR") + " GNF";
 
 }
 
 
-function afficherMessage(
-  elementId,
-  texte,
-  type
-){
+function echapperHTML(texte) {
 
-  const element =
-    document.getElementById(elementId);
+  if (texte === null || texte === undefined) {
+    return "";
+  }
 
-  if(!element)return;
+  return String(texte)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+
+
+function afficherMessage(id, texte, type) {
+
+  const element = document.getElementById(id);
+
+  if (!element) return;
 
   element.textContent = texte;
-  element.className =
-    "message " + type;
-  element.style.display = "block";
+
+  element.className = "message " + type;
 
 }
 
 
-function formaterPrix(prix){
+/* =========================
+   MODALES
+========================= */
 
-  return new Intl.NumberFormat(
-    "fr-FR"
-  ).format(Number(prix || 0)) +
-  " GNF";
+function fermerModal(id) {
 
-}
-
-
-function echapperHTML(texte){
-
-  return String(texte ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+  document.getElementById(id).style.display = "none";
 
 }
 
 
-/* MODALS */
+function ouvrirCompte() {
 
-function fermerModal(id){
+  document.getElementById("compteModal").style.display = "block";
 
-  const modal =
-    document.getElementById(id);
+}
 
-  if(modal){
-    modal.style.display = "none";
+
+function ouvrirInscription() {
+
+  fermerModal("compteModal");
+
+  document.getElementById("inscriptionModal").style.display = "block";
+
+}
+
+
+function ouvrirConnexion() {
+
+  fermerModal("compteModal");
+
+  document.getElementById("connexionModal").style.display = "block";
+
+}
+
+
+function ouvrirPublication() {
+
+  document.getElementById("publicationModal").style.display = "block";
+
+}
+
+
+function ouvrirMessages() {
+
+  document.getElementById("messagesModal").style.display = "block";
+
+}
+
+
+function ouvrirPaiement() {
+
+  document.getElementById("paiementModal").style.display = "block";
+
+}
+
+
+window.onclick = function(event) {
+
+  if (event.target.classList.contains("modal")) {
+    event.target.style.display = "none";
   }
 
-}
+};
 
 
-function ouvrirCompte(){
+/* =========================
+   INSCRIPTION
+========================= */
 
-  document.getElementById(
-    "accountModal"
-  ).style.display = "block";
-
-  chargerCompte();
-
-}
-
-
-function ouvrirInscription(){
-
-  fermerModal("accountModal");
-
-  document.getElementById(
-    "signupModal"
-  ).style.display = "block";
-
-}
-
-
-function ouvrirConnexion(){
-
-  fermerModal("accountModal");
-
-  document.getElementById(
-    "loginModal"
-  ).style.display = "block";
-
-}
-
-
-function ouvrirPublication(){
-
-  document.getElementById(
-    "publicationModal"
-  ).style.display = "block";
-
-}
-
-
-function ouvrirMessages(){
-
-  document.getElementById(
-    "messageModal"
-  ).style.display = "block";
-
-}
-
-
-function ouvrirPaiement(){
-
-  document.getElementById(
-    "paymentModal"
-  ).style.display = "block";
-
-}
-
-
-window.addEventListener(
-  "click",
-  function(event){
-
-    const modals =
-      document.querySelectorAll(".modal");
-
-    modals.forEach(
-      function(modal){
-
-        if(event.target === modal){
-          modal.style.display = "none";
-        }
-
-      }
-    );
-
-  }
-);
-
-
-/* COMPTE */
-
-async function chargerCompte(){
-
-  const zone =
-    document.getElementById(
-      "accountInfo"
-    );
-
-  if(!zone)return;
-
-  zone.innerHTML = "Chargement...";
-
-  try{
-
-    const {
-      data:sessionData
-    } =
-      await supabaseClient.auth.getSession();
-
-    const user =
-      sessionData?.session?.user;
-
-    if(!user){
-
-      zone.innerHTML =
-        "<p>Vous n'êtes pas encore connecté.</p>";
-
-      return;
-
-    }
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .from("Users")
-        .select('"Full name", Phone')
-        .eq("id",user.id)
-        .maybeSingle();
-
-    if(error){
-
-      zone.innerHTML =
-        "<p>Compte connecté.</p>";
-
-      return;
-
-    }
-
-    if(data){
-
-      zone.innerHTML = `
-        <p>
-          <strong>Nom :</strong>
-          ${echapperHTML(data["Full name"] || "")}
-        </p>
-
-        <p>
-          <strong>Numéro :</strong>
-          ${echapperHTML(data.Phone || "")}
-        </p>
-
-        <p style="color:#00843d;font-weight:bold;">
-          ✅ Compte connecté
-        </p>
-      `;
-
-    }else{
-
-      zone.innerHTML =
-        "<p>Compte connecté.</p>";
-
-    }
-
-  }catch(error){
-
-    zone.innerHTML =
-      "<p>Impossible de charger le compte.</p>";
-
-  }
-
-}
-
-
-/* INSCRIPTION */
-
-async function creerCompte(){
+async function creerCompte() {
 
   const nom =
-    document.getElementById(
-      "signupName"
-    ).value.trim();
+    document.getElementById("signupName").value.trim();
 
   const phone =
     nettoyerTelephone(
-      document.getElementById(
-        "signupPhone"
-      ).value
+      document.getElementById("signupPhone").value
     );
 
   const password =
-    document.getElementById(
-      "signupPassword"
-    ).value;
+    document.getElementById("signupPassword").value;
 
-
-  if(!nom){
+  if (!nom || !phone || !password) {
 
     afficherMessage(
       "signupMessage",
-      "Veuillez entrer votre nom complet.",
-      "red"
+      "Veuillez remplir tous les champs.",
+      "error"
     );
 
     return;
-
   }
 
-
-  if(!validerTelephone(phone)){
+  if (!/^6\d{8}$/.test(phone)) {
 
     afficherMessage(
       "signupMessage",
-      "Numéro guinéen invalide. Exemple : 621234567",
-      "red"
+      "Le numéro doit être un numéro guinéen à 9 chiffres commençant par 6.",
+      "error"
     );
 
     return;
-
   }
 
-
-  if(password.length < 6){
+  if (password.length < 6) {
 
     afficherMessage(
       "signupMessage",
       "Le mot de passe doit contenir au moins 6 caractères.",
-      "red"
+      "error"
     );
 
     return;
-
   }
 
 
-  try{
+  const email =
+    emailTechniqueDepuisTelephone(phone);
 
-    const {
-      data:existingUser
-    } =
+
+  try {
+
+    const { data: existingUser, error: searchError } =
       await supabaseClient
         .from("Users")
         .select("id")
-        .eq("Phone",phone)
+        .eq("Phone", phone)
         .maybeSingle();
 
 
-    if(existingUser){
+    if (searchError) {
 
-      afficherMessage(
-        "signupMessage",
-        "Ce numéro possède déjà un compte.",
-        "red"
-      );
-
-      return;
+      console.log("Recherche utilisateur :", searchError);
 
     }
 
 
-    const email =
-      emailTechniqueDepuisTelephone(phone);
+    if (existingUser) {
+
+      afficherMessage(
+        "signupMessage",
+        "Ce numéro est déjà utilisé. Connectez-vous.",
+        "error"
+      );
+
+      return;
+    }
 
 
-    const {
-      data,
-      error
-    } =
+    const { data, error } =
       await supabaseClient.auth.signUp({
-
-        email:email,
-
-        password:password,
-
-        options:{
-          data:{
-            full_name:nom,
-            phone:phone
+        email: email,
+        password: password,
+        options: {
+          data: {
+            full_name: nom,
+            phone: phone
           }
         }
-
       });
 
 
-    if(error){
+    if (error) {
 
       afficherMessage(
         "signupMessage",
         error.message,
-        "red"
+        "error"
       );
 
       return;
-
     }
 
 
-    if(!data.user){
+    if (!data.user) {
 
       afficherMessage(
         "signupMessage",
         "Le compte n'a pas pu être créé.",
-        "red"
+        "error"
       );
 
       return;
+    }
+
+
+    const { error: userTableError } =
+      await supabaseClient
+        .from("Users")
+        .upsert({
+          id: data.user.id,
+          "Full name": nom,
+          Phone: phone
+        });
+
+
+    if (userTableError) {
+
+      console.log(
+        "Erreur table Users :",
+        userTableError
+      );
 
     }
 
 
-    await supabaseClient
-      .from("Users")
-      .upsert({
-
-        id:data.user.id,
-
-        "Full name":nom,
-
-        Phone:phone
-
-      });
-
-
     afficherMessage(
       "signupMessage",
-      "Compte créé avec succès ! 🎉",
-      "green"
+      "Compte créé avec succès !",
+      "success"
     );
 
 
-    setTimeout(
-      function(){
+    setTimeout(() => {
 
-        fermerModal("signupModal");
-        ouvrirCompte();
+      fermerModal("inscriptionModal");
 
-      },
-      1200
-    );
+    }, 1200);
 
 
-  }catch(error){
+  } catch (error) {
 
     afficherMessage(
       "signupMessage",
-      "Une erreur est survenue : " +
-      error.message,
-      "red"
+      "Une erreur est survenue : " + error.message,
+      "error"
     );
 
   }
@@ -1243,105 +1011,78 @@ async function creerCompte(){
 }
 
 
-/* CONNEXION */
+/* =========================
+   CONNEXION
+========================= */
 
-async function connecterCompte(){
+async function connecterCompte() {
 
   const phone =
     nettoyerTelephone(
-      document.getElementById(
-        "loginPhone"
-      ).value
+      document.getElementById("loginPhone").value
     );
 
   const password =
-    document.getElementById(
-      "loginPassword"
-    ).value;
+    document.getElementById("loginPassword").value;
 
 
-  if(!validerTelephone(phone)){
+  if (!phone || !password) {
 
     afficherMessage(
       "loginMessage",
-      "Numéro guinéen invalide.",
-      "red"
+      "Veuillez remplir tous les champs.",
+      "error"
     );
 
     return;
-
   }
 
 
-  if(!password){
-
-    afficherMessage(
-      "loginMessage",
-      "Veuillez entrer votre mot de passe.",
-      "red"
-    );
-
-    return;
-
-  }
+  const email =
+    emailTechniqueDepuisTelephone(phone);
 
 
-  try{
+  try {
 
-    const email =
-      emailTechniqueDepuisTelephone(phone);
-
-
-    const {
-      error
-    } =
+    const { data, error } =
       await supabaseClient.auth.signInWithPassword({
-
-        email:email,
-
-        password:password
-
+        email: email,
+        password: password
       });
 
 
-    if(error){
+    if (error) {
 
       afficherMessage(
         "loginMessage",
-        "Connexion impossible : " +
-        error.message,
-        "red"
+        "Numéro ou mot de passe incorrect.",
+        "error"
       );
 
       return;
-
     }
 
 
     afficherMessage(
       "loginMessage",
-      "Connexion réussie ! ✅",
-      "green"
+      "Connexion réussie !",
+      "success"
     );
 
 
-    setTimeout(
-      function(){
+    setTimeout(() => {
 
-        fermerModal("loginModal");
-        ouvrirCompte();
+      fermerModal("connexionModal");
 
-      },
-      1000
-    );
+    }, 1000);
 
 
-  }catch(error){
+  } catch (error) {
 
     afficherMessage(
       "loginMessage",
-      "Une erreur est survenue.",
-      "red"
+      error.message,
+      "error"
     );
 
   }
@@ -1349,25 +1090,24 @@ async function connecterCompte(){
 }
 
 
-/* APERCU PHOTO */
+/* =========================
+   PREVISUALISATION PHOTO
+========================= */
 
-function aperçuPhoto(event){
+function previsualiserPhoto() {
 
   const fichier =
-    event.target.files[0];
+    document.getElementById("productPhoto").files[0];
 
   const preview =
-    document.getElementById(
-      "photoPreview"
-    );
+    document.getElementById("photoPreview");
 
 
-  if(!fichier){
+  if (!fichier) {
 
     preview.style.display = "none";
 
     return;
-
   }
 
 
@@ -1375,16 +1115,13 @@ function aperçuPhoto(event){
     new FileReader();
 
 
-  lecteur.onload =
-    function(e){
+  lecteur.onload = function(event) {
 
-      preview.src =
-        e.target.result;
+    preview.src = event.target.result;
 
-      preview.style.display =
-        "block";
+    preview.style.display = "block";
 
-    };
+  };
 
 
   lecteur.readAsDataURL(fichier);
@@ -1392,15 +1129,65 @@ function aperçuPhoto(event){
 }
 
 
-/* UPLOAD PHOTO */
+/* =========================
+   TROUVER CATEGORIE
+========================= */
 
-async function envoyerPhotoVersStorage(
-  fichier,
-  listingId
-){
+async function trouverCategorie() {
 
-  if(!fichier){
-    return null;
+  const tablesPossibles = [
+    "Catégorie",
+    "categories",
+    "categorie",
+    "category"
+  ];
+
+
+  for (const table of tablesPossibles) {
+
+    try {
+
+      const { data, error } =
+        await supabaseClient
+          .from(table)
+          .select("*")
+          .limit(1);
+
+
+      if (!error && data && data.length > 0) {
+
+        return data[0].id;
+
+      }
+
+    } catch (e) {
+
+      console.log(e);
+
+    }
+
+  }
+
+
+  return null;
+
+}
+
+
+/* =========================
+   ENVOYER PHOTO
+   BUCKET PRIVE
+========================= */
+
+async function envoyerPhotoVersStorage(fichier, listingId) {
+
+  if (!fichier) {
+
+    return {
+      success: true,
+      imageUrl: null
+    };
+
   }
 
 
@@ -1410,7 +1197,7 @@ async function envoyerPhotoVersStorage(
       : "jpg";
 
 
-  const nomFichier =
+  const chemin =
     listingId +
     "-" +
     Date.now() +
@@ -1418,406 +1205,335 @@ async function envoyerPhotoVersStorage(
     extension;
 
 
-  const chemin =
-    nomFichier;
+  /* IMPORTANT :
+     Le vrai ID du bucket est Listing-image
+  */
 
-
-  const {
-    error:uploadError
-  } =
+  const { error: uploadError } =
     await supabaseClient
       .storage
-      .from("Listing image")
+      .from("Listing-image")
       .upload(
         chemin,
         fichier,
         {
-          cacheControl:"3600",
-          upsert:false,
-          contentType:fichier.type
+          cacheControl: "3600",
+          upsert: false,
+          contentType: fichier.type
         }
       );
 
 
-  if(uploadError){
+  if (uploadError) {
 
-    throw uploadError;
-
-  }
-
-
-  const {
-    data:publicData
-  } =
-    supabaseClient
-      .storage
-      .from("Listing image")
-      .getPublicUrl(chemin);
-
-
-  const imageUrl =
-    publicData?.publicUrl;
-
-
-  if(!imageUrl){
-
-    throw new Error(
-      "Impossible de récupérer l'adresse de la photo."
+    console.error(
+      "Erreur upload Storage :",
+      uploadError
     );
+
+    return {
+      success: false,
+      error: uploadError.message
+    };
 
   }
 
 
   /*
-    On essaie d'enregistrer la relation
-    entre l'annonce et la photo.
+    Le bucket est privé.
+    On crée donc une URL signée valable 1 heure.
   */
 
-  let imageSaved = false;
+  const { data: signedData, error: signedError } =
+    await supabaseClient
+      .storage
+      .from("Listing-image")
+      .createSignedUrl(
+        chemin,
+        3600
+      );
 
 
-  try{
+  if (signedError) {
 
-    const {
-      error
-    } =
+    console.error(
+      "Erreur URL signée :",
+      signedError
+    );
+
+    return {
+      success: false,
+      error: signedError.message
+    };
+
+  }
+
+
+  const imageUrl =
+    signedData.signedUrl;
+
+
+  /*
+    On essaie d'enregistrer le chemin
+    dans la table des images.
+  */
+
+  let relationEnregistree = false;
+
+
+  try {
+
+    const { error } =
       await supabaseClient
         .from("Listing images")
         .insert({
-
-          listing_id:listingId,
-
-          image_url:imageUrl
-
+          listing_id: listingId,
+          image_url: imageUrl
         });
 
 
-    if(!error){
+    if (!error) {
 
-      imageSaved = true;
+      relationEnregistree = true;
+
+    } else {
+
+      console.log(
+        "Table Listing images :",
+        error.message
+      );
 
     }
 
-  }catch(e){
+  } catch (e) {
 
-    console.log(
-      "Table Listing images non utilisée :",
-      e
+    console.log(e);
+
+  }
+
+
+  /*
+    Deuxième possibilité si la table
+    porte un autre nom.
+  */
+
+  if (!relationEnregistree) {
+
+    try {
+
+      const { error } =
+        await supabaseClient
+          .from("listing_images")
+          .insert({
+            listing_id: listingId,
+            image_url: imageUrl
+          });
+
+
+      if (!error) {
+
+        relationEnregistree = true;
+
+      }
+
+    } catch (e) {
+
+      console.log(e);
+
+    }
+
+  }
+
+
+  /*
+    Même si la relation échoue,
+    le fichier est bien dans Storage.
+  */
+
+  if (!relationEnregistree) {
+
+    console.warn(
+      "Photo uploadée mais relation non enregistrée."
     );
 
   }
 
 
-  if(!imageSaved){
-
-    try{
-
-      const {
-        error
-      } =
-        await supabaseClient
-          .from("listing_images")
-          .insert({
-
-            listing_id:listingId,
-
-            image_url:imageUrl
-
-          });
-
-
-      if(!error){
-
-        imageSaved = true;
-
-      }
-
-    }catch(e){
-
-      console.log(
-        "Deuxième tentative image :",
-        e
-      );
-
-    }
-
-  }
-
-
-  return imageUrl;
+  return {
+    success: true,
+    imageUrl: imageUrl,
+    path: chemin,
+    relationEnregistree: relationEnregistree
+  };
 
 }
 
 
-/* PUBLICATION */
+/* =========================
+   PUBLIER ANNONCE
+========================= */
 
-async function publierAnnonce(){
+async function publierAnnonce() {
 
   const nom =
-    document.getElementById(
-      "productName"
-    ).value.trim();
+    document.getElementById("productName").value.trim();
 
   const description =
-    document.getElementById(
-      "productDescription"
-    ).value.trim();
+    document.getElementById("productDescription").value.trim();
 
   const prix =
-    document.getElementById(
-      "productPrice"
-    ).value;
+    document.getElementById("productPrice").value.trim();
 
   const etat =
-    document.getElementById(
-      "productCondition"
-    ).value;
+    document.getElementById("productCondition").value;
 
   const ville =
-    document.getElementById(
-      "productCity"
-    ).value.trim();
+    document.getElementById("productCity").value.trim();
 
   const quartier =
-    document.getElementById(
-      "productNeighborhood"
-    ).value.trim();
+    document.getElementById("productNeighborhood").value.trim();
 
   const fichier =
-    document.getElementById(
-      "productPhoto"
-    ).files[0];
+    document.getElementById("productPhoto").files[0];
 
 
-  if(!nom){
+  if (!nom || !prix || !etat || !ville || !quartier) {
 
     afficherMessage(
       "publicationMessage",
-      "Veuillez entrer le nom du produit.",
-      "red"
+      "Veuillez remplir tous les champs obligatoires.",
+      "error"
     );
 
     return;
-
   }
 
 
-  if(!prix || Number(prix)<=0){
+  const prixNombre =
+    Number(prix);
+
+
+  if (!Number.isFinite(prixNombre) || prixNombre <= 0) {
 
     afficherMessage(
       "publicationMessage",
       "Veuillez entrer un prix valide.",
-      "red"
+      "error"
     );
 
     return;
-
   }
 
 
-  if(!etat){
-
-    afficherMessage(
-      "publicationMessage",
-      "Veuillez choisir l'état du produit.",
-      "red"
-    );
-
-    return;
-
-  }
+  afficherMessage(
+    "publicationMessage",
+    "Publication en cours...",
+    "success"
+  );
 
 
-  if(!ville){
-
-    afficherMessage(
-      "publicationMessage",
-      "Veuillez entrer la ville.",
-      "red"
-    );
-
-    return;
-
-  }
-
-
-  try{
+  try {
 
     const {
-      data:sessionData
+      data: { user }
     } =
-      await supabaseClient.auth.getSession();
-
-    const user =
-      sessionData?.session?.user;
+      await supabaseClient.auth.getUser();
 
 
-    if(!user){
+    if (!user) {
 
       afficherMessage(
         "publicationMessage",
-        "Vous devez créer un compte ou vous connecter avant de publier une annonce.",
-        "red"
+        "Vous devez être connecté pour publier une annonce.",
+        "error"
       );
 
       return;
-
     }
 
 
-    const prixNombre =
-      Number(prix);
+    const categoryId =
+      await trouverCategorie();
 
 
-    const tablesCategories = [
-      "Catégorie",
-      "categories",
-      "categorie",
-      "category"
-    ];
-
-
-    let categoryId = null;
-
-
-    for(
-      const table of tablesCategories
-    ){
-
-      try{
-
-        const {
-          data:categoryData,
-          error:categoryError
-        } =
-          await supabaseClient
-            .from(table)
-            .select("id")
-            .limit(1)
-            .maybeSingle();
-
-
-        if(
-          !categoryError &&
-          categoryData?.id
-        ){
-
-          categoryId =
-            categoryData.id;
-
-          break;
-
-        }
-
-      }catch(e){
-
-        console.log(
-          "Catégorie non trouvée :",
-          table
-        );
-
-      }
-
-    }
-
-
-    if(!categoryId){
+    if (!categoryId) {
 
       afficherMessage(
         "publicationMessage",
-        "Aucune catégorie disponible dans Supabase.",
-        "red"
+        "Impossible de trouver la catégorie.",
+        "error"
       );
 
       return;
-
     }
 
 
     /*
-      1. Création de l'annonce
+      Création de l'annonce.
     */
 
-    const {
-      data,
-      error
-    } =
+    const { data: annonce, error } =
       await supabaseClient
         .from("listings")
         .insert({
-
-          seller_id:user.id,
-
-          category_id:categoryId,
-
-          title:nom,
-
-          description:description,
-
-          price_gnf:prixNombre,
-
-          condition:etat,
-
-          city:ville,
-
-          neighborhood:quartier,
-
-          status:"active",
-
-          views:0
-
+          seller_id: user.id,
+          category_id: categoryId,
+          title: nom,
+          description: description,
+          price_gnf: prixNombre,
+          condition: etat,
+          city: ville,
+          neighborhood: quartier,
+          status: "active",
+          views: 0
         })
         .select()
         .single();
 
 
-    if(error){
+    if (error) {
 
-      console.error(error);
+      console.error(
+        "Erreur création annonce :",
+        error
+      );
 
       afficherMessage(
         "publicationMessage",
-        "Impossible de publier l'annonce : " +
-        error.message,
-        "red"
+        "Impossible de publier l'annonce : " + error.message,
+        "error"
       );
 
       return;
-
     }
 
 
     /*
-      2. Envoi de la photo dans Storage
+      Si une photo a été choisie,
+      on l'envoie dans Storage.
     */
 
-    if(fichier){
+    if (fichier) {
 
-      try{
-
+      const resultatPhoto =
         await envoyerPhotoVersStorage(
           fichier,
-          data.id
+          annonce.id
         );
 
-      }catch(photoError){
 
-        console.error(
-          "Erreur photo :",
-          photoError
-        );
+      if (!resultatPhoto.success) {
 
         afficherMessage(
           "publicationMessage",
           "Annonce publiée, mais la photo n'a pas pu être enregistrée : " +
-          photoError.message,
-          "red"
+          resultatPhoto.error,
+          "error"
         );
 
         await chargerAnnonces();
 
         return;
-
       }
 
     }
@@ -1825,56 +1541,48 @@ async function publierAnnonce(){
 
     afficherMessage(
       "publicationMessage",
-      "Annonce publiée avec succès ! 🎉",
-      "green"
+      "Annonce publiée avec succès !",
+      "success"
     );
 
 
-    document.getElementById(
-      "productName"
-    ).value = "";
-
-    document.getElementById(
-      "productDescription"
-    ).value = "";
-
-    document.getElementById(
-      "productPrice"
-    ).value = "";
-
-    document.getElementById(
-      "productCondition"
-    ).value = "";
-
-    document.getElementById(
-      "productCity"
-    ).value = "";
-
-    document.getElementById(
-      "productNeighborhood"
-    ).value = "";
-
-    document.getElementById(
-      "productPhoto"
-    ).value = "";
-
-    document.getElementById(
-      "photoPreview"
-    ).style.display = "none";
-
+    /*
+      Actualisation immédiate
+      de la liste des annonces.
+    */
 
     await chargerAnnonces();
 
 
-  }catch(error){
+    /*
+      Nettoyage du formulaire.
+    */
+
+    document.getElementById("productName").value = "";
+
+    document.getElementById("productDescription").value = "";
+
+    document.getElementById("productPrice").value = "";
+
+    document.getElementById("productCondition").value = "";
+
+    document.getElementById("productCity").value = "";
+
+    document.getElementById("productNeighborhood").value = "";
+
+    document.getElementById("productPhoto").value = "";
+
+    document.getElementById("photoPreview").style.display = "none";
+
+
+  } catch (error) {
 
     console.error(error);
 
     afficherMessage(
       "publicationMessage",
-      "Une erreur est survenue : " +
-      error.message,
-      "red"
+      "Une erreur est survenue : " + error.message,
+      "error"
     );
 
   }
@@ -1882,53 +1590,45 @@ async function publierAnnonce(){
 }
 
 
-/* CHARGEMENT DES ANNONCES */
+/* =========================
+   CHARGER ANNONCES
+========================= */
 
-async function chargerAnnonces(){
+async function chargerAnnonces() {
 
-  const zone =
-    document.getElementById(
-      "listeAnnonces"
-    );
-
-
-  zone.innerHTML =
-    `<div class="empty">
-      Chargement des annonces...
-    </div>`;
+  const conteneur =
+    document.getElementById("listeAnnonces");
 
 
-  try{
+  conteneur.innerHTML =
+    '<div class="loading">Chargement des annonces...</div>';
 
-    const {
-      data,
-      error
-    } =
+
+  try {
+
+    const { data, error } =
       await supabaseClient
         .from("listings")
         .select(
-          "id,title,description,price_gnf,condition,city,neighborhood,status,views,created_at"
+          "id, title, description, price_gnf, condition, city, neighborhood, status, views, created_at"
         )
-        .eq("status","active")
-        .order(
-          "created_at",
-          {
-            ascending:false
-          }
-        );
+        .eq("status", "active")
+        .order("created_at", {
+          ascending: false
+        });
 
 
-    if(error){
+    if (error) {
 
-      console.error(error);
+      console.error(
+        "Erreur annonces :",
+        error
+      );
 
-      zone.innerHTML =
-        `<div class="empty">
-          Impossible de charger les annonces.
-        </div>`;
+      conteneur.innerHTML =
+        '<div class="no-annonces">Impossible de charger les annonces.</div>';
 
       return;
-
     }
 
 
@@ -1937,70 +1637,120 @@ async function chargerAnnonces(){
 
 
     /*
-      Charger les images associées
+      Récupération des photos.
     */
 
-    for(
-      const annonce of toutesLesAnnonces
-    ){
+    for (const annonce of toutesLesAnnonces) {
 
       annonce.image_url = null;
 
 
-      try{
+      let images = null;
 
-        const {
-          data:imageData
-        } =
+
+      try {
+
+        const resultat =
           await supabaseClient
             .from("Listing images")
-            .select("image_url")
-            .eq(
-              "listing_id",
-              annonce.id
-            )
-            .limit(1)
-            .maybeSingle();
+            .select("*")
+            .eq("listing_id", annonce.id)
+            .limit(1);
 
 
-        if(imageData?.image_url){
+        if (!resultat.error) {
 
-          annonce.image_url =
-            imageData.image_url;
+          images = resultat.data;
 
         }
 
-      }catch(e){
+      } catch (e) {
 
-        try{
+        console.log(e);
 
-          const {
-            data:imageData2
-          } =
+      }
+
+
+      if (!images || images.length === 0) {
+
+        try {
+
+          const resultat =
             await supabaseClient
               .from("listing_images")
-              .select("image_url")
-              .eq(
-                "listing_id",
-                annonce.id
-              )
-              .limit(1)
-              .maybeSingle();
+              .select("*")
+              .eq("listing_id", annonce.id)
+              .limit(1);
 
 
-          if(imageData2?.image_url){
+          if (!resultat.error) {
 
-            annonce.image_url =
-              imageData2.image_url;
+            images = resultat.data;
 
           }
 
-        }catch(e2){
+        } catch (e) {
 
-          console.log(
-            "Image non trouvée pour l'annonce",
-            annonce.id
-          );
+          console.log(e);
+
+        }
+
+      }
+
+
+      if (images && images.length > 0) {
+
+        const image =
+          images[0];
+
+
+        /*
+          On utilise d'abord le chemin
+          s'il existe dans la table.
+        */
+
+        const chemin =
+          image.path ||
+          image.storage_path ||
+          image.file_path;
+
+
+        if (chemin) {
+
+          try {
+
+            const { data: signedData } =
+              await supabaseClient
+                .storage
+                .from("Listing-image")
+                .createSignedUrl(
+                  chemin,
+                  3600
+                );
+
+
+            if (signedData) {
+
+              annonce.image_url =
+                signedData.signedUrl;
+
+            }
+
+          } catch (e) {
+
+            console.log(e);
+
+          }
+
+        } else if (image.image_url) {
+
+          /*
+            Si l'ancienne URL est encore valide,
+            on l'utilise.
+          */
+
+          annonce.image_url =
+            image.image_url;
 
         }
 
@@ -2009,45 +1759,111 @@ async function chargerAnnonces(){
     }
 
 
-    afficherAnnonces();
+    afficherAnnonces(
+      toutesLesAnnonces
+    );
 
-
-  }catch(error){
+  } catch (error) {
 
     console.error(error);
 
-    zone.innerHTML =
-      `<div class="empty">
-        Erreur lors du chargement des annonces.
-      </div>`;
+    conteneur.innerHTML =
+      '<div class="no-annonces">Une erreur est survenue.</div>';
 
   }
 
 }
 
 
-/* AFFICHAGE */
+/* =========================
+   AFFICHER ANNONCES
+========================= */
 
-function afficherAnnonces(){
+function afficherAnnonces(annonces) {
 
-  const zone =
-    document.getElementById(
-      "listeAnnonces"
-    );
+  const conteneur =
+    document.getElementById("listeAnnonces");
 
+
+  if (!annonces || annonces.length === 0) {
+
+    conteneur.innerHTML =
+      '<div class="no-annonces">Aucune annonce trouvée.</div>';
+
+    return;
+  }
+
+
+  conteneur.innerHTML =
+    annonces.map(annonce => {
+
+      const imageHTML =
+        annonce.image_url
+          ?
+          `<img
+             class="annonce-image"
+             src="${annonce.image_url}"
+             alt="${echapperHTML(annonce.title)}"
+           >`
+          :
+          `<div class="annonce-image">📦</div>`;
+
+
+      return `
+        <article class="annonce-card">
+
+          ${imageHTML}
+
+          <div class="annonce-content">
+
+            <div class="annonce-title">
+              ${echapperHTML(annonce.title)}
+            </div>
+
+            <div class="annonce-price">
+              ${formaterPrix(annonce.price_gnf)}
+            </div>
+
+            <div class="annonce-location">
+              📍 ${echapperHTML(annonce.city)}
+              ${annonce.neighborhood
+                ? " - " + echapperHTML(annonce.neighborhood)
+                : ""}
+            </div>
+
+            <span class="annonce-condition">
+              ${echapperHTML(annonce.condition)}
+            </span>
+
+          </div>
+
+        </article>
+      `;
+
+    }).join("");
+
+}
+
+
+/* =========================
+   RECHERCHE
+========================= */
+
+function filtrerAnnonces() {
 
   const recherche =
-    document.getElementById(
-      "searchInput"
-    ).value.trim().toLowerCase();
+    document
+      .getElementById("searchInput")
+      .value
+      .trim()
+      .toLowerCase();
 
 
-  const annonces =
-    toutesLesAnnonces.filter(
-      function(annonce){
+  let resultat =
+    toutesLesAnnonces.filter(annonce => {
 
-        const texte = (
-
+      const texte =
+        (
           (annonce.title || "") +
           " " +
           (annonce.description || "") +
@@ -2055,337 +1871,149 @@ function afficherAnnonces(){
           (annonce.city || "") +
           " " +
           (annonce.neighborhood || "")
-
         ).toLowerCase();
 
 
-        const correspondRecherche =
-          !recherche ||
-          texte.includes(recherche);
+      return texte.includes(recherche);
+
+    });
 
 
-        let correspondCategorie =
-          true;
+  /*
+    Filtre catégorie temporaire.
+    La vraie relation avec les catégories
+    sera améliorée ensuite.
+  */
+
+  if (categorieSelectionnee !== "Tous") {
+
+    const motsCategorie = {
+
+      "Téléphones": [
+        "iphone",
+        "samsung",
+        "telephone",
+        "téléphone",
+        "xiaomi",
+        "tecno",
+        "infinix"
+      ],
+
+      "Vêtements": [
+        "pantalon",
+        "chemise",
+        "robe",
+        "chaussure",
+        "vêtement",
+        "vetement",
+        "t-shirt"
+      ],
+
+      "Maison": [
+        "table",
+        "chaise",
+        "lit",
+        "canapé",
+        "canape",
+        "maison",
+        "frigo",
+        "réfrigérateur"
+      ],
+
+      "Électronique": [
+        "ordinateur",
+        "pc",
+        "tv",
+        "télévision",
+        "television",
+        "ordinateur",
+        "casque",
+        "écouteur",
+        "ecouteur"
+      ],
+
+      "Véhicules": [
+        "voiture",
+        "moto",
+        "véhicule",
+        "vehicule",
+        "auto"
+      ],
+
+      "Autres": []
+
+    };
 
 
-        if(
-          categorieSelectionnee !== "Tous"
-        ){
+    if (
+      categorieSelectionnee !== "Autres"
+    ) {
 
-          correspondCategorie =
-            texte.includes(
-              categorieSelectionnee.toLowerCase()
-            );
-
-        }
+      const mots =
+        motsCategorie[categorieSelectionnee] || [];
 
 
-        return(
-          correspondRecherche &&
-          correspondCategorie
-        );
+      resultat =
+        resultat.filter(annonce => {
 
-      }
-    );
+          const texte =
+            (
+              (annonce.title || "") +
+              " " +
+              (annonce.description || "")
+            ).toLowerCase();
 
 
-  if(annonces.length === 0){
+          return mots.some(
+            mot => texte.includes(mot)
+          );
 
-    zone.innerHTML =
-      `<div class="empty">
-        Aucune annonce trouvée.
-      </div>`;
+        });
 
-    return;
+    }
 
   }
 
 
-  zone.innerHTML =
-    annonces.map(
-      function(annonce){
-
-        const imageHTML =
-          annonce.image_url
-            ? `
-              <div class="annonce-image">
-                <img
-                  src="${echapperHTML(annonce.image_url)}"
-                  alt="${echapperHTML(annonce.title)}"
-                  loading="lazy"
-                >
-              </div>
-            `
-            : `
-              <div class="annonce-image">
-                <div class="placeholder">
-                  📦
-                </div>
-              </div>
-            `;
-
-
-        return `
-
-          <div class="annonce-card">
-
-            ${imageHTML}
-
-            <div class="annonce-content">
-
-              <div class="annonce-title">
-                ${echapperHTML(
-                  annonce.title
-                )}
-              </div>
-
-              <div class="annonce-price">
-                ${formaterPrix(
-                  annonce.price_gnf
-                )}
-              </div>
-
-              <div class="annonce-info">
-                📍 ${echapperHTML(
-                  annonce.city || ""
-                )}
-
-                ${
-                  annonce.neighborhood
-                    ? " - " +
-                      echapperHTML(
-                        annonce.neighborhood
-                      )
-                    : ""
-                }
-              </div>
-
-              <div class="annonce-info">
-                État :
-                ${echapperHTML(
-                  annonce.condition || ""
-                )}
-              </div>
-
-              <div class="annonce-info">
-                👁️ ${
-                  Number(
-                    annonce.views || 0
-                  )
-                } vue(s)
-              </div>
-
-              ${
-                annonce.description
-                  ? `
-                    <p style="font-size:14px;color:#555;">
-                      ${echapperHTML(
-                        annonce.description
-                      )}
-                    </p>
-                  `
-                  : ""
-              }
-
-            </div>
-
-          </div>
-
-        `;
-
-      }
-    ).join("");
+  afficherAnnonces(resultat);
 
 }
 
 
-/* RECHERCHE */
+/* =========================
+   CHOISIR CATEGORIE
+========================= */
 
-function filtrerAnnonces(){
-
-  afficherAnnonces();
-
-}
-
-
-/* CATEGORIES */
-
-function choisirCategorie(
-  categorie,
-  bouton
-){
+function choisirCategorie(categorie, bouton) {
 
   categorieSelectionnee =
     categorie;
 
 
   document
-    .querySelectorAll(
-      ".categories button"
-    )
-    .forEach(
-      function(btn){
+    .querySelectorAll(".category-btn")
+    .forEach(btn => {
 
-        btn.classList.remove(
-          "active"
-        );
+      btn.classList.remove("active");
 
-      }
-    );
+    });
 
 
-  if(bouton){
-
-    bouton.classList.add(
-      "active"
-    );
-
-  }
+  bouton.classList.add("active");
 
 
-  afficherAnnonces();
+  filtrerAnnonces();
 
 }
 
 
-/* MESSAGES */
-
-async function envoyerMessage(){
-
-  const message =
-    document.getElementById(
-      "messageText"
-    ).value.trim();
-
-
-  if(!message){
-
-    afficherMessage(
-      "messageResult",
-      "Veuillez écrire un message.",
-      "red"
-    );
-
-    return;
-
-  }
-
-
-  afficherMessage(
-    "messageResult",
-    "Message vérifié et prêt à être envoyé. 💬",
-    "green"
-  );
-
-}
-
-
-/* PAIEMENT */
-
-function calculerCommission(){
-
-  const montant =
-    Number(
-      document.getElementById(
-        "paymentAmount"
-      ).value
-    );
-
-
-  const info =
-    document.getElementById(
-      "paymentInfo"
-    );
-
-
-  if(!montant || montant<=0){
-
-    info.textContent =
-      "La commission de démonstration est de 3%.";
-
-    return;
-
-  }
-
-
-  const commission =
-    Math.round(
-      montant * 0.03
-    );
-
-
-  const total =
-    montant + commission;
-
-
-  info.innerHTML = `
-    Montant :
-    <strong>
-      ${formaterPrix(montant)}
-    </strong>
-    <br>
-
-    Commission Marché Guinée :
-    <strong>
-      ${formaterPrix(commission)}
-    </strong>
-    (3%)
-    <br>
-
-    Total :
-    <strong>
-      ${formaterPrix(total)}
-    </strong>
-  `;
-
-}
-
-
-function effectuerPaiement(){
-
-  const montant =
-    Number(
-      document.getElementById(
-        "paymentAmount"
-      ).value
-    );
-
-
-  if(!montant || montant<=0){
-
-    afficherMessage(
-      "paymentResult",
-      "Veuillez entrer un montant valide.",
-      "red"
-    );
-
-    return;
-
-  }
-
-
-  const commission =
-    Math.round(
-      montant * 0.03
-    );
-
-
-  afficherMessage(
-    "paymentResult",
-    "Paiement préparé. Commission de démonstration : " +
-    formaterPrix(commission) +
-    " (3%).",
-    "green"
-  );
-
-}
-
-
-/* CHARGEMENT INITIAL */
+/* =========================
+   DEMARRAGE
+========================= */
 
 document.addEventListener(
   "DOMContentLoaded",
-  function(){
+  function() {
 
     chargerAnnonces();
 

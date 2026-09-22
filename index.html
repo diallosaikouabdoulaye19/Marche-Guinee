@@ -2,72 +2,59 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Marché Guinée</title>
-
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,sans-serif;background:#f5f5f5;color:#222}
-header{background:#00843d;color:white;padding:12px 15px;position:sticky;top:0;z-index:10}
+header{background:#00843d;color:#fff;padding:12px 15px;position:sticky;top:0;z-index:10}
 .header-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .logo{font-size:21px;font-weight:bold}
-.compte-btn{width:42px;height:42px;border:0;border-radius:50%;background:white;font-size:22px;cursor:pointer}
+.compte-btn{width:42px;height:42px;border:0;border-radius:50%;background:#fff;font-size:22px;cursor:pointer}
 .search-box{margin-top:12px}
 .search-box input{width:100%;padding:12px 15px;border:0;border-radius:10px;font-size:15px;outline:none}
 .categories{display:flex;gap:8px;overflow-x:auto;padding:12px 0 2px}
 .categories button{white-space:nowrap;border:0;background:#ffd100;color:#222;padding:8px 13px;border-radius:20px;font-weight:bold;cursor:pointer}
-.hero{background:white;margin:15px;padding:20px;border-radius:14px;text-align:center}
-.hero h1{margin:0 0 8px;color:#00843d}
-.hero p{margin:0;color:#666}
+.hero{background:#fff;margin:15px;padding:20px;border-radius:14px;text-align:center}
+.hero h1{margin:0 0 8px;color:#00843d}.hero p{margin:0;color:#666}
 .actions{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:15px}
-.action-btn{border:0;padding:12px;border-radius:10px;background:#00843d;color:white;font-weight:bold;cursor:pointer}
+.action-btn{border:0;padding:12px;border-radius:10px;background:#00843d;color:#fff;font-weight:bold;cursor:pointer}
 .action-btn.yellow{background:#ffd100;color:#222}
 .section-title{padding:0 15px;margin-top:20px}
 #listeAnnonces{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:0 15px 30px}
-.annonce-card{background:white;border-radius:13px;overflow:hidden;box-shadow:0 2px 7px rgba(0,0,0,.08);cursor:pointer;transition:.15s}
+.annonce-card{background:#fff;border-radius:13px;overflow:hidden;box-shadow:0 2px 7px rgba(0,0,0,.08);cursor:pointer;transition:.15s}
 .annonce-card:active{transform:scale(.98)}
 .annonce-image{width:100%;height:150px;background:#eee;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .annonce-image img{width:100%;height:100%;object-fit:cover;display:block}
-.no-image{font-size:45px}
-.annonce-content{padding:10px}
+.no-image{font-size:45px}.annonce-content{padding:10px}
 .annonce-title{font-weight:bold;font-size:15px;margin-bottom:6px}
 .annonce-price{color:#00843d;font-weight:bold;font-size:16px}
 .annonce-location,.annonce-condition{color:#666;font-size:12px;margin-top:5px}
-.empty{grid-column:1/-1;text-align:center;padding:30px;color:#777;background:white;border-radius:12px}
-
+.empty{grid-column:1/-1;text-align:center;padding:30px;color:#777;background:#fff;border-radius:12px}
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:100;padding:15px;overflow-y:auto}
-.modal-box{background:white;max-width:500px;margin:30px auto;border-radius:15px;padding:20px;position:relative}
+.modal-box{background:#fff;max-width:500px;margin:30px auto;border-radius:15px;padding:20px;position:relative}
 .close{position:absolute;right:12px;top:10px;border:0;background:#eee;width:35px;height:35px;border-radius:50%;font-size:20px;cursor:pointer}
 .modal h2{margin-top:5px;color:#00843d}
-.form-group{margin-bottom:13px}
-.form-group label{display:block;font-weight:bold;margin-bottom:6px}
+.form-group{margin-bottom:13px}.form-group label{display:block;font-weight:bold;margin-bottom:6px}
 .form-group input,.form-group textarea,.form-group select{width:100%;padding:11px;border:1px solid #ddd;border-radius:9px;font-size:15px}
 .form-group textarea{min-height:100px;resize:vertical}
-.main-btn{width:100%;padding:13px;border:0;border-radius:10px;background:#00843d;color:white;font-size:16px;font-weight:bold;cursor:pointer}
+.main-btn{width:100%;padding:13px;border:0;border-radius:10px;background:#00843d;color:#fff;font-size:16px;font-weight:bold;cursor:pointer}
 .secondary-btn{width:100%;padding:12px;margin-top:9px;border:0;border-radius:10px;background:#ffd100;font-weight:bold;cursor:pointer}
 .preview{margin-top:10px;width:100%;max-height:220px;object-fit:contain;border-radius:10px;display:none;background:#eee}
 .message{padding:10px;border-radius:8px;margin-bottom:12px;background:#f0f0f0;display:none}
-
 .detail-modal-box{max-width:600px;padding:0;overflow:hidden}
 .detail-header{position:relative}
 .detail-close{position:absolute;z-index:3;right:12px;top:12px;width:38px;height:38px;border:0;border-radius:50%;background:rgba(255,255,255,.9);font-size:22px;cursor:pointer}
 .detail-image{width:100%;height:300px;background:#eee;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .detail-image img{width:100%;height:100%;object-fit:cover;display:block}
-.detail-body{padding:20px}
-.detail-title{font-size:23px;font-weight:bold;margin-bottom:8px}
+.detail-body{padding:20px}.detail-title{font-size:23px;font-weight:bold;margin-bottom:8px}
 .detail-price{color:#00843d;font-size:22px;font-weight:bold;margin-bottom:15px}
 .detail-info{background:#f6f6f6;border-radius:10px;padding:12px;margin-bottom:15px}
-.detail-info div{padding:5px 0}
-.detail-description{line-height:1.5;color:#444;white-space:pre-wrap}
+.detail-info div{padding:5px 0}.detail-description{line-height:1.5;color:#444;white-space:pre-wrap}
 .detail-views{color:#777;font-size:13px;margin-top:12px}
-
-@media(max-width:420px){
-.annonce-image{height:135px}
-.detail-image{height:260px}
-}
+@media(max-width:420px){.annonce-image{height:135px}.detail-image{height:260px}}
 </style>
 </head>
-
 <body>
 
 <header>
@@ -75,11 +62,9 @@ header{background:#00843d;color:white;padding:12px 15px;position:sticky;top:0;z-
 <div class="logo">🇬🇳 Marché Guinée</div>
 <button class="compte-btn" onclick="ouvrirCompte()">👤</button>
 </div>
-
 <div class="search-box">
 <input id="searchInput" type="search" placeholder="Rechercher un produit..." oninput="filtrerAnnonces()">
 </div>
-
 <div class="categories">
 <button onclick="choisirCategorie('Tous')">Tous</button>
 <button onclick="choisirCategorie('Téléphones')">Téléphones</button>
@@ -94,7 +79,6 @@ header{background:#00843d;color:white;padding:12px 15px;position:sticky;top:0;z-
 <section class="hero">
 <h1>Bienvenue sur Marché Guinée</h1>
 <p>Achetez et vendez facilement en Guinée.</p>
-
 <div class="actions">
 <button class="action-btn" onclick="ouvrirPublication()">Vendre un produit</button>
 <button class="action-btn yellow" onclick="ouvrirCompte()">Mon compte</button>
@@ -104,101 +88,46 @@ header{background:#00843d;color:white;padding:12px 15px;position:sticky;top:0;z-
 </section>
 
 <h2 class="section-title">Annonces</h2>
-
-<div id="listeAnnonces">
-<div class="empty">Chargement des annonces...</div>
-</div>
+<div id="listeAnnonces"><div class="empty">Chargement des annonces...</div></div>
 
 <!-- COMPTE -->
-<div class="modal" id="compteModal">
-<div class="modal-box">
+<div class="modal" id="compteModal"><div class="modal-box">
 <button class="close" onclick="fermerModal('compteModal')">×</button>
 <h2>Mon compte</h2>
-
-<button class="main-btn" onclick="fermerModal('compteModal');ouvrirInscription()">
-Créer mon compte gratuitement
-</button>
-
-<button class="secondary-btn" onclick="fermerModal('compteModal');ouvrirConnexion()">
-Se connecter
-</button>
-</div>
-</div>
+<button class="main-btn" onclick="fermerModal('compteModal');ouvrirInscription()">Créer mon compte gratuitement</button>
+<button class="secondary-btn" onclick="fermerModal('compteModal');ouvrirConnexion()">Se connecter</button>
+</div></div>
 
 <!-- INSCRIPTION -->
-<div class="modal" id="inscriptionModal">
-<div class="modal-box">
+<div class="modal" id="inscriptionModal"><div class="modal-box">
 <button class="close" onclick="fermerModal('inscriptionModal')">×</button>
 <h2>Créer mon compte gratuitement</h2>
-
 <div id="inscriptionMessage" class="message"></div>
-
-<div class="form-group">
-<label>Nom complet</label>
-<input id="nomComplet" type="text" placeholder="Votre nom complet">
-</div>
-
-<div class="form-group">
-<label>Numéro</label>
-<input id="numeroInscription" type="tel" placeholder="Votre numéro">
-</div>
-
-<div class="form-group">
-<label>Mot de passe</label>
-<input id="motDePasseInscription" type="password" placeholder="Votre mot de passe">
-</div>
-
+<div class="form-group"><label>Nom complet</label><input id="nomComplet" type="text" placeholder="Votre nom complet"></div>
+<div class="form-group"><label>Numéro</label><input id="numeroInscription" type="tel" placeholder="Votre numéro"></div>
+<div class="form-group"><label>Mot de passe</label><input id="motDePasseInscription" type="password" placeholder="Votre mot de passe"></div>
 <button class="main-btn" onclick="creerCompte()">Créer mon compte</button>
-</div>
-</div>
+</div></div>
 
 <!-- CONNEXION -->
-<div class="modal" id="connexionModal">
-<div class="modal-box">
+<div class="modal" id="connexionModal"><div class="modal-box">
 <button class="close" onclick="fermerModal('connexionModal')">×</button>
 <h2>Se connecter</h2>
-
 <div id="connexionMessage" class="message"></div>
-
-<div class="form-group">
-<label>Numéro</label>
-<input id="numeroConnexion" type="tel" placeholder="Votre numéro">
-</div>
-
-<div class="form-group">
-<label>Mot de passe</label>
-<input id="motDePasseConnexion" type="password" placeholder="Votre mot de passe">
-</div>
-
+<div class="form-group"><label>Numéro</label><input id="numeroConnexion" type="tel" placeholder="Votre numéro"></div>
+<div class="form-group"><label>Mot de passe</label><input id="motDePasseConnexion" type="password" placeholder="Votre mot de passe"></div>
 <button class="main-btn" onclick="connecterCompte()">Se connecter</button>
-</div>
-</div>
+</div></div>
 
 <!-- PUBLICATION -->
-<div class="modal" id="publicationModal">
-<div class="modal-box">
+<div class="modal" id="publicationModal"><div class="modal-box">
 <button class="close" onclick="fermerModal('publicationModal')">×</button>
 <h2>Vendre un produit</h2>
-
 <div id="publicationMessage" class="message"></div>
-
-<div class="form-group">
-<label>Titre</label>
-<input id="titreAnnonce" type="text" placeholder="Ex : iPhone 12">
-</div>
-
-<div class="form-group">
-<label>Description</label>
-<textarea id="descriptionAnnonce" placeholder="Décrivez votre produit..."></textarea>
-</div>
-
-<div class="form-group">
-<label>Prix en GNF</label>
-<input id="prixAnnonce" type="number" placeholder="Ex : 5000000">
-</div>
-
-<div class="form-group">
-<label>Catégorie</label>
+<div class="form-group"><label>Titre</label><input id="titreAnnonce" type="text" placeholder="Ex : iPhone 12"></div>
+<div class="form-group"><label>Description</label><textarea id="descriptionAnnonce" placeholder="Décrivez votre produit..."></textarea></div>
+<div class="form-group"><label>Prix en GNF</label><input id="prixAnnonce" type="number" placeholder="Ex : 5000000"></div>
+<div class="form-group"><label>Catégorie</label>
 <select id="categorieAnnonce">
 <option value="">Choisir une catégorie</option>
 <option value="Téléphones">Téléphones</option>
@@ -207,444 +136,211 @@ Se connecter
 <option value="Électronique">Électronique</option>
 <option value="Véhicules">Véhicules</option>
 <option value="Autres">Autres</option>
-</select>
-</div>
-
-<div class="form-group">
-<label>État</label>
+</select></div>
+<div class="form-group"><label>État</label>
 <select id="conditionAnnonce">
 <option value="Good">Bon état</option>
 <option value="New">Neuf</option>
 <option value="Used">Occasion</option>
-</select>
-</div>
-
-<div class="form-group">
-<label>Ville</label>
-<input id="villeAnnonce" type="text" placeholder="Ex : Conakry">
-</div>
-
-<div class="form-group">
-<label>Quartier</label>
-<input id="quartierAnnonce" type="text" placeholder="Ex : Ratoma">
-</div>
-
-<div class="form-group">
-<label>Photo du produit</label>
+</select></div>
+<div class="form-group"><label>Ville</label><input id="villeAnnonce" type="text" placeholder="Ex : Conakry"></div>
+<div class="form-group"><label>Quartier</label><input id="quartierAnnonce" type="text" placeholder="Ex : Ratoma"></div>
+<div class="form-group"><label>Photo du produit</label>
 <input id="photoAnnonce" type="file" accept="image/*" onchange="previsualiserPhoto(event)">
 <img id="photoPreview" class="preview">
 </div>
-
 <button class="main-btn" onclick="publierAnnonce()">Publier l'annonce</button>
-</div>
-</div>
+</div></div>
 
-<!-- DÉTAIL ANNONCE -->
-<div class="modal" id="annonceDetailModal">
-<div class="modal-box detail-modal-box">
-
+<!-- DÉTAIL -->
+<div class="modal" id="annonceDetailModal"><div class="modal-box detail-modal-box">
 <div class="detail-header">
 <button class="detail-close" onclick="fermerModal('annonceDetailModal')">×</button>
-
-<div class="detail-image" id="detailImageContainer">
-<div class="no-image">📦</div>
+<div class="detail-image" id="detailImageContainer"><div class="no-image">📦</div></div>
 </div>
-</div>
-
 <div class="detail-body">
 <div id="detailTitre" class="detail-title"></div>
 <div id="detailPrix" class="detail-price"></div>
-
 <div class="detail-info">
 <div><strong>📍 Localisation :</strong> <span id="detailLocalisation"></span></div>
 <div><strong>🏷️ État :</strong> <span id="detailCondition"></span></div>
 <div><strong>📅 Publié le :</strong> <span id="detailDate"></span></div>
 </div>
-
 <h3>Description</h3>
 <div id="detailDescription" class="detail-description"></div>
-
 <div id="detailVues" class="detail-views"></div>
 </div>
-
-</div>
-</div>
+</div></div>
 
 <!-- MESSAGES -->
-<div class="modal" id="messagesModal">
-<div class="modal-box">
+<div class="modal" id="messagesModal"><div class="modal-box">
 <button class="close" onclick="fermerModal('messagesModal')">×</button>
 <h2>Messages</h2>
 <p>La messagerie entre acheteurs et vendeurs sera disponible ici.</p>
-</div>
-</div>
+</div></div>
 
 <!-- PAIEMENT -->
-<div class="modal" id="paiementModal">
-<div class="modal-box">
+<div class="modal" id="paiementModal"><div class="modal-box">
 <button class="close" onclick="fermerModal('paiementModal')">×</button>
 <h2>Paiement</h2>
 <p>Marché Guinée prélève une commission de <strong>3 %</strong> sur les ventes.</p>
-</div>
-</div>
+</div></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script>
 const SUPABASE_URL="https://meernnpwtcgqjppyccqk.supabase.co";
 const SUPABASE_KEY="sb_publishable_RQUvUH0EYETyddgkKFgbAQ_ZKQubV-Z";
-
-const supabaseClient=supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
-);
+const supabaseClient=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 
 let toutesLesAnnonces=[];
 let categorieActuelle="Tous";
 
-function nettoyerTelephone(numero){
-return String(numero||"").replace(/\D/g,"");
-}
-
-function emailTechniqueDepuisTelephone(numero){
-return nettoyerTelephone(numero)+"@marche-guinee.netlify.app";
-}
-
-function formaterPrix(prix){
-return Number(prix||0).toLocaleString("fr-FR")+" GNF";
-}
-
+function nettoyerTelephone(numero){return String(numero||"").replace(/\D/g,"")}
+function emailTechniqueDepuisTelephone(numero){return nettoyerTelephone(numero)+"@marche-guinee.netlify.app"}
+function formaterPrix(prix){return Number(prix||0).toLocaleString("fr-FR")+" GNF"}
 function echapperHTML(texte){
-return String(texte??"")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
+return String(texte??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;")
 }
-
 function formaterDate(date){
 if(!date)return"Non précisé";
 const d=new Date(date);
 if(isNaN(d.getTime()))return"Non précisé";
-return d.toLocaleDateString("fr-FR",{
-day:"2-digit",
-month:"long",
-year:"numeric"
-});
+return d.toLocaleDateString("fr-FR",{day:"2-digit",month:"long",year:"numeric"})
 }
-
 function afficherMessage(id,texte){
-const element=document.getElementById(id);
-if(!element)return;
-element.textContent=texte;
-element.style.display="block";
+const e=document.getElementById(id);
+if(!e)return;
+e.textContent=texte;
+e.style.display="block"
 }
-
-function ouvrirCompte(){
-document.getElementById("compteModal").style.display="block";
-}
-
-function ouvrirInscription(){
-document.getElementById("inscriptionModal").style.display="block";
-}
-
-function ouvrirConnexion(){
-document.getElementById("connexionModal").style.display="block";
-}
-
-function ouvrirPublication(){
-document.getElementById("publicationModal").style.display="block";
-}
-
-function ouvrirMessages(){
-document.getElementById("messagesModal").style.display="block";
-}
-
-function ouvrirPaiement(){
-document.getElementById("paiementModal").style.display="block";
-}
-
+function ouvrirCompte(){document.getElementById("compteModal").style.display="block"}
+function ouvrirInscription(){document.getElementById("inscriptionModal").style.display="block"}
+function ouvrirConnexion(){document.getElementById("connexionModal").style.display="block"}
+function ouvrirPublication(){document.getElementById("publicationModal").style.display="block"}
+function ouvrirMessages(){document.getElementById("messagesModal").style.display="block"}
+function ouvrirPaiement(){document.getElementById("paiementModal").style.display="block"}
 function fermerModal(id){
-const modal=document.getElementById(id);
-if(modal)modal.style.display="none";
+const m=document.getElementById(id);
+if(m)m.style.display="none"
 }
 
-window.addEventListener("click",function(event){
-document.querySelectorAll(".modal").forEach(function(modal){
-if(event.target===modal)modal.style.display="none";
-});
+window.addEventListener("click",function(e){
+document.querySelectorAll(".modal").forEach(function(m){
+if(e.target===m)m.style.display="none"
+})
 });
 
 async function creerCompte(){
-
 const nom=document.getElementById("nomComplet").value.trim();
 const numero=document.getElementById("numeroInscription").value.trim();
 const motDePasse=document.getElementById("motDePasseInscription").value;
 
 if(!nom||!numero||!motDePasse){
-afficherMessage("inscriptionMessage","Veuillez remplir tous les champs.");
-return;
+afficherMessage("inscriptionMessage","Veuillez remplir tous les champs.");return
 }
-
 if(motDePasse.length<6){
-afficherMessage("inscriptionMessage","Le mot de passe doit contenir au moins 6 caractères.");
-return;
+afficherMessage("inscriptionMessage","Le mot de passe doit contenir au moins 6 caractères.");return
 }
-
 try{
-
 const email=emailTechniqueDepuisTelephone(numero);
-
-const {data,error}=await supabaseClient.auth.signUp({
-email:email,
-password:motDePasse
-});
-
-if(error){
-afficherMessage("inscriptionMessage",error.message);
-return;
-}
-
+const {data,error}=await supabaseClient.auth.signUp({email:email,password:motDePasse});
+if(error){afficherMessage("inscriptionMessage",error.message);return}
 if(data.user){
-
-const {error:userError}=await supabaseClient
-.from("Users")
-.upsert({
-id:data.user.id,
-"Full name":nom,
-Phone:numero
+const {error:userError}=await supabaseClient.from("Users").upsert({
+id:data.user.id,"Full name":nom,Phone:numero
 });
-
-if(userError)console.log("Erreur Users :",userError);
+if(userError)console.log("Erreur Users :",userError)
 }
-
 afficherMessage("inscriptionMessage","Compte créé avec succès.");
-
 }catch(error){
-
-console.error(error);
-afficherMessage("inscriptionMessage","Une erreur est survenue.");
+console.error(error);afficherMessage("inscriptionMessage","Une erreur est survenue.")
 }
 }
 
 async function connecterCompte(){
-
 const numero=document.getElementById("numeroConnexion").value.trim();
 const motDePasse=document.getElementById("motDePasseConnexion").value;
-
 if(!numero||!motDePasse){
-afficherMessage("connexionMessage","Veuillez remplir tous les champs.");
-return;
+afficherMessage("connexionMessage","Veuillez remplir tous les champs.");return
 }
-
 try{
-
 const email=emailTechniqueDepuisTelephone(numero);
-
-const {error}=await supabaseClient.auth.signInWithPassword({
-email:email,
-password:motDePasse
-});
-
-if(error){
-afficherMessage("connexionMessage","Numéro ou mot de passe incorrect.");
-return;
-}
-
+const {error}=await supabaseClient.auth.signInWithPassword({email:email,password:motDePasse});
+if(error){afficherMessage("connexionMessage","Numéro ou mot de passe incorrect.");return}
 afficherMessage("connexionMessage","Connexion réussie.");
-
 }catch(error){
-
-console.error(error);
-afficherMessage("connexionMessage","Une erreur est survenue.");
+console.error(error);afficherMessage("connexionMessage","Une erreur est survenue.")
 }
 }
 
 function previsualiserPhoto(event){
-
 const fichier=event.target.files[0];
 const preview=document.getElementById("photoPreview");
-
-if(!fichier){
-preview.style.display="none";
-preview.src="";
-return;
-}
-
+if(!fichier){preview.style.display="none";preview.src="";return}
 const lecteur=new FileReader();
-
-lecteur.onload=function(e){
-preview.src=e.target.result;
-preview.style.display="block";
-};
-
-lecteur.readAsDataURL(fichier);
+lecteur.onload=function(e){preview.src=e.target.result;preview.style.display="block"};
+lecteur.readAsDataURL(fichier)
 }
 
 async function trouverCategorie(nomCategorie){
-
-const {data,error}=await supabaseClient
-.from("Catégorie")
-.select("*");
-
-if(error){
-console.log("Erreur catégories :",error);
-return null;
-}
-
+const {data,error}=await supabaseClient.from("Catégorie").select("*");
+if(error){console.log("Erreur catégories :",error);return null}
 if(!data||!data.length)return null;
-
 const recherche=String(nomCategorie||"").toLowerCase().trim();
-
 return data.find(c=>{
-
-const valeurs=[
-c.name,
-c.nom,
-c.title,
-c.label,
-c.category_name,
-c["Name"],
-c["Nom"]
-];
-
-return valeurs.some(v=>
-String(v||"").toLowerCase().trim()===recherche
-);
-
-})||null;
+const valeurs=[c.name,c.nom,c.title,c.label,c.category_name,c["Name"],c["Nom"]];
+return valeurs.some(v=>String(v||"").toLowerCase().trim()===recherche)
+})||null
 }
-
-/* ==================================================
-   PHOTO
-   IMPORTANT :
-   On enregistre seulement listing_id + image_url
-   comme dans la version qui fonctionnait.
-================================================== */
 
 async function envoyerPhotoVersStorage(fichier,listingId){
-
-if(!fichier){
-return{
-success:true,
-imageUrl:null,
-relationEnregistree:false
-};
-}
-
+if(!fichier)return{success:true,imageUrl:null,relationEnregistree:false};
 try{
-
-const extension=fichier.name.includes(".")
-?fichier.name.split(".").pop()
-:"jpg";
-
+const extension=fichier.name.includes(".")?fichier.name.split(".").pop():"jpg";
 const chemin=listingId+"/"+Date.now()+"."+extension;
 
-const {error:uploadError}=await supabaseClient
-.storage
-.from("Listing-image")
-.upload(chemin,fichier,{
-cacheControl:"3600",
-upsert:false,
-contentType:fichier.type||"image/jpeg"
-});
+const {error:uploadError}=await supabaseClient.storage.from("Listing-image").upload(
+chemin,fichier,{cacheControl:"3600",upsert:false,contentType:fichier.type||"image/jpeg"}
+);
 
 if(uploadError){
-
 console.error("Erreur upload photo :",uploadError);
-
-return{
-success:false,
-imageUrl:null,
-relationEnregistree:false
-};
+return{success:false,imageUrl:null,relationEnregistree:false}
 }
 
-/* Création de l'URL signée */
-const {data:signedData,error:signedError}=
-await supabaseClient
-.storage
-.from("Listing-image")
-.createSignedUrl(
-chemin,
-60*60*24*30
+const {data:signedData,error:signedError}=await supabaseClient.storage.from("Listing-image").createSignedUrl(
+chemin,60*60*24*30
 );
 
 if(signedError||!signedData){
-
 console.error("Erreur URL photo :",signedError);
-
-return{
-success:false,
-imageUrl:null,
-relationEnregistree:false
-};
+return{success:false,imageUrl:null,relationEnregistree:false}
 }
 
 const imageUrl=signedData.signedUrl;
 
-/*
- IMPORTANT :
- on ne met PAS "path" ici.
-*/
-let relation=await supabaseClient
-.from("Listing images")
-.insert({
-listing_id:listingId,
-image_url:imageUrl
+let relation=await supabaseClient.from("Listing images").insert({
+listing_id:listingId,image_url:imageUrl
 });
 
-if(!relation.error){
+if(!relation.error)return{success:true,imageUrl:imageUrl,relationEnregistree:true};
 
-return{
-success:true,
-imageUrl:imageUrl,
-relationEnregistree:true
-};
-
-}
-
-/* Fallback si la table porte un autre nom */
-relation=await supabaseClient
-.from("listing_images")
-.insert({
-listing_id:listingId,
-image_url:imageUrl
+relation=await supabaseClient.from("listing_images").insert({
+listing_id:listingId,image_url:imageUrl
 });
 
-if(!relation.error){
-
-return{
-success:true,
-imageUrl:imageUrl,
-relationEnregistree:true
-};
-
-}
+if(!relation.error)return{success:true,imageUrl:imageUrl,relationEnregistree:true};
 
 console.error("Erreur enregistrement image :",relation.error);
-
-return{
-success:true,
-imageUrl:imageUrl,
-relationEnregistree:false
-};
+return{success:true,imageUrl:imageUrl,relationEnregistree:false};
 
 }catch(error){
-
 console.error("Erreur photo :",error);
-
-return{
-success:false,
-imageUrl:null,
-relationEnregistree:false
-};
+return{success:false,imageUrl:null,relationEnregistree:false}
 }
 }
 
 async function publierAnnonce(){
-
 const titre=document.getElementById("titreAnnonce").value.trim();
 const description=document.getElementById("descriptionAnnonce").value.trim();
 const prix=Number(document.getElementById("prixAnnonce").value);
@@ -655,47 +351,25 @@ const quartier=document.getElementById("quartierAnnonce").value.trim();
 const photo=document.getElementById("photoAnnonce").files[0];
 
 if(!titre||!description||!prix||!categorie||!ville){
-
-afficherMessage(
-"publicationMessage",
-"Veuillez remplir les informations nécessaires."
-);
-
-return;
+afficherMessage("publicationMessage","Veuillez remplir les informations nécessaires.");return
 }
 
 try{
-
 const {data:sessionData}=await supabaseClient.auth.getSession();
-
 const utilisateur=sessionData?.session?.user;
 
 if(!utilisateur){
-
-afficherMessage(
-"publicationMessage",
-"Vous devez être connecté pour publier une annonce."
-);
-
-return;
+afficherMessage("publicationMessage","Vous devez être connecté pour publier une annonce.");return
 }
 
 const categorieTrouvee=await trouverCategorie(categorie);
 const categoryId=categorieTrouvee?.id||null;
 
 if(!categoryId){
-
-afficherMessage(
-"publicationMessage",
-"Catégorie introuvable dans Supabase."
-);
-
-return;
+afficherMessage("publicationMessage","Catégorie introuvable dans Supabase.");return
 }
 
-const {data:listing,error}=await supabaseClient
-.from("listings")
-.insert({
+const {data:listing,error}=await supabaseClient.from("listings").insert({
 seller_id:utilisateur.id,
 category_id:categoryId,
 title:titre,
@@ -706,43 +380,22 @@ city:ville,
 neighborhood:quartier,
 status:"available",
 views:0
-})
-.select()
-.single();
+}).select().single();
 
 if(error){
-
 console.error(error);
-
-afficherMessage(
-"publicationMessage",
-"Impossible de publier l'annonce : "+error.message
-);
-
-return;
+afficherMessage("publicationMessage","Impossible de publier l'annonce : "+error.message);return
 }
 
 if(photo){
-
-const resultatPhoto=
-await envoyerPhotoVersStorage(photo,listing.id);
-
+const resultatPhoto=await envoyerPhotoVersStorage(photo,listing.id);
 if(!resultatPhoto.success){
-
-afficherMessage(
-"publicationMessage",
-"Annonce créée, mais la photo n'a pas pu être envoyée."
-);
-
-await chargerAnnonces();
-return;
+afficherMessage("publicationMessage","Annonce créée, mais la photo n'a pas pu être envoyée.");
+await chargerAnnonces();return
 }
 }
 
-afficherMessage(
-"publicationMessage",
-"Annonce publiée avec succès."
-);
+afficherMessage("publicationMessage","Annonce publiée avec succès.");
 
 document.getElementById("titreAnnonce").value="";
 document.getElementById("descriptionAnnonce").value="";
@@ -751,96 +404,46 @@ document.getElementById("categorieAnnonce").value="";
 document.getElementById("villeAnnonce").value="";
 document.getElementById("quartierAnnonce").value="";
 document.getElementById("photoAnnonce").value="";
-
 document.getElementById("photoPreview").src="";
 document.getElementById("photoPreview").style.display="none";
 
 await chargerAnnonces();
 
 }catch(error){
-
 console.error(error);
-
-afficherMessage(
-"publicationMessage",
-"Une erreur est survenue pendant la publication."
-);
+afficherMessage("publicationMessage","Une erreur est survenue pendant la publication.")
 }
 }
-
-/* ==================================================
-   CHARGEMENT DES ANNONCES ET DES PHOTOS
-================================================== */
 
 async function chargerAnnonces(){
-
 const liste=document.getElementById("listeAnnonces");
-
 liste.innerHTML='<div class="empty">Chargement des annonces...</div>';
 
 try{
-
-const {data:annonces,error}=await supabaseClient
-.from("listings")
-.select(`
-id,
-title,
-description,
-price_gnf,
-condition,
-city,
-neighborhood,
-status,
-views,
-created_at
-`)
-.order("created_at",{ascending:false});
+const {data:annonces,error}=await supabaseClient.from("listings").select(`
+id,title,description,price_gnf,condition,city,neighborhood,status,views,created_at
+`).order("created_at",{ascending:false});
 
 if(error){
-
 console.error(error);
-
-liste.innerHTML=
-'<div class="empty">Impossible de charger les annonces.</div>';
-
-return;
+liste.innerHTML='<div class="empty">Impossible de charger les annonces.</div>';return
 }
 
 toutesLesAnnonces=annonces||[];
 
-/*
- On récupère exactement image_url.
- Pas besoin de path.
-*/
-
 for(const annonce of toutesLesAnnonces){
-
 annonce.image_url=null;
 
-/* Première table */
-let resultat=await supabaseClient
-.from("Listing images")
-.select("listing_id,image_url")
-.eq("listing_id",annonce.id)
-.limit(1);
+let resultat=await supabaseClient.from("Listing images")
+.select("listing_id,image_url").eq("listing_id",annonce.id).limit(1);
 
 if(!resultat.error&&resultat.data&&resultat.data.length){
-
 annonce.image_url=resultat.data[0].image_url;
-
 }else{
-
-/* Deuxième table si nécessaire */
-resultat=await supabaseClient
-.from("listing_images")
-.select("listing_id,image_url")
-.eq("listing_id",annonce.id)
-.limit(1);
-
+resultat=await supabaseClient.from("listing_images")
+.select("listing_id,image_url").eq("listing_id",annonce.id).limit(1);
 if(!resultat.error&&resultat.data&&resultat.data.length){
-
-annonce.image_url=resultat.data[0].image_url;
-
+annonce.image_url=resultat.data[0].image_url
 }
 }
 }
@@ -848,24 +451,16 @@ annonce.image_url=resultat.data[0].image_url;
 afficherAnnonces(toutesLesAnnonces);
 
 }catch(error){
-
 console.error(error);
-
-liste.innerHTML=
-'<div class="empty">Une erreur est survenue.</div>';
+liste.innerHTML='<div class="empty">Une erreur est survenue.</div>'
 }
 }
 
 function afficherAnnonces(annonces){
-
 const liste=document.getElementById("listeAnnonces");
 
 if(!annonces||!annonces.length){
-
-liste.innerHTML=
-'<div class="empty">Aucune annonce trouvée.</div>';
-
-return;
+liste.innerHTML='<div class="empty">Aucune annonce trouvée.</div>';return
 }
 
 liste.innerHTML=annonces.map(function(annonce){
@@ -873,227 +468,150 @@ liste.innerHTML=annonces.map(function(annonce){
 let imageHTML;
 
 if(annonce.image_url){
-
-imageHTML=
-'<img src="'+
-echapperHTML(annonce.image_url)+
-'" alt="'+
-echapperHTML(annonce.title)+
-'" loading="lazy" onerror="this.style.display=\'none\';this.parentElement.innerHTML=\'<div class=&quot;no-image&quot;>📦</div>\';">';
-
+imageHTML='<img src="'+echapperHTML(annonce.image_url)+'" alt="'+echapperHTML(annonce.title)+'" loading="lazy" onerror="this.style.display=\'none\';this.parentElement.innerHTML=\'<div class=&quot;no-image&quot;>📦</div>\';">';
 }else{
-
-imageHTML='<div class="no-image">📦</div>';
+imageHTML='<div class="no-image">📦</div>'
 }
 
-const localisation=[
-annonce.city,
-annonce.neighborhood
-]
-.filter(Boolean)
-.join(" • ");
+const localisation=[annonce.city,annonce.neighborhood].filter(Boolean).join(" • ");
 
-return`
-
-<article
-class="annonce-card"
-onclick="ouvrirDetailAnnonce('${annonce.id}')"
->
-
-<div class="annonce-image">
-${imageHTML}
-</div>
-
+return `
+<article class="annonce-card" data-annonce-id="${echapperHTML(annonce.id)}">
+<div class="annonce-image">${imageHTML}</div>
 <div class="annonce-content">
-
-<div class="annonce-title">
-${echapperHTML(annonce.title)}
+<div class="annonce-title">${echapperHTML(annonce.title)}</div>
+<div class="annonce-price">${formaterPrix(annonce.price_gnf)}</div>
+<div class="annonce-location">📍 ${echapperHTML(localisation||"Guinée")}</div>
+<div class="annonce-condition">État : ${echapperHTML(annonce.condition||"Non précisé")}</div>
 </div>
-
-<div class="annonce-price">
-${formaterPrix(annonce.price_gnf)}
-</div>
-
-<div class="annonce-location">
-📍 ${echapperHTML(localisation||"Guinée")}
-</div>
-
-<div class="annonce-condition">
-État : ${echapperHTML(annonce.condition||"Non précisé")}
-</div>
-
-</div>
-
 </article>
-
 `;
-
 }).join("");
+
+/* NOUVEAU : gestion directe du clic sur chaque annonce */
+document.querySelectorAll(".annonce-card").forEach(function(carte){
+carte.addEventListener("click",function(){
+const id=this.getAttribute("data-annonce-id");
+ouvrirDetailAnnonce(id);
+});
+});
 }
 
 function filtrerAnnonces(){
-
-const recherche=
-document.getElementById("searchInput")
-.value
-.toLowerCase()
-.trim();
+const recherche=document.getElementById("searchInput").value.toLowerCase().trim();
 
 const resultats=toutesLesAnnonces.filter(function(annonce){
-
 const texte=[
 annonce.title,
 annonce.description,
 annonce.city,
 annonce.neighborhood,
 annonce.condition
-]
-.join(" ")
-.toLowerCase();
+].join(" ").toLowerCase();
 
-const correspondRecherche=
-!recherche||texte.includes(recherche);
+const correspondRecherche=!recherche||texte.includes(recherche);
 
 let correspondCategorie=true;
 
 if(categorieActuelle!=="Tous"){
-
-correspondCategorie=
-texte.includes(categorieActuelle.toLowerCase());
-
+correspondCategorie=texte.includes(categorieActuelle.toLowerCase())
 }
 
 return correspondRecherche&&correspondCategorie;
-
 });
 
 afficherAnnonces(resultats);
 }
 
 function choisirCategorie(categorie){
-
 categorieActuelle=categorie;
-
-filtrerAnnonces();
+filtrerAnnonces()
 }
 
-/* ==================================================
-   DÉTAIL ANNONCE
-================================================== */
-
+/* DÉTAIL DE L'ANNONCE */
 async function ouvrirDetailAnnonce(id){
 
+console.log("Ouverture annonce :",id);
+
 const annonce=toutesLesAnnonces.find(function(item){
-
-return String(item.id)===String(id);
-
+return String(item.id)===String(id)
 });
 
-if(!annonce)return;
+if(!annonce){
+console.log("Annonce introuvable :",id);
+return
+}
 
-document.getElementById("detailTitre").textContent=
-annonce.title||"Annonce";
+document.getElementById("detailTitre").textContent=annonce.title||"Annonce";
+document.getElementById("detailPrix").textContent=formaterPrix(annonce.price_gnf);
 
-document.getElementById("detailPrix").textContent=
-formaterPrix(annonce.price_gnf);
-
-document.getElementById("detailLocalisation").textContent=
-[
-annonce.city,
-annonce.neighborhood
-]
-.filter(Boolean)
-.join(" • ")||"Non précisée";
+document.getElementById("detailLocalisation").textContent=[
+annonce.city,annonce.neighborhood
+].filter(Boolean).join(" • ")||"Non précisée";
 
 let conditionTexte=annonce.condition||"Non précisé";
 
-if(conditionTexte==="Good"){
-conditionTexte="Bon état";
-}
+if(conditionTexte==="Good")conditionTexte="Bon état";
+if(conditionTexte==="New")conditionTexte="Neuf";
+if(conditionTexte==="Used")conditionTexte="Occasion";
 
-if(conditionTexte==="New"){
-conditionTexte="Neuf";
-}
+document.getElementById("detailCondition").textContent=conditionTexte;
+document.getElementById("detailDate").textContent=formaterDate(annonce.created_at);
+document.getElementById("detailDescription").textContent=annonce.description||"Aucune description.";
+document.getElementById("detailVues").textContent="👁️ "+Number(annonce.views||0)+" vue(s)";
 
-if(conditionTexte==="Used"){
-conditionTexte="Occasion";
-}
+const imageContainer=document.getElementById("detailImageContainer");
 
-document.getElementById("detailCondition").textContent=
-conditionTexte;
+imageContainer.innerHTML="";
 
-document.getElementById("detailDate").textContent=
-formaterDate(annonce.created_at);
-
-document.getElementById("detailDescription").textContent=
-annonce.description||"Aucune description.";
-
-document.getElementById("detailVues").textContent=
-"👁️ "+Number(annonce.views||0)+" vue(s)";
-
-const imageContainer=
-document.getElementById("detailImageContainer");
+const bouton=document.createElement("button");
+bouton.className="detail-close";
+bouton.textContent="×";
+bouton.onclick=function(e){
+e.stopPropagation();
+fermerModal("annonceDetailModal");
+};
+imageContainer.appendChild(bouton);
 
 if(annonce.image_url){
-
-imageContainer.innerHTML=`
-
-<button
-class="detail-close"
-onclick="fermerModal('annonceDetailModal')"
->×</button>
-
-<img
-src="${echapperHTML(annonce.image_url)}"
-alt="${echapperHTML(annonce.title)}"
-onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<div class=&quot;no-image&quot;>📦</div>');"
->
-
-`;
-
+const image=document.createElement("img");
+image.src=annonce.image_url;
+image.alt=annonce.title||"Produit";
+image.onerror=function(){
+image.style.display="none";
+const noImage=document.createElement("div");
+noImage.className="no-image";
+noImage.textContent="📦";
+imageContainer.appendChild(noImage);
+};
+imageContainer.appendChild(image);
 }else{
-
-imageContainer.innerHTML=`
-
-<button
-class="detail-close"
-onclick="fermerModal('annonceDetailModal')"
->×</button>
-
-<div class="no-image">📦</div>
-
-`;
+const noImage=document.createElement("div");
+noImage.className="no-image";
+noImage.textContent="📦";
+imageContainer.appendChild(noImage);
 }
 
+/* OUVERTURE IMMÉDIATE */
 document.getElementById("annonceDetailModal").style.display="block";
 
-/* Comptage des vues : facultatif, et ne bloque pas la photo */
-
+/* Mise à jour des vues */
 const anciennesVues=Number(annonce.views||0);
 const nouvellesVues=anciennesVues+1;
 
-const {error}=await supabaseClient
-.from("listings")
+const {error}=await supabaseClient.from("listings")
 .update({views:nouvellesVues})
 .eq("id",annonce.id);
 
 if(!error){
-
 annonce.views=nouvellesVues;
-
-document.getElementById("detailVues").textContent=
-"👁️ "+nouvellesVues+" vue(s)";
-
+document.getElementById("detailVues").textContent="👁️ "+nouvellesVues+" vue(s)";
 }
 }
 
-document.addEventListener(
-"DOMContentLoaded",
-function(){
+document.addEventListener("DOMContentLoaded",function(){
 chargerAnnonces();
-}
-);
+});
 </script>
-
 </body>
 </html>
